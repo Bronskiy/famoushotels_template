@@ -1,0 +1,28 @@
+<flippingbook>
+	<width>{segment_5}</width>
+	<height>{segment_6}</height>
+	<scalecontent>true</scalecontent>
+	<firstpage>1</firstpage>
+	<alwaysopened>false</alwaysopened>
+	<autoflip>50</autoflip>
+	<fliponclick>true</fliponclick>
+	<staticshadowsdepth>1</staticshadowsdepth>
+	<dynamicshadowsdepth>2</dynamicshadowsdepth>
+	<movespeed>2</movespeed>
+	<closespeed>3</closespeed>
+	<flipsound>http://famoushotels.org/flash/01.mp3</flipsound>
+	<pageback>0xcccc99</pageback>
+	<loadondemand>true</loadondemand>
+	<cachepages>true</cachepages>
+	<cachesize>10</cachesize>
+	<preloadertype>Progress Bar</preloadertype>
+	<pages>
+	{if segment_4 == "entryid"}
+	<?php for ($i = 1; $i <= {segment_3}; $i++) {$url = 'http://famoushotels.org/images/hotels/hotel_{segment_2}/flippingbook/{segment_2}_'.$i.'_famoushotels.jpg';
+	echo "<page>$url</page>\n";} ?>
+	{if:elseif segment_2 == "url"}
+	<?php for ($i = 1; $i <= {segment_3}; $i++) {$url = 'http://famoushotels.org/images/flippingbook/{segment_4}/'.$i.'_famoushotels.jpg';
+	echo "<page>$url</page>\n";} ?>
+	{/if}
+	</pages>
+</flippingbook>

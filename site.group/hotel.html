@@ -1,0 +1,343 @@
+{preload_replace:my_channel="news"}
+{preload_replace:my_template_group="site"}
+
+{embed="includes/html_header" my_template_group="{my_template_group}" my_title="{basetitle} | Suggest a Hotel"}
+
+<body>
+
+{if member_group == "1"}<div style="position: absolute; right: 15%; top: 50px;"><a href="/fhdb1986/index.php?S=0&C=publish&M=entry_form&channel_id=2"><img src="http://ingmar.at/images/icons/page_add.png" height="16" width="16" alt="Add a new entry" title="Add a new entry" align="bottom" class="icon" border="0" /></a>
+</div>{/if}
+
+<div id="container">
+
+{embed="includes/header"}
+<div id="wrapper">
+<div id="contentright">
+
+{if segment_2 == "" OR segment_2 == "suggest" OR segment_3 == "suggest"}
+{if segment_3 == "submitted" OR segment_4 == "submitted"}
+<h1><span style="color: #F70437;">You Suggested</span> a new Member of the Most Famous Hotels in the World</h1>
+
+<p>Thank you - your suggestion has been received and will be reviewed.</p>
+<p>A research team will now try to find out as much as possible about this hotel. We shall then present this entry to the jury for its judgement.</p>
+<p>We trust that you find it all right that we have added your e-mail address to our mailing list in order to keep you posted. Should you not wish to receive mail from us please unsubscribe from the list after you receive a mail.</p>
+
+<p>Thank you so much for helping us to complete the list of <br />
+THE MOST FAMOUS HOTELS IN THE WORLD</p>
+
+<p>Andreas Augustin<br />
+President</p>
+
+{if:else}
+<h4>{exp:titleimg font="korinna_regular.ttf" size="14" color="111111"}Suggest a new Member of the Most Famous Hotels in the World {/exp:titleimg}</h4>
+
+<p>Before you suggest a new hotel, kindly check the <b><a href="/index.php/hotels/search/all"> </b>list of all famous hotels</a> first.</p>
+
+<p>
+
+<i><u>Basic requirements:</u><br><br>
+Please note the <b>3 x 50 requirements!</b>
+The hotel<p>must be at least <b>50 years old</b> (as a hotel!),<p>must have more than <b>50 rooms</b> and<p>must be <b>open more than 50% of the year.</b>
+<p><p>
+Please submit your suggestion below!</p>
+
+<h2>Your Suggestion</h2>
+
+<p>I would like to suggest the following hotel to be considered a new member of THE MOST FAMOUS HOTELS IN THE WORLD:
+
+ (Please try to answer as many questions as possible. Fields marked * are mandatory.)</p>
+
+{exp:freeform:form form_name="suggest_hotel" required="hotel_name,city,country,my_name,my_mail" return="hotel/suggest/submitted" notify="president@famoushotels.org" template="hotel_submit" mailinglist="Testmails" mailinglist_opt_in="yes" send_user_email="yes" user_email_template="hotel_submit_feedback"}
+
+<p><label for="hotel_name" style="color: #F70437; font-weight: bolder;">*&nbsp;Name of hotel:</label><input style="width: 280px;" type="text" name="hotel_name" value="" class=""/></p>
+<p><label for="city" style="color: #F70437; font-weight: bolder;">*&nbsp;City:</label><input style="width: 280px;" type="text" name="city" value="" class=""/></p>
+
+<p><label for="country" style="color: #F70437; font-weight: bolder;">*&nbsp;Country:</label>
+<select style="width: 280px;" name="country" id="country" />
+<option label="Choose" value="">Chose a country</option>
+<option label="Afghanistan" value="Afghanistan">Afghanistan</option>
+<option label="Albania" value="Albania">Albania</option>
+<option label="Algeria" value="Algeria">Algeria</option>
+<option label="American Samoa" value="American Samoa">American Samoa</option>
+<option label="Andorra" value="Andorra">Andorra</option>
+<option label="Anguilla" value="Anguilla">Anguilla</option>
+<option label="Antarctica" value="Antarctica">Antarctica</option>
+<option label="Antigua And Barbuda" value="Antigua And Barbuda">Antigua And Barbuda</option>
+<option label="Argentina" value="Argentina">Argentina</option>
+<option label="Armenia" value="Armenia">Armenia</option>
+<option label="Aruba" value="Aruba">Aruba</option>
+<option label="Australia" value="Australia">Australia</option>
+<option label="Austria" value="Austria">Austria</option>
+<option label="Azerbaijan" value="Azerbaijan">Azerbaijan</option>
+<option label="Bahamas" value="Bahamas">Bahamas</option>
+<option label="Bahrain" value="Bahrain">Bahrain</option>
+<option label="Bangladesh" value="Bangladesh">Bangladesh</option>
+<option label="Barbados" value="Barbados">Barbados</option>
+<option label="Belarus" value="Belarus">Belarus</option>
+<option label="Belgium" value="Belgium">Belgium</option>
+<option label="Belize" value="Belize">Belize</option>
+<option label="Benin" value="Benin">Benin</option>
+<option label="Bermuda" value="Bermuda">Bermuda</option>
+<option label="Bhutan" value="Bhutan">Bhutan</option>
+<option label="Bolivia" value="Bolivia">Bolivia</option>
+<option label="Bosnia and Herzegovina" value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+<option label="Botswana" value="Botswana">Botswana</option>
+<option label="Bouvet Island" value="Bouvet Island">Bouvet Island</option>
+<option label="Brazil" value="Brazil">Brazil</option>
+<option label="British Indian Ocean Territory" value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+<option label="Brunei Darussalam" value="Brunei Darussalam">Brunei Darussalam</option>
+<option label="Bulgaria" value="Bulgaria">Bulgaria</option>
+<option label="Burkina Faso" value="Burkina Faso">Burkina Faso</option>
+<option label="Burundi" value="Burundi">Burundi</option>
+<option label="Cambodia" value="Cambodia">Cambodia</option>
+<option label="Cameroon" value="Cameroon">Cameroon</option>
+<option label="Canada" value="Canada">Canada</option>
+<option label="Cape Verde" value="Cape Verde">Cape Verde</option>
+<option label="Cayman Islands" value="Cayman Islands">Cayman Islands</option>
+<option label="Central African Republic" value="Central African Republic">Central African Republic</option>
+<option label="Chad" value="Chad">Chad</option>
+<option label="Chile" value="Chile">Chile</option>
+<option label="China" value="China">China</option>
+<option label="Christmas Island" value="Christmas Island">Christmas Island</option>
+<option label="Cocos (Keeling) Islands" value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+<option label="Colombia" value="Colombia">Colombia</option>
+<option label="Comoros" value="Comoros">Comoros</option>
+<option label="Congo" value="Congo">Congo</option>
+<option label="Congo, the Democratic Republic of the" value="Congo, the Democratic Republic of the">Congo, the Democratic Republic of the</option>
+<option label="Cook Islands" value="Cook Islands">Cook Islands</option>
+<option label="Costa Rica" value="Costa Rica">Costa Rica</option>
+<option label="Cote d'Ivoire" value="Cote d'Ivoire">Cote d'Ivoire</option>
+<option label="Croatia" value="Croatia">Croatia</option>
+<option label="Cyprus" value="Cyprus">Cyprus</option>
+<option label="Czech Republic" value="Czech Republic">Czech Republic</option>
+<option label="Denmark" value="Denmark">Denmark</option>
+<option label="Djibouti" value="Djibouti">Djibouti</option>
+<option label="Dominica" value="Dominica">Dominica</option>
+<option label="Dominican Republic" value="Dominican Republic">Dominican Republic</option>
+<option label="East Timor" value="East Timor">East Timor</option>
+<option label="Ecuador" value="Ecuador">Ecuador</option>
+<option label="Egypt" value="Egypt">Egypt</option>
+<option label="El Salvador" value="El Salvador">El Salvador</option>
+<option label="England" value="England">England</option>
+<option label="Equatorial Guinea" value="Equatorial Guinea">Equatorial Guinea</option>
+<option label="Eritrea" value="Eritrea">Eritrea</option>
+<option label="Espana" value="Espana">Espana</option>
+<option label="Estonia" value="Estonia">Estonia</option>
+<option label="Ethiopia" value="Ethiopia">Ethiopia</option>
+<option label="Falkland Islands" value="Falkland Islands">Falkland Islands</option>
+<option label="Faroe Islands" value="Faroe Islands">Faroe Islands</option>
+<option label="Fiji" value="Fiji">Fiji</option>
+<option label="Finland" value="Finland">Finland</option>
+<option label="France" value="France">France</option>
+<option label="French Guiana" value="French Guiana">French Guiana</option>
+<option label="French Polynesia" value="French Polynesia">French Polynesia</option>
+<option label="French Southern Territories" value="French Southern Territories">French Southern Territories</option>
+<option label="Gabon" value="Gabon">Gabon</option>
+<option label="Gambia" value="Gambia">Gambia</option>
+<option label="Georgia" value="Georgia">Georgia</option>
+<option label="Germany" value="Germany">Germany</option>
+<option label="Ghana" value="Ghana">Ghana</option>
+<option label="Gibraltar" value="Gibraltar">Gibraltar</option>
+<option label="Great Britain" value="Great Britain">Great Britain</option>
+<option label="Greece" value="Greece">Greece</option>
+<option label="Greenland" value="Greenland">Greenland</option>
+<option label="Grenada" value="Grenada">Grenada</option>
+<option label="Guadeloupe" value="Guadeloupe">Guadeloupe</option>
+<option label="Guam" value="Guam">Guam</option>
+<option label="Guatemala" value="Guatemala">Guatemala</option>
+<option label="Guinea" value="Guinea">Guinea</option>
+<option label="Guinea-Bissau" value="Guinea-Bissau">Guinea-Bissau</option>
+<option label="Guyana" value="Guyana">Guyana</option>
+<option label="Haiti" value="Haiti">Haiti</option>
+<option label="Heard and Mc Donald Islands" value="Heard and Mc Donald Islands">Heard and Mc Donald Islands</option>
+<option label="Honduras" value="Honduras">Honduras</option>
+<option label="Hong Kong" value="Hong Kong">Hong Kong</option>
+<option label="Hungary" value="Hungary">Hungary</option>
+<option label="Iceland" value="Iceland">Iceland</option>
+<option label="India" value="India">India</option>
+<option label="Indonesia" value="Indonesia">Indonesia</option>
+<option label="Ireland" value="Ireland">Ireland</option>
+<option label="Israel" value="Israel">Israel</option>
+<option label="Italy" value="Italy">Italy</option>
+<option label="Jamaica" value="Jamaica">Jamaica</option>
+<option label="Japan" value="Japan">Japan</option>
+<option label="Jordan" value="Jordan">Jordan</option>
+<option label="Kazakhstan" value="Kazakhstan">Kazakhstan</option>
+<option label="Kenya" value="Kenya">Kenya</option>
+<option label="Kiribati" value="Kiribati">Kiribati</option>
+<option label="Korea, Republic of" value="Korea, Republic of">Korea, Republic of</option>
+<option label="Korea (South)" value="Korea (South)">Korea (South)</option>
+<option label="Kuwait" value="Kuwait">Kuwait</option>
+<option label="Kyrgyzstan" value="Kyrgyzstan">Kyrgyzstan</option>
+<option label="Lao People's Democratic Republic" value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+<option label="Latvia" value="Latvia">Latvia</option>
+<option label="Lebanon" value="Lebanon">Lebanon</option>
+<option label="Lesotho" value="Lesotho">Lesotho</option>
+<option label="Liberia" value="Liberia">Liberia</option>
+<option label="Libya" value="Libya">Libya</option>
+<option label="Liechtenstein" value="Liechtenstein">Liechtenstein</option>
+<option label="Lithuania" value="Lithuania">Lithuania</option>
+<option label="Luxembourg" value="Luxembourg">Luxembourg</option>
+<option label="Macau" value="Macau">Macau</option>
+<option label="Macedonia" value="Macedonia">Macedonia</option>
+<option label="Madagascar" value="Madagascar">Madagascar</option>
+<option label="Malawi" value="Malawi">Malawi</option>
+<option label="Malaysia" value="Malaysia">Malaysia</option>
+<option label="Maldives" value="Maldives">Maldives</option>
+<option label="Mali" value="Mali">Mali</option>
+<option label="Malta" value="Malta">Malta</option>
+<option label="Marshall Islands" value="Marshall Islands">Marshall Islands</option>
+<option label="Martinique" value="Martinique">Martinique</option>
+<option label="Mauritania" value="Mauritania">Mauritania</option>
+<option label="Mauritius" value="Mauritius">Mauritius</option>
+<option label="Mayotte" value="Mayotte">Mayotte</option>
+<option label="Mexico" value="Mexico">Mexico</option>
+<option label="Micronesia, Federated States of" value="Micronesia, Federated States of">Micronesia, Federated States of</option>
+<option label="Moldova, Republic of" value="Moldova, Republic of">Moldova, Republic of</option>
+<option label="Monaco" value="Monaco">Monaco</option>
+<option label="Mongolia" value="Mongolia">Mongolia</option>
+<option label="Montserrat" value="Montserrat">Montserrat</option>
+<option label="Morocco" value="Morocco">Morocco</option>
+<option label="Mozambique" value="Mozambique">Mozambique</option>
+<option label="Myanmar" value="Myanmar">Myanmar</option>
+<option label="Namibia" value="Namibia">Namibia</option>
+<option label="Nauru" value="Nauru">Nauru</option>
+<option label="Nepal" value="Nepal">Nepal</option>
+<option label="Netherlands" value="Netherlands">Netherlands</option>
+<option label="Netherlands Antilles" value="Netherlands Antilles">Netherlands Antilles</option>
+<option label="New Caledonia" value="New Caledonia">New Caledonia</option>
+<option label="New Zealand" value="New Zealand">New Zealand</option>
+<option label="Nicaragua" value="Nicaragua">Nicaragua</option>
+<option label="Niger" value="Niger">Niger</option>
+<option label="Nigeria" value="Nigeria">Nigeria</option>
+<option label="Niue" value="Niue">Niue</option>
+<option label="Norfolk Island" value="Norfolk Island">Norfolk Island</option>
+<option label="Northern Ireland" value="Northern Ireland">Northern Ireland</option>
+<option label="Northern Mariana Islands" value="Northern Mariana Islands">Northern Mariana Islands</option>
+<option label="Norway" value="Norway">Norway</option>
+<option label="Oman" value="Oman">Oman</option>
+<option label="Pakistan" value="Pakistan">Pakistan</option>
+<option label="Palau" value="Palau">Palau</option>
+<option label="Panama" value="Panama">Panama</option>
+<option label="Papua New Guinea" value="Papua New Guinea">Papua New Guinea</option>
+<option label="Paraguay" value="Paraguay">Paraguay</option>
+<option label="Peru" value="Peru">Peru</option>
+<option label="Philippines" value="Philippines">Philippines</option>
+<option label="Pitcairn" value="Pitcairn">Pitcairn</option>
+<option label="Poland" value="Poland">Poland</option>
+<option label="Portugal" value="Portugal">Portugal</option>
+<option label="Puerto Rico" value="Puerto Rico">Puerto Rico</option>
+<option label="Qatar" value="Qatar">Qatar</option>
+<option label="Reunion" value="Reunion">Reunion</option>
+<option label="Romania" value="Romania">Romania</option>
+<option label="Russia" value="Russia">Russia</option>
+<option label="Russian Federation" value="Russian Federation">Russian Federation</option>
+<option label="Rwanda" value="Rwanda">Rwanda</option>
+<option label="Saint Kitts and Nevis" value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+<option label="Saint Lucia" value="Saint Lucia">Saint Lucia</option>
+<option label="Saint Vincent and the Grenadines" value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+<option label="Samoa (Independent)" value="Samoa (Independent)">Samoa (Independent)</option>
+<option label="San Marino" value="San Marino">San Marino</option>
+<option label="Sao Tome and Principe" value="Sao Tome and Principe">Sao Tome and Principe</option>
+<option label="Saudi Arabia" value="Saudi Arabia">Saudi Arabia</option>
+<option label="Scotland" value="Scotland">Scotland</option>
+<option label="Senegal" value="Senegal">Senegal</option>
+<option label="Serbia and Montenegro" value="Serbia and Montenegro">Serbia and Montenegro</option>
+<option label="Seychelles" value="Seychelles">Seychelles</option>
+<option label="Sierra Leone" value="Sierra Leone">Sierra Leone</option>
+<option label="Singapore" value="Singapore">Singapore</option>
+<option label="Slovakia" value="Slovakia">Slovakia</option>
+<option label="Slovenia" value="Slovenia">Slovenia</option>
+<option label="Solomon Islands" value="Solomon Islands">Solomon Islands</option>
+<option label="Somalia" value="Somalia">Somalia</option>
+<option label="South Africa" value="South Africa">South Africa</option>
+<option label="South Georgia and the South Sandwich Islands" value="South Georgia and the South Sandwich Islands">South Georgia and the South Sandwich Islands</option>
+<option label="South Korea" value="South Korea">South Korea</option>
+<option label="Spain" value="Spain">Spain</option>
+<option label="Sri Lanka" value="Sri Lanka">Sri Lanka</option>
+<option label="St. Helena" value="St. Helena">St. Helena</option>
+<option label="St. Pierre and Miquelon" value="St. Pierre and Miquelon">St. Pierre and Miquelon</option>
+<option label="Suriname" value="Suriname">Suriname</option>
+<option label="Svalbard and Jan Mayen Islands" value="Svalbard and Jan Mayen Islands">Svalbard and Jan Mayen Islands</option>
+<option label="Swaziland" value="Swaziland">Swaziland</option>
+<option label="Sweden" value="Sweden">Sweden</option>
+<option label="Switzerland" value="Switzerland">Switzerland</option>
+<option label="Taiwan" value="Taiwan">Taiwan</option>
+<option label="Tajikistan" value="Tajikistan">Tajikistan</option>
+<option label="Tanzania" value="Tanzania">Tanzania</option>
+<option label="Thailand" value="Thailand">Thailand</option>
+<option label="Togo" value="Togo">Togo</option>
+<option label="Tokelau" value="Tokelau">Tokelau</option>
+<option label="Tonga" value="Tonga">Tonga</option>
+<option label="Trinidad" value="Trinidad">Trinidad</option>
+<option label="Trinidad and Tobago" value="Trinidad and Tobago">Trinidad and Tobago</option>
+<option label="Tunisia" value="Tunisia">Tunisia</option>
+<option label="Turkey" value="Turkey">Turkey</option>
+<option label="Turkmenistan" value="Turkmenistan">Turkmenistan</option>
+<option label="Turks and Caicos Islands" value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+<option label="Tuvalu" value="Tuvalu">Tuvalu</option>
+<option label="Uganda" value="Uganda">Uganda</option>
+<option label="Ukraine" value="Ukraine">Ukraine</option>
+<option label="United Arab Emirates" value="United Arab Emirates">United Arab Emirates</option>
+<option label="United Kingdom" value="United Kingdom">United Kingdom</option>
+<option label="United States Minor Outlying Islands" value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+<option label="Uruguay" value="Uruguay">Uruguay</option>
+<option label="USA" value="USA">USA</option>
+<option label="Uzbekistan" value="Uzbekistan">Uzbekistan</option>
+<option label="Vanuatu" value="Vanuatu">Vanuatu</option>
+<option label="Vatican City State (Holy See)" value="Vatican City State (Holy See)">Vatican City State (Holy See)</option>
+<option label="Venezuela" value="Venezuela">Venezuela</option>
+<option label="Viet Nam" value="Viet Nam">Viet Nam</option>
+<option label="Virgin Islands (British)" value="Virgin Islands (British)">Virgin Islands (British)</option>
+<option label="Virgin Islands (U.S.)" value="Virgin Islands (U.S.)">Virgin Islands (U.S.)</option>
+<option label="Wales" value="Wales">Wales</option>
+<option label="Wallis and Futuna Islands" value="Wallis and Futuna Islands">Wallis and Futuna Islands</option>
+<option label="Western Sahara" value="Western Sahara">Western Sahara</option>
+<option label="Yemen" value="Yemen">Yemen</option>
+<option label="Yugoslavia" value="Yugoslavia">Yugoslavia</option>
+<option label="Zambia" value="Zambia">Zambia</option>
+<option label="Zimbabwe" value="Zimbabwe">Zimbabwe</option>
+</select></p>
+
+<p><label for="url">URL (webaddress):</label><input style="width: 280px;" type="text" name="url" value="http://" class=""/></p>
+<p><label for="manager">General Manager:</label><input style="width: 280px;" type="text" name="manager" value=""  class=""/></p>
+<p><label for="phone">Telephone:</label><input style="width: 280px;" type="text" name="phone" value="" class=""/></p>
+
+<h2>What makes this hotel a qualified member?</h2>
+
+<p>Please give us your personal view why you think this hotel would be a suitable member of The Most Famous Hotels in the World:<br />
+<label for="reasons">&nbsp;</label><textarea id="reasons" name="reasons" rows="6" cols="40" style="width: 280px;"></textarea></p>
+
+<p><label for="my_name" style="color: #F70437; font-weight: bolder;">*&nbsp;My name:</label><input style="width: 280px;" type="text" name="my_name" value="" class=""/></p>
+<p><label for="my_mail" style="color: #F70437; font-weight: bolder;">*&nbsp;My email:</label><input style="width: 280px;" type="text" name="my_mail" value="" class=""/></p>
+
+<p style="position: relative; right: -40%;"><input type="submit" name="submit" value="Submit" />
+<input type="reset" name="reset" value="Clear" />
+</p>
+
+
+{/exp:freeform:form}
+
+
+{/if}
+
+{if segment_2 == "review" OR segment_3 == "review"}
+{if segment_3 == "submitted" OR segment_4 == "submitted"}
+<h1><span style="color: #F70437;">You Reviewed /span> a Member of the Most Famous Hotels in the World?</h1>
+{if:else}
+<h1><span style="color: #F70437;">Review</span> a Member of the Most Famous Hotels in the World?</h1>
+{/if}
+{/if}
+
+
+
+
+</div>
+</div>
+
+{embed="includes/left_column"}
+{embed=includes/footer}
+
+</div>
+</body>
+</html>

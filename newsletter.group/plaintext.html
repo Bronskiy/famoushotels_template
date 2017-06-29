@@ -1,0 +1,32 @@
+{exp:channel:entries channel="newsletter" orderby="date" sort="desc" limit="1" rdf="off" status="pending|open" disable="member_data|trackbacks"}
+
+{edit_date format="%F %d %Y"}
+{heading}
+{smartline}
+{if navigationstoryoneurl != "" || navigationstoryoneid != ""} 
+{if navigationstoryoneurl != ""}{navigationstoryoneurl}"{if:elseif navigationstoryoneid != "" && navigationstoryoneurl == ""}http://www.famoushotels.org/article/{navigationstoryoneid}{headingstoryone}
+{/if} 
+{if allourbooks == "Yes"} 
+http://www.famoushotels.org/books
+{/if} {if aboutaa == "Yes"} 
+http://famoushotels.org/site/about/bio
+{/if} {if mailtoaa == "Yes"} 
+mailto:andreas.augustin@famoushotels.org
+{/if} {if navigationone != ""} 
+<a href="{navigationoneurl}">
+{navigationone}</a>
+{/if} {if navigationtwo != ""} 
+<a href="{navigationtwourl}">
+{navigationtwo}</a>
+{/if} 
+{if editorialheading != ""} 
+{editorialheading}
+{/if} {editorial} {if editorialsignature == "Yes" && editorialalternativesignature == ""} 
+Andreas Augustin
+{if:elseif editorialalternativesignature != ""} 
+{editorialalternativesignature}
+{/if} 
+{if headingstoryone != ""} 
+{headingstoryone}
+{/if} {if textstoryone != ""} {textstoryone}{/if} 
+{/exp:channel:entries}

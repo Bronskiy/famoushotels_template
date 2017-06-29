@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<title>Quick Cheat Sheet</title>
+
+<style type="text/css">
+<!-- 
+body{
+	background:#eee;
+	color:#333;
+	font: 11px Arial, sans-serif;
+} 
+table {
+	float:left;
+	margin:5px;
+	border:1px solid #ccc;
+}
+.heading{
+	background:#ddd;
+}
+-->
+</style>
+</head>
+<body>
+
+<table summary="Weblog IDs" cellpadding="5">
+<tr class="heading">
+<td><b>Full Weblog Name</b></td>
+<td><b>Short Name</b></td>
+<td><b>Weblog ID</b></td>
+</tr>
+{exp:query sql="SELECT channel_id, blog_name, blog_title, blog_url FROM exp_channels ORDER BY blog_title"}
+<tr>
+<td>{channel_title}</td>
+<td>{blog_name}</td>
+<td>{channel_id}</td>
+</tr>
+{/exp:query}
+</table>
+<br clear="all" />
+
+<table summary="Custom Field IDs" cellpadding="5">
+<tr class="heading">
+<!-- <td><b>Full Field Name</b></td> -->
+<td><b>Short Name</b></td>
+<!-- <td><b>Field Type</b></td>
+<td><b>Field ID</b></td> -->
+</tr>
+{exp:query sql="SELECT group_id, field_name, field_label, field_type, field_id FROM exp_channel_fields WHERE group_id =2 ORDER BY field_name"}
+<tr>
+<!-- <td>{field_label}</td> -->
+<td>{field_name}</td>
+<!-- <td>{field_type}</td>
+<td>{field_id}</td> -->
+</tr>
+{/exp:query}</table>
+
+<table summary="Category IDs" cellpadding="5">
+<tr class="heading">
+<td><b>Full Category Name</b></td>
+<td><b>Category ID</b></td>
+</tr>
+{exp:query sql="SELECT cat_name, cat_id, group_id FROM exp_categories ORDER BY group_id"}
+<tr>
+<td>{cat_name}</td>
+<td>{cat_id}</td>
+</tr>
+{/exp:query}</table>
+
+</body>
+</html>

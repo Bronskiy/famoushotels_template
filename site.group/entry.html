@@ -1,0 +1,36 @@
+{preload_replace:my_channel="news"}
+{preload_replace:my_template_group="site"}
+
+{embed="includes/html_header" my_template_group="{my_template_group}"}
+
+<body>
+
+{if member_group == "1"}<div style="position: absolute; right: 15%; top: 50px;"><a href="http://www.famoushotels.org/db/fhdb1986/index.php?S=0&C=publish&M=entry_form&channel_id=2"><img src="http://ingmar.at/images/icons/page_add.png" height="16" width="16" alt="Add a new entry" title="Add a new entry" align="bottom" class="icon" border="0" /></a>
+</div>{/if}
+
+<div id="container">
+
+{embed="includes/header"}
+<div id="wrapper">
+<div id="contentright">
+
+{exp:channel:entries limit="1"}
+
+<h1>{title}</h1>
+{if summary != ""}<p><em>{summary}</em></p>{/if}
+
+{body}
+
+{if member_group == "1"}<a style="position: relative; left: 30px;" href="http://www.famoushotels.org/db/fhdb1986/index.php?S=0&C=edit&M=edit_entry&channel_id=2&entry_id={entry_id}"><img src="http://ingmar.at/images/icons/page_edit.png" height="16" width="16" alt="Edit this entry" title="Edit this entry" align="bottom" class="icon" border="0" /></a>{/if}
+
+{/exp:channel:entries}
+
+</div>
+</div>
+
+{embed="includes/left_column"}
+{embed=includes/footer}
+
+</div>
+</body>
+</html>

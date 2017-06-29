@@ -1,0 +1,28 @@
+{layout="includes/_wrapper"}
+
+<section class="content single-post-content">
+  <div class="container">
+    {exp:channel:entries channel="pages" disable="categories|member_data|pagination" cache="yes" refresh="576"}
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="normal-box single-post-box">
+            <div class="normal-post">
+              {if page_image}
+              <div class="normal-post-header">
+                <img src="{page_image}" alt="{title}">
+              </div>
+              {/if}
+              <div class="normal-post-content">
+                <h1 class="normal-post-title">{title}</h1>
+                {page_body}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {/exp:channel:entries}
+    {embed="includes/_sidebar"}
+  </div>
+</section>

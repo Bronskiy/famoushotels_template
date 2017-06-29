@@ -1,0 +1,102 @@
+{preload_replace:my_template_group="site"}
+
+{exp:channel:entries limit="1" status="open|opener"}
+{embed="includes/html_header" my_template_group="{my_template_group}" my_title="{basetitle} | {title}"}
+{/exp:channel:entries}
+
+<body>
+
+<div id="container">
+
+{embed="includes/header"}
+<div id="wrapper"><div id="content"><div id="replacer" class="archives">
+
+{exp:channel:entries channel="homepage" status="open" limit="1" category="21" orderby="date" disable="member_data|trackbacks"}
+
+<div class="bookteaser">
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="{fbwidth}" height="{fbheight}">
+      <param name="movie" value="http://famoushotels.org/flash/flippingBook.swf" />
+      <param name="quality" value="high" />
+{if fbentryid != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" />
+{if:elseif fburl != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" />
+{/if}
+      <param name="scale" value="noscale" />
+      <param name="bgcolor" value="#cccc99" />
+{if fbentryid != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{if:elseif fburl != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{/if}
+</object>
+</div>
+
+{/exp:channel:entries}
+
+{exp:channel:entries limit="1" status="open|opener"}
+
+<div class="infozeile">
+<span class="datum">{entry_date format="%m %d %Y"}</span>
+<span class="entryid">{entry_id}</span>
+<br clear="all"/>
+</div>
+
+<div class="dots">
+<img width="3" height="1" src="http://famoushotels.org/images/archives/layout/dot.gif" alt=""/>
+</div>
+
+<div id="headerinfo">
+<h4 class="title">{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}{title} {/exp:titleimg}</h4>
+{if newsletter_author_display == "yes"}
+<div class="author"><i>by </i>
+{if author == "Andreas Augustin" || author == "Editor"}
+<a href="http://www.famoushotels.org/site/about/bio" title="Andreas Augustin"><span class="author">Andreas Augustin</span></a>
+{if:elseif newsletter_author != ""}
+{if newsletter_author_url != ""}<a href="{newsletter_author_url}" target="_blank" title="Internet address">{/if}
+<span class="author">{newsletter_author}</span>
+{if newsletter_author_url != ""}</a>{/if}
+{if:else}
+<span class="author">{author}</span>
+{/if}
+</div>
+{/if}
+</div>
+
+<div class="dots">
+<img width="3" height="1" src="http://famoushotels.org/images/archives/layout/dot.gif" alt=""/>
+</div>
+
+<div class="funktionszeile">
+{if channel_id == "8"}<span class="kategorie"><a href="/archives/newsletters">NEWSLETTER</a></span>{/if}
+{categories show="not 7"}
+{if category_name == "Inspirations"}<span class="kategorie"><a href="/archives/inspirations">INSPIRATIONS</a></span>{/if}
+{if category_name == "Publications"}<span class="kategorie"><a href="/archives/publications">PUBLICATIONS</a></span>{/if}
+{if category_name == "Documentations"}<span class="kategorie"><a href="/archives/documentations">DOCUMENTATIONS</a></span>{/if}
+{if category_name == "Who Where When"}<span class="kategorie"><a href="/archives/whowherewhen">WHOWHEREWHEN</a></span>{/if}
+{/categories}
+
+<a href="javascript:textSize('up')" class="buttonup" title="Increase Font-Size"><img src="http://famoushotels.org/images/archives/layout/buttonup.gif" class="buttonup" width="14" height="14" alt="" border="0" /></a><a href="javascript:textSize('down')" class="buttondown" title="Decrease Font-Size"><img src="http://famoushotels.org/images/archives/layout/buttondown.gif" class="buttondown" width="14" height="14" alt="" border="0" /></a>
+<br clear="all" />
+</div>
+
+{if newsletter_body != ""}{newsletter_body}{/if}
+
+{if article_photo != ""}<div id="articlephoto">{article_photo}{article_photo_caption}</div><br clear="all"/>{/if}
+
+{if summary != ""}<div class="summary"><em>{summary}</em></div>{/if}
+
+{if body != ""}{body}{/if}
+
+{/exp:channel:entries}
+
+</div></div></div>
+
+
+{embed="includes/right_column_ajax"}
+{embed="includes/left_column"}
+{embed="includes/footer"}
+
+</div>
+</body>
+</html>

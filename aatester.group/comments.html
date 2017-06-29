@@ -1,0 +1,100 @@
+{preload_replace:gallery_name="aatest"}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Comments</title>
+<meta http-equiv="Content-Type" content="text/html; charset={charset}" />
+
+<link rel='stylesheet' type='text/css' media='all' href='{stylesheet=aatester/gallery_css}' /> 
+<style type='text/css' media='screen'>@import "{stylesheet=aatester/gallery_css}";</style>
+</head>
+
+<body>
+
+<div id="narrowcontent">
+
+
+<ol>
+
+{exp:gallery:comments}
+
+<li>{comment}
+<div class="posted">Posted by {url_or_email_as_author}  &nbsp;on&nbsp; {comment_date format='%m/%d'} &nbsp;at&nbsp; {comment_date format='%h:%i %A'}</div>
+</li>
+
+{/exp:gallery:comments}
+
+</ol>
+
+
+<div class="spacer">&nbsp;</div>
+
+
+{exp:gallery:comment_form preview="aatester/comment_preview"}
+
+{if logged_out}
+
+<p>
+Name:<br />
+<input type="text" name="name" value="{name}" size="50" style="width:100%;" />
+</p>
+
+<p>
+Email:<br />
+<input type="text" name="email" value="{email}" size="50" style="width:100%;" />
+</p>
+
+<p>
+Location:<br />
+<input type="text" name="location" value="{location}" size="50" style="width:100%;" />
+</p>
+
+<p>
+URL:<br />
+<input type="text" name="url" value="{url}" size="50" style="width:100%;" />
+</p>
+
+{/if}
+
+<p>
+<a href="{path=aatester/smileys}" onclick="window.open(this.href, '_blank', 'width=400,height=440');return false;" onkeypress="this.onclick()">Smileys</a>
+</p>
+
+<p>
+<textarea name="comment" cols="50" rows="12" style="width:100%;" >{comment}</textarea>
+</p>
+
+{if logged_out}
+<p><input type="checkbox" name="save_info" value="yes" {save_info} /> Remember my personal information</p>
+{/if}
+
+<p><input type="checkbox" name="notify_me" value="yes" {notify_me} /> Notify me of follow-up comments?</p>
+
+{if captcha}
+<p>Submit the word you see below:</p>
+<p>
+{captcha}
+<br />
+<input type="text" name="captcha" value="{captcha_word}" size="20" maxlength="20" style="width:140px;" />
+</p>
+{/if}
+
+<input type="submit" name="submit" value="Submit" />
+<input type="submit" name="preview" value="Preview" />
+
+{/exp:gallery:comment_form}
+
+
+<div class="spacer">&nbsp;</div>
+
+<div class="windowclose"><a href="#" onclick="window.close();">Close Window</a></div>
+
+
+<div class="powered"><a href="http://www.pmachine.com/">Powered by ExpressionEngine</a></div>
+
+</div>
+
+</body>
+</html>

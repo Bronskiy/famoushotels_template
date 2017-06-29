@@ -1,0 +1,147 @@
+{layout="includes/_wrapper"}
+{preload_replace:my_channel="news"}
+{preload_replace:my_template_group="site"}
+
+{embed="includes/html_header" my_template_group="{my_template_group}" my_title="{basetitle} | Hotels"}
+
+<body>
+
+<div id="container">
+
+{embed="includes/header"}
+
+<div id="wrapper">
+<div id="content">
+
+{if segment_2 != ""}
+
+{exp:channel:entries channel="hotels" status="open|Full Plan" limit="1" disable="categories|member_data|trackbacks"}
+
+<h4>{exp:titleimg font="korinna_regular.ttf" size="14" color="111111"}{title} {/exp:titleimg}</h4>
+<div id="replace">
+
+{if hotel_photo_url != ""}
+<div id="hotelphoto">{hotel_photo_url}{hotel_photo_caption}</div><br clear="all"/>
+{/if}
+
+{if famous_quote != ""}<div class="summary"><em>{famous_quote}</em></div>{/if}
+
+
+</div>
+</div>
+</div>
+
+<div id="rightcolhotels">
+
+{!--mr<h1 class="right" style="text-align: left;">Our Select Member</h1>
+<div style="text-align: center;">
+<?php $file2 = '/www/pmh5017/public_html/images/hotels/hotel_{entry_id}/{entry_id}_002.jpg';
+if (file_exists($file2)) {
+echo "<img src=\"/images/hotels/hotel_{entry_id}/{entry_id}_002.jpg\" alt=\"\" />";
+} else { echo "<img src=\"/images/crest.jpg\" alt=\"\">"; } ?>
+</div>--}
+
+<h2 style="margin-top:0px;">Our Select Member Hotel</h2>
+
+<p><strong>{title}</strong><br /><b>Country: </b>{!--<a href="/hotels/search/{country}/all/{entry_id}" title="Search for more hotels in {country}">--}{country}{!--</a>--}<br /><b>City: </b>{!--<a href="/hotels/search/{country}/{city}/{entry_id}" title="Search for more hotels in {city}, {country}">--}{city}{!--</a>--}<br />
+<strong>Opening date</strong>: {opening_date}<br />
+<h2 style="margin-top:0px;">Note from the Host</h2>
+General Manager  {general_manager}<br />
+{if hotel_manager != ""}<strong>Hotel Manager</strong>: {hotel_manager}<br />{/if}
+
+{if concierge != ""}<strong>Concierge</strong>: {concierge}<br />{/if}
+
+
+</p>
+
+<h2>The History</h2>
+<p>
+{if historic_data != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/historic_data','replace');">History</a><br />{/if}
+
+{if famous_guests != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/famous_guests','replace');">Famous Guests</a><br />{/if}
+
+{if legendary_stories != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/legendary_stories','replace');">Legendary Stories / Literature</a><br />{/if}
+
+{if film_appearances != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/film_appearances','replace');">In the Movies</a><br />{/if}
+
+{if managers_history != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/managers_history','replace');">Former Managers</a><br />{/if}
+
+{if book != "" AND book != "NO"}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/book','replace');">History Book</a><br />{/if}
+</p>
+
+<h2>The Present</h2>
+
+<p>
+{if managed_by_company != ""}<strong>Managed by:</strong> {managed_by_company}<br />{/if}
+{number_of_rooms} Rooms<br />
+{if number_suites != ""}{number_suites} Suites <br />{/if}
+
+{if room_features != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/room_features','replace');">Room features</a><br />{/if}
+{if famous_suites != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/famous_suites','replace');">Famous Suites</a><br />{/if}
+
+{if situated != "" || f_b_outlets != "" || must_do != "" || kids_info != "" || body_mind_soul != "" || banqueting_MICE != "" || dress_code != ""}
+
+{if situated != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/situated','replace');">Situated</a><br />{/if}
+
+{if f_b_outlets != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/f_b_outlets','replace');">Restaurants &amp; Bars</a><br />{/if}
+
+{if must_do != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/must_do','replace');">Must-do at the hotel</a><br />{/if}
+
+{if kids_info != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/kids_info','replace');">Kid's Info</a><br />{/if}
+
+{if body_mind_soul != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/body_mind_soul','replace');">Body, Mind and Soul</a><br />{/if}
+
+{if banqueting_MICE != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/banqueting_MICE','replace');">Banqueting / MICE</a><br />{/if}
+
+{if dress_code != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/dress_code','replace');">Dress Code</a><br />{/if}
+
+</p>
+{/if}
+
+<h2>Coordinates</h2>
+<p><strong>{if street != ""}{street}<br>{/if} {zip} {city}, {country}</strong><br />
+{if telephone != “”}Tel: <strong>{telephone}</strong><br />{/if}
+{if fax != “”}Fax: <strong>{fax}</strong><br />{/if}
+
+</p>
+
+<h2>Reload this Hotel</h2>
+<p>
+<a href="/hotels/{entry_id}">Start again</a></p>
+<p>
+<h2><b>Book a Room</b>
+Click on the link below to start your trip (no booking fees)!<br>
+
+
+{if url_reservation != ""}<strong>&raquo;</strong>&nbsp;"{url_reservation}"<br>or copy this link into your browser</a><br />{/if}
+
+
+
+{if status=="Full Plan"}<h2><b>Book a Room</b><br> powered by booking.com</h2>
+<p>
+{if url_reservation != ""}<strong>&raquo;</strong>&nbsp;<"{url_reservation}"Check availability </a><br />{/if}
+
+</p>
+{/if}
+
+{/exp:channel:entries}
+
+{if:else}
+
+{embed="includes/making_history"}
+
+</div>
+</div>
+
+{embed="includes/rightnav"}
+
+{/if}
+
+
+</div>
+
+{embed="includes/left_column"}
+{embed=includes/footer}
+</div>
+</body>
+</html>

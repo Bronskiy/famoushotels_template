@@ -1,0 +1,14 @@
+
+{exp:channel:entries channel="making_history" status="open" limit="1" orderby="random" disable="member_data|trackbacks"}
+<p class="cc">{mh_picture}</p>
+{if mh_text != ""}
+<p>
+<em>{mh_text}</em>
+{if mh_link_entryid != ""}
+<span><em><a href="http://famoushotels.org/article/{mh_link_entryid}" title="{title}">{mh_link_name}</a></em></span>
+{if:elseif mh_link_url != "" && mh_link_entryid == ""}
+<span><em><a href="{mh_link_url}" title="{title}">{mh_link_name}</a></em></span>
+{/if}
+</p>
+{/if}
+{/exp:channel:entries}

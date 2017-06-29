@@ -1,0 +1,21 @@
+
+<?php
+$tr="32";
+$sml = "{embed:sml}";
+$sone = "{embed:sone}";
+$stwo = "{embed:stwo}";
+$sthree = "{embed:sthree}";
+if ($sml == "0") {
+$tr=$tr-6;
+}
+if ( $sone != "Open") {
+$tr=$tr-4;
+}
+if ( $stwo != "Open") {
+$tr=$tr-4;
+}
+if ( $sthree != "Open") {
+$tr=$tr-4;
+}
+echo $tr;
+?>

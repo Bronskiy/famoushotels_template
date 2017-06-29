@@ -1,0 +1,47 @@
+{preload_replace:my_channel="news"}
+{preload_replace:my_template_group="site"}
+
+{embed="includes/html_header" my_template_group="{my_template_group}" my_title="{basetitle} | TimeLine"}
+
+<body>
+
+<div id="container">
+{embed="includes/header"}
+
+<div id="wrapper">
+<div id="content">
+
+</div>
+</div>
+
+<div id="extra">
+
+<?php $jahreszahlen = array(); ?>
+{exp:channel:entries channel="hotels" sort="asc"}
+{if opening_date != ""}
+<?php $ziffern = "{opening_date}";
+$laenge = strlen($ziffern);
+if (($laenge == "4" && is_numeric($ziffern) == "true") || $laenge > "4") {
+array_push($jahreszahlen,substr($ziffern,0,4));} ?>
+{/if}
+{/exp:channel:entries}
+<?php sort($jahreszahlen); foreach ($jahreszahlen as $keys => $val) { echo $val . "<br \>\n";} ?>
+
+<div style="text-align: center;"><img src="/db/images/uploads/pileofbooks.jpg" alt="image" width="200" height="240" /></div>
+<h2>Become a Member</h2>
+<div>
+<p>The Friends of The Most Famous Hotels is a global non-profit organization. Although we do have full membership schemes available, at first, you might like to become a corresponding member to receive regular updates on our activities.</p>
+<p>Please join us as a corresponding member. Corresponding membership is free of charge.
+Kindly register your e-mail address to receive our newsletter. Thank you.</p>
+</div>
+</div>
+
+</p>
+
+
+{embed="includes/left_column"}
+{embed=includes/footer}
+</div>
+
+</body>
+</html>

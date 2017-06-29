@@ -1,0 +1,175 @@
+{preload_replace:my_channel="news"}
+{preload_replace:my_template_group="site"}
+
+{embed="includes/html_header" my_template_group="{my_template_group}" my_title="{basetitle} | Search Hotels"}
+
+<body>
+
+<div id="container">
+
+{embed="includes/header"}
+
+<div id="wrapper">
+<div id="contentright">
+
+{if segment_3 == "all"}
+
+<h4>
+{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}Complete List of the Most Famous Hotels in the World {/exp:titleimg}
+</h4>
+
+<div id="allhotels">
+<div>
+<?php $land = ""; $stadt = "";?>
+{exp:query sql="SELECT DISTINCT d.field_id_7 AS city, d.field_id_8 AS country, d.entry_id, t.title
+                FROM exp_channel_data AS d, exp_channel_titles AS t
+                WHERE d.channel_id = '4' 
+                AND (t.status='open' OR t.status='Full Plan')
+                AND t.entry_id = d.entry_id ORDER BY field_id_8, field_id_7, t.title"}
+<?php 
+if ($land  != "{country}") { echo "</div><div class=\"allhotelsentry\"><p class=\"allhotelscountry\"><span class=\"allhotelsmargin\"><strong>{country}</strong></span></p>"; }
+if ($stadt != "{city}") { echo "<p class=\"allhotelscity\"><span class=\"allhotelsmargin\"><strong>{city}</strong></span></p>"; } ?>
+<p class="allhotelshotel"><a class="allhotelsmargin" href="/hotels/{entry_id}">{title}</a></p>
+<?php $land="{country}"; $stadt="{city}"; ?>
+
+{/exp:query}
+</div>
+</div>
+
+
+
+{if:elseif segment_3 == "export"}
+
+<h4>
+{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}Complete List of the Most Famous Hotels in the World {/exp:titleimg}
+</h4>
+
+<div id="allhotels">
+<div>
+<?php $land = ""; $stadt = ""; $address = ""; $telephone = ""; $url = ""; $fax = ""; $email = ""; ?>
+{exp:query sql="SELECT DISTINCT d.field_id_7 AS city, d.field_id_8 AS country, d.entry_id, t.title, d.field_id_6 AS address, d.field_id_9 AS telephone, d.field_id_42 AS url, d.field_id_35 AS fax, d.field_id_44 AS email
+                FROM exp_channel_data AS d, exp_channel_titles AS t
+                WHERE d.channel_id = '4' 
+                AND (t.status='open' OR t.status='Full Plan')
+                AND t.entry_id = d.entry_id ORDER BY field_id_8, field_id_7, t.title, field_id_6, field_id_9, d.field_id_42, d.field_id_35, d.field_id_44"}
+<?php 
+if ($land  != "{country}") { echo "</div><div class=\"allhotelsentry\"><p class=\"allhotelscountry\"><span class=\"allhotelsmargin\"><strong>{country}</strong></span></p>"; }
+if ($stadt != "{city}") { echo "<p class=\"allhotelscity\"><span class=\"allhotelsmargin\"><strong>{city}</strong></span></p>"; } ?>
+
+<p class="allhotelshotel"><a class="allhotelsmargin" href="/hotels/{entry_id}">{title}</a></p>
+
+<?php if ($telephone != "{telephone}") { echo "<p class=\"allhotelshotel\"><span class=\"allhotelsmargin\">{telephone}</span></p>"; } ?>
+<?php if ($fax != "{fax}") { echo "<p class=\"allhotelshotel\"><span class=\"allhotelsmargin\">{fax}</span></p>"; } ?>
+<?php if ($email != "{email}") { echo "<p class=\"allhotelshotel\"><span class=\"allhotelsmargin\">{email}</span></p>"; } ?>
+<?php if ($address != "{address}") { echo "<p class=\"allhotelshotel\"><span class=\"allhotelsmargin\">{address}</span></p>"; } ?>
+<?php if ($url != "{url}") { echo "<p class=\"allhotelshotel\"><span class=\"allhotelsmargin\">{url}</span></p>"; } ?>
+
+<?php $land="{country}"; $stadt="{city}"; $address = "{address}"; $telephone = "{telephone}"; $url = "{url}";$fax = "{fax}"; $email = "{email}"; ?>
+
+{/exp:query}
+</div>
+</div>
+
+
+
+{if:else}
+
+{if segment_4 != ""}
+
+{if segment_5 != "" AND segment_4 == "all"}
+
+<h4>
+{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}Hotels in {segment_3} {/exp:titleimg}
+</h4>
+
+<div id="allhotels">
+<div class="allhotelsentry"><p class="allhotelscountry"><span class="allhotelsmargin"><strong>{segment_3}</strong></span></p>
+
+<?php $stadt = "";?>
+{exp:query sql="SELECT DISTINCT d.field_id_7 AS city, d.entry_id, t.title
+                FROM exp_channel_data AS d, exp_channel_titles AS t
+                WHERE d.channel_id = '4' 
+                AND d.field_id_8 LIKE '{segment_3}' 
+                AND (t.status='open' OR t.status='Full Plan')
+                AND t.entry_id = d.entry_id" ORDER BY field_id_8, field_id_7. t.title}
+<?php if ($stadt != "{city}") { echo "<p class=\"allhotelscity\"><span class=\"allhotelsmargin\"><strong>{city}</strong></span></p>"; } ?>
+<p class="allhotelshotel"><a class="allhotelsmargin" href="/hotels/{entry_id}">{title}</a></p>
+<?php $stadt="{city}" ?>
+
+{/exp:query}
+</div>
+</div>
+
+{if:else}
+
+<h4>
+{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}Hotels in {segment_4} {/exp:titleimg}
+</h4>
+
+<div id="allhotels">
+<div class="allhotelsentry"><p class="allhotelscountry"><span class="allhotelsmargin"><strong><a href="/hotels/search/{segment_3}/all/{segment_5}">{segment_3}</a></strong></span></p>
+
+<?php $stadt = "";?>
+{exp:query sql="SELECT DISTINCT d.field_id_7 AS city, d.entry_id, t.title FROM exp_channel_data AS d, exp_channel_titles AS t WHERE d.channel_id = '4' 
+AND d.field_id_8 LIKE '{segment_3}' AND d.field_id_7 LIKE '{segment_4}' AND (t.status='open' OR t.status='Full Plan') AND t.entry_id = d.entry_id ORDER BY field_id_8, field_id_7, t.title"}
+<?php if ($stadt != "{city}") { echo "<p class=\"allhotelscity\"><span class=\"allhotelsmargin\"><strong>{city}</strong></span></p>"; } ?>
+<p class="allhotelshotel"><a class="allhotelsmargin" href="/hotels/{entry_id}">{title}</a></p>
+<?php $stadt="{city}" ?>
+
+{/exp:query}
+</div>
+</div>
+{/if}
+
+{if segment_5 != ""}
+{exp:query sql="SELECT title AS hotel FROM exp_channel_titles WHERE entry_id = '{segment_5}'"}
+<br /><strong>&laquo;</strong><a href="/hotels/{segment_5}"> Back to the "{hotel}"</a>
+{/exp:query}
+
+{if:else}
+<br /><strong>&laquo;</strong><a href="/hotels/"> Back to Hotels</a>
+
+{/if}
+
+ {if:else}
+
+<h4>
+{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}Hotels in {segment_3} {/exp:titleimg}
+</h4>
+
+<div id="allhotels">
+<div class="allhotelsentry"><p class="allhotelscountry"><span class="allhotelsmargin"><strong>{segment_3}</strong></span></p>
+
+<?php $stadt = "";?>
+{exp:query sql="SELECT DISTINCT d.field_id_7 AS city, d.entry_id, t.title
+                FROM exp_channel_data AS d, exp_channel_titles AS t
+                WHERE d.channel_id = '4' 
+                AND d.field_id_8 LIKE '{segment_3}' 
+                AND (t.status='open' OR t.status='Full Plan')
+                AND t.entry_id = d.entry_id" ORDER BY field_id_8, field_id_7. t.title}
+<?php if ($stadt != "{city}") { echo "<p class=\"allhotelscity\"><span class=\"allhotelsmargin\"><strong>{city}</strong></span></p>"; } ?>
+<p class="allhotelshotel"><a class="allhotelsmargin" href="/hotels/{entry_id}">{title}</a></p>
+<?php $stadt="{city}" ?>
+
+{/exp:query}
+</div>
+</div>
+
+{if segment_5 != ""}
+{exp:query sql="SELECT title AS hotel FROM exp_channel_titles WHERE entry_id = '{segment_5}'"}
+<br /><strong>&laquo;</strong><a href="/hotels/{segment_5}"> Back to the "{hotel}"</a>
+{/exp:query}
+
+{if:else}
+<br /><strong>&laquo;</strong><a href="/hotels/"> Back to Hotels</a>
+
+{/if}{/if}{/if}
+</div>
+</div>
+
+{embed="includes/left_column"}
+{embed=includes/footer}
+
+</div>
+</body>
+</html>

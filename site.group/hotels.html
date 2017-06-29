@@ -1,0 +1,68 @@
+{preload_replace:my_channel="news"}
+{preload_replace:my_template_group="site"}
+
+{embed="includes/html_header" my_template_group="{my_template_group}"}
+
+<body>
+
+{if member_group == "1"}<div style="position: absolute; right: 15%; top: 50px;"><a href="http://www.famoushotels.org/db/fhdb1986/index.php?S=0&C=publish&M=entry_form&channel_id=2"><img src="http://ingmar.at/images/icons/page_add.png" height="16" width="16" alt="Add a new entry" title="Add a new entry" align="bottom" class="icon" border="0" /></a>
+</div>{/if}
+
+<div id="container">
+
+{embed="includes/header"}
+<div id="wrapper">
+
+<div id="contentright">
+
+{if segment_2 == ""}
+
+
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"
+width="530" height="300" id="zoom_map" align="top">
+<param name="movie" value="http://www.famoushotels.org/db/images/world_new.swf" />
+<param name="quality" value="high" />
+<param name="bgcolor" value="#FFFFFF" />
+            <embed src="world-new.swf" quality="high" bgcolor="#FFFFFF"
+width="530" height="300" name="Clickable World Map" align="top" 
+type="application/x-shockwave-flash" 
+pluginspage="http://www.macromedia.com/go/getflashplayer">
+</embed></object>
+
+
+{if:else}
+
+{if segment_2 == "by_country"}
+
+<h1>Show by country: {segment_3}</h1>
+
+{exp:query sql="SELECT * FROM `exp_channel_data`WHERE field_id_8 LIKE '%{segment_3}%'"}
+<div>
+<p><a href="/db/index.php/hotels/{entry_id}/">{field_id_4}</a> <br />
+</p>
+</div>
+{/exp:query}
+
+{if:else}
+
+{exp:channel:entries limit="1" channel="hotels"}
+
+
+<h1>{title}</h1>
+
+<h2>{hotel}</h2>
+
+
+{/exp:channel:entries}
+
+{/if}{/if}
+</div>
+</div>
+
+{embed="includes/left_column"}
+{embed=includes/footer}
+
+</div>
+</body>
+</html>

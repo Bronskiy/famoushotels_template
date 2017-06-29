@@ -1,0 +1,71 @@
+{exp:channel:entries channel="newsletter" orderby="date" sort="desc" limit="1" rdf="off" status="{embed:picstatus}" disable="member_data|trackbacks"}
+
+{if story{embed:nr}relatedarticle != "0"}
+
+	{if story{embed:nr}linkpicture == "Yes"}
+	
+		{story{embed:nr}relatedarticle}
+			
+			{if newsletterpicture != ""}
+				<a href="http://www.famoushotels.org/article/{story{embed:nr}relatedarticle:entry_id}">{story{embed:nr}relatedarticle:newsletterpicture}</a>
+			{if:else}
+				<a href="http://www.famoushotels.org/article/{story{embed:nr}relatedarticle:entry_id}"><img width="150" height="150" border="0" alt="Picture" src="http://famoushotels.org/images/newsletter/template/platzhalter.jpg"></a>
+			{/if}
+		
+		{/story{embed:nr}relatedarticle}
+	
+	{if:else}
+	
+		{story{embed:nr}relatedarticle}
+		
+			{if newsletterpicture != ""}
+				{story{embed:nr}relatedarticle:newsletterpicture}
+			{if:else}
+				<img width="150" height="150" border="0" alt="Picture" src="http://famoushotels.org/images/newsletter/template/platzhalter.jpg">
+			{/if}
+		
+		{/story{embed:nr}relatedarticle}
+	
+	{/if}
+
+{if:else}
+
+	{if story{embed:nr}linkpicture == "Yes"}
+	
+		{if story{embed:nr}linkurl != ""}
+		
+			{if story{embed:nr}picture != ""}
+				<a href="{story{embed:nr}linkurl}">{story{embed:nr}picture}</a>
+			{if:else}
+				<a href="{story{embed:nr}linkurl}"><img width="150" height="150" border="0" alt="Picture" src="http://famoushotels.org/images/newsletter/template/platzhalter.jpg"></a>
+			{/if}
+				
+		{if:else}
+		
+			{if story{embed:nr}linkarticle != "0"}
+			
+				{if story{embed:nr}picture != ""}
+					{story{embed:nr}linkarticle}<a href="http://www.famoushotels.org/article/{story{embed:nr}linkarticle:entry_id}">{/story{embed:nr}linkarticle}{story{embed:nr}picture}</a>
+				{if:else}
+					{story{embed:nr}linkarticle}<a href="http://www.famoushotels.org/article/{story{embed:nr}linkarticle:entry_id}">{/story{embed:nr}linkarticle}<img width="150" height="150" border="0" alt="Picture" src="http://famoushotels.org/images/newsletter/template/platzhalter.jpg"></a>
+				{/if}
+				
+			{/if}
+			
+		{/if}
+	
+	{if:else}
+		
+		{if story{embed:nr}picture != ""}
+			{story{embed:nr}picture}
+		{if:else}
+			<img width="150" height="150" border="0" alt="Picture" src="http://famoushotels.org/images/newsletter/template/platzhalter.jpg">
+		{/if}
+
+	{/if}
+
+{/if}
+
+
+{/exp:channel:entries}
+

@@ -1,0 +1,28 @@
+
+{exp:channel:entries channel="homepage" status="open" limit="1" category="24" orderby="random" disable="member_data|trackbacks"}
+<div class="bookteaser">
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="{fbwidth}" height="{fbheight}">
+      <param name="movie" value="http://famoushotels.org/flash/flippingBook.swf" />
+      <param name="quality" value="high" />
+{if fbentryid != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" />
+{if:elseif fburl != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" />
+{/if}
+      <param name="scale" value="noscale" />
+      <param name="bgcolor" value="#cccc99" />
+{if fbentryid != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{if:elseif fburl != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{/if}
+</object>
+</div><br clear="all" />
+<p><em>{fbtext}</em></p>
+{/exp:channel:entries}
+
+<p style="background: beige; border-top: 1px solid #cccc99; border-bottom: 1px solid #cccc99; padding: 0.35em; text-align: center;">
+<a href="http://famoushotels.org/flippingpages" title="Preview more books">
+Preview more books
+</a>
+</p>

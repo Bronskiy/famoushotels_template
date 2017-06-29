@@ -1,0 +1,14 @@
+{!--
+<div id="publishedhotels">
+
+{exp:channel:entries channel="books" status="open|To be published" orderby="random" limit="3" disable="categories|member_data|trackbacks|pagination"}
+{book_related_hotel}
+
+<div class="pitem"><a target="_blank" href="/books/{book_related_hotel:entry_id}" title="Book: {book_related_hotel:title}"><img width="55" height="55" border="0" alt="" src="{book_related_hotel:book_image_small_url}" /></a><p><span class="">{book_related_hotel:title}<br /><span class="">Country: {book_related_hotel:country}</span><br /><span class="">City: {book_related_hotel:city}</span></p></div>
+
+{/book_related_hotel}
+{/exp:channel:entries}
+
+<br clear="all" />
+</div>--}
+

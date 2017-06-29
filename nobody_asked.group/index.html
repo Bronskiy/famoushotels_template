@@ -1,0 +1,276 @@
+{preload_replace:my_channel="nobody_asked"}
+{preload_replace:my_template_group="books"}
+
+{exp:channel:entries channel="nobody_asked" limit="1" status="open|To be published|Out of Print" disable="trackbacks|member_data|pagination"}
+{embed="includes/html_header" my_template_group="site" my_title="{basetitle} | Books{if segment_2 != ""}{if segment_2 == "C11"} | The Most Famous Hotels in the World Series{if:elseif segment_2 == "C12"} | The Treasury Books{if:elseif segment_2 == "C13"} | Individual Books{if:elseif segment_2 == "C15"} | E-Books{if:else} | {title}{/if}{/if}"}{/exp:channel:entries}
+
+<body>
+
+<div id="container">
+
+{embed="includes/header"}
+
+<div id="wrapper">
+
+{if segment_2 == ""}
+<div id="contentright">
+<a href="/nobody_asked/530"><img src="http://famoushotels.org/images/hotels/hotel_170/rouge_red_550.jpg" alt="image" width="550" height="343" border="0" /></a><form>
+<select onchange="document.location.href=this.options[this.selectedIndex].value;">
+<option value="/books">Select a Book ...</option>
+{exp:query sql="SELECT entry_id, title FROM `exp_channel_titles` WHERE channel_id ='3' AND (status = 'open' OR status = 'To be published') ORDER BY title"}
+
+<option value="/nobody_asked/{entry_id}">{title}</option>{/exp:query}</select>
+
+<strong>&nbsp;&nbsp;&nbsp;&raquo;</strong><a href="https://www.paypal.com/cart/display=1&bn=tm_gl_2.0&business=au@famoushotels.org" onclick="window.open(this.href);return false;">&nbsp;View Shoppingcart</a></form>
+
+	<div id="books">
+	<div id="bookitem">
+
+	<a href="/nobody_asked/C11">{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}The Most Famous Hotels in the World Series {/exp:titleimg}</a>
+	<div class="clr"></div>
+
+	<p class="bookitemtop"><a href="/nobody_asked/C11"><img src="http://www.famoushotels.org/phpthumb/phpThumb.php?src=http://famoushotels.org/images/hotels/hotel_303/303_bkkmoh_cover.jpg&amp;w=60&amp;q=70" alt="Picture: Book" /></a>Individually researched by our dedicated team, published in an unique library of cloth- and leather bound books. The Oriental Bangkok, The Imperial Vienna, The Savoy London, The Peninsula Hong Kong, The Imperial New Delhi, Grand Hotel Rome, St. Petersburg, Budapest ... <br /><p class="bookitemmore"><strong>&raquo;</strong>&nbsp;<a href="/nobody_asked/C11">more</a></p></p><div class="clr"></div>
+</div>
+
+<div id="bookitem">
+<a href="/nobody_asked/C12">{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}The Treasury Books {/exp:titleimg}</a>
+<div class="clr"></div>
+<p class="bookitemtop"><a href="/nobody_asked/C12"><img src="http://www.famoushotels.org/phpthumb/phpThumb.php?src=http://famoushotels.org/images/covers/caimen-cover.jpg&amp;w=60&amp;q=70" alt="Picture: Book" /></a>Derived from the wealth of our research, the practical paperback companion. The Mena House Treasury, The Raffles Treasury, The Café Central Vienna Treasury, The Singapore Treasury, The Penang Treasury ... <br /><p class="bookitemmore"><strong>&raquo;</strong>&nbsp;<a href="/nobody_asked/C12">more</a></p></p><div class="clr"></div>
+</div>
+
+<div id="bookitem">
+<a href="/nobody_asked/C13">{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}Individual Books {/exp:titleimg}</a>
+<div class="clr"></div>
+<p class="bookitemtop"><a href="/nobody_asked/C13"><img src="http://www.famoushotels.org/phpthumb/phpThumb.php?src=http://hotels.pmhclients.com/images/hotels/hotel_558/558_coscalcover.jpg&amp;w=60&amp;q=70" alt="Picture: Book" /></a>Experienced research meets exclusive design. Moments greater than life skilfully captured at the Cala di Volpe, Vienna Hilton, at the Great Western Royal in Paddington, the Diana Majestic in Milan ... <br /><p class="bookitemmore"><strong>&raquo;</strong>&nbsp;<a href="/nobody_asked/C13">more</a></p></p><div class="clr"></div>
+</div>
+
+<div id="bookitem">
+<a href="/nobody_asked/C15">{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}E-Books {/exp:titleimg}</a>
+<div class="clr"></div>
+<p class="bookitemtop"><a href="/nobody_asked/C15"><img src="http://www.famoushotels.org/phpthumb/phpThumb.php?src=http://famoushotels.org/images/covers/yanstrtrea_cover.jpg&amp;w=60&amp;q=70" alt="Picture: Book" /></a>Download your journey to one of The Most Famous Hotels in the World. Elegantly designed, easy to view (Adobe Reader) our E-Books come with all convenient features (searchable, printable, ...). Buy your own copy and download the book.<br /><p class="bookitemmore"><strong>&raquo;</strong>&nbsp;<a href="/nobody_asked/C15">more</a></p></p><div class="clr"></div>
+</div>
+<br />
+<p><strong>Note:</strong> Should you prefer to order by fax, please download our mail order form <strong><a href="http://www.famoushotels.org/images/mailorder/mail_order.pdf">order form</a></strong>.</strong></p>
+
+</div>
+
+</div>
+
+{if:else}
+
+<div id="contentright">
+
+<!-- NOT EMPTY START -->
+
+<form><select onchange="document.location.href=this.options[this.selectedIndex].value;"><option value="/books">Select a Book ...</option>
+
+{exp:query sql="SELECT entry_id, title FROM `exp_channel_titles` WHERE channel_id ='3' AND (status = 'open' OR status = 'To be published') ORDER BY title"}
+<option value="/nobody_asked/{entry_id}"{if entry_id == "{segment_2}"} selected="selected"{/if}>{title}</option>
+
+{/exp:query}</select>
+
+<strong>&nbsp;&nbsp;&nbsp;&raquo;</strong><a href="https://www.paypal.com/cart/display=1&bn=tm_gl_2.0&business=au@famoushotels.org" onclick="window.open(this.href);return false;">&nbsp;View Shoppingcart</a></form>
+
+<div id="booklist">
+<h4>
+{if segment_2 == "C11"}{exp:titleimg font="korinna_regular.ttf" size="20" color="#000"}The Most Famous Hotels in the World Series {/exp:titleimg}
+{if:elseif segment_2 == "C12"}{exp:titleimg font="korinna_regular.ttf" size="20" color="#000"}The Treasury Book Series {/exp:titleimg}
+{if:elseif segment_2 == "C13"}{exp:titleimg font="korinna_regular.ttf" size="20" color="#000"}Individual Books {/exp:titleimg}
+{if:elseif segment_2 == "C15"}{exp:titleimg font="korinna_regular.ttf" size="20" color="#000"}E-Books {/exp:titleimg}
+{/if}
+</h4>
+
+{exp:channel:entries channel="nobody_asked" limit="5" status="open|To be published|Out of Print" disable="trackbacks}
+{if category_request}
+
+{paginate}<p id="pagination">{if segment_2 == "C11" OR segment_2 == "C12" OR segment_2 == "C13" OR segment_2 == "C15" }
+Page {current_page} of {total_pages} pages {pagination_links}{/if}</p>{/paginate}
+
+<div>
+<div id="bookitem">
+{exp:simple_commerce:purchase entry_id="{entry_id}" currency="EUR" decimal="," success="nobody_asked/index" fail="nobody_asked/index"}
+
+<a href="/nobody_asked/{entry_id}">{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}{title} {/exp:titleimg}</a>{if member_group=="1" AND status=="open" AND segment_2 != "C15"}[{!--<strong>{item_purchases} sold, --}{if in_stock == ""}<span style="color: #d00;">0</span>{if:else}<?php $in_stock = "{in_stock}"; $purchased = "{item_purchases}"; $remainder = $in_stock-$purchased; if ($remainder < 10) { echo "<span style="color: #d00;">$remainder</span>"; } else { echo $remainder; }?>{/if} left</strong>]{/if}
+
+<div class="clr"></div>
+
+<p class="bookitemtop"><a href="/nobody_asked/{entry_id}">{if book_image_small_url != ""}<img alt="Picture: Book" src="/phpthumb/phpThumb.php?src={book_image_small_url}&w=60&q=70">{/if}</a>
+{exp:word_limit total="90"}{book_blurb}{/exp:word_limit}<div class="clr"></div></p>
+<p style="padding-top: 3px;"><strong>&raquo;</strong>&nbsp;<a href="/nobody_asked/{entry_id}">more</a>
+
+{if status=="open"}
+
+{if in_stock != "" AND in_stock <= item_purchases} | <strong>Sold out</strong>{if:else}| <a href="{add_to_cart_url}" onclick="window.open(this.href);return false;"><img src="/images/icons/cart_add.png" class="cart" alt="Add to cart" height="16" width="16" /> <strong>Add to cart</strong></a> for {item_regular_price} EUR{if segment_2 != "C15"} + S&H{/if}{/if}{if:elseif status=="To be published"} | <strong>Available shortly</strong>{if:else} | Currently not available{/if}<br /></p>
+{/exp:simple_commerce:purchase}
+</div></div>
+
+{if:else}{!-- no category request --}
+
+<!-- SINGLE ENTRY HERE -->
+
+
+
+{exp:simple_commerce:purchase entry_id="{entry_id}" currency="EUR" decimal="," success="nobody_asked/index" fail="nobody_asked/index"}
+
+{if member_group=="1"}
+
+[{!--<strong>{item_purchases} sold, --}{if in_stock == ""}<span style="color: #d00;">0</span>{if:else}<?php $in_stock = "{in_stock}"; $purchased = "{item_purchases}"; $remainder = $in_stock-$purchased; if ($remainder < 10) { echo "<span style="color: #d00;">$remainder</span>"; } else { echo $remainder; }?>{/if} left</strong>]
+
+{/if}
+
+<h4>{exp:titleimg font="korinna_regular.ttf" size="16" color="#000"}{title} {/exp:titleimg}</h4>
+
+<div id="booksiten"><strong>&raquo;</strong>&nbsp;
+{if segment_3 != "notes" AND travellers_notepad != ""}<a href="/nobody_asked/{entry_id}/notes">Author's Notes</a> | {/if}
+{if segment_3 != "credit" AND credits != ""}<a href="/nobody_asked/{entry_id}/credit"> Book Credits</a> | {/if}
+{if segment_3 != "making" AND making_of != ""}<a href="/nobody_asked/{entry_id}/making">Making Of</a> | {/if}
+{if segment_3 != "testimonial" AND testimonials != ""}<a href="/nobody_asked/{entry_id}/testimonial">Testimonials</a> | {/if}
+{if segment_3 != ""}<a href="/nobody_asked/{entry_id}">The Blurb</a> | {/if}
+{book_related_hotel}Read more about the <a href="/hotels/{book_related_hotel:entry_id}">hotel</a>{/book_related_hotel}
+</div>
+
+<div id="booksitei"><p>{if book_image_small_url != ""}<img align="left" width="150" alt="" src="/phpthumb/phpThumb.php?src={book_image_small_url}&w=150&q=70" style="margin: 1em; margin-right: 1.5em; margin-top: 0; margin-bottom: 0.5em;"/>{/if}
+
+{if segment_3 == ""}{book_blurb}{if:elseif segment_3 == "notes"}<h3>Author's Notes</h3>{travellers_notepad}{if:elseif segment_3 == "credit"}<h3>Book Credits</h3>{credits}{if:elseif segment_3 == "testimonial"}<h3>Testimonials</h3>{testimonials}{if:elseif segment_3 == "making"}<h3>Making Of</h3>{making_of}{if:else}{book_blurb}{/if}</p></div>
+
+<p><div class="clr"></div><div id="booksited">
+{if author_name != ""}By {author_name}.{/if} 
+{if pages != ""}{pages} pages, {/if}{binding}, laminated jacket{if acessories !=""}, {acessories}{/if}.
+<br />ISBN {if isbn == "" AND isbn_13 == ""}0-0000000-00-0{if:else}{isbn}{/if}
+<br />{if width != "" AND height != ""}{width} x {height} mm{/if}{if weight != ""}, {weight} g{/if}
+{if other_languages != "None"}<br /><strong>Also available in {other_languages}.</strong>{/if}
+</div></p>
+
+{if leather_available == "Yes" AND leather_id != ""}<p><strong>We also publish a <a href="/nobody_asked/{leather_id}">leather-bound edition</a> of this book.</strong><p>{/if}
+
+
+{if status == "open"}
+
+
+{if in_stock != "" AND in_stock <= item_purchases}<p><strong>Sold out</strong></p>{if:else}
+<div id="booksiteb"><p>
+<strong>&raquo; <a href="{add_to_cart_url}" onclick="window.open(this.href);return false;"><img src="/images/icons/cart_add.png" class="cart" alt="Add to cart" height="16" width="16" /> Add to cart</a></strong> for {item_regular_price} EUR{categories}{if category_name != "E-Book"} + S&H{/if}{/categories} | <a href="{view_cart_url}" onclick="window.open(this.href);return false;"><img src="/images/icons/cart_go.png" class="cart" alt="View cart" height="16" width="16" /> View Cart</a></p></div>
+{categories}{if category_name == "E-Book"}<p><strong>&raquo;&nbsp;<a href="{exp:download_lock:link entry_id="{entry_id}"}">Download</strong> {title}</a> after purchase</p>{/if}{/categories}
+
+{/if}{if:elseif status == "To be published"}To be published, will be available shortly{/if}
+{/exp:simple_commerce:purchase}
+
+{/if}{!-- category request? --}
+{/exp:channel:entries}
+
+</div><!-- end booklist -->
+
+<!-- NOT EMPTY STOP -->
+
+<!-- ************** FLIPPING BOOK VIESAC -->
+{if segment_2 == "546"}
+{exp:channel:entries channel="homepage" status="open" limit="1" entry_id="735" disable="member_data|trackbacks"}
+<div class="bookteaser">
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="{fbwidth}" height="{fbheight}">
+      <param name="movie" value="http://famoushotels.org/flash/flippingBook.swf" />
+      <param name="quality" value="high" />
+{if fbentryid != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" />
+{if:elseif fburl != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" />
+{/if}
+      <param name="scale" value="noscale" />
+      <param name="bgcolor" value="#cccc99" />
+{if fbentryid != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{if:elseif fburl != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{/if}
+</object>
+</div>
+<p><em>{if fbalttext != ""}{fbalttext}{if:else}{fbtext}{/if}</em></p>
+{/exp:channel:entries}
+
+<!-- ************** FLIPPING BOOK VIESAC dt. -->
+{if:elseif segment_2 == "729"}
+{exp:channel:entries channel="homepage" status="open" limit="1" entry_id="738" disable="member_data|trackbacks"}
+<div class="bookteaser">
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="{fbwidth}" height="{fbheight}">
+      <param name="movie" value="http://famoushotels.org/flash/flippingBook.swf" />
+      <param name="quality" value="high" />
+{if fbentryid != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" />
+{if:elseif fburl != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" />
+{/if}
+      <param name="scale" value="noscale" />
+      <param name="bgcolor" value="#cccc99" />
+{if fbentryid != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{if:elseif fburl != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{/if}
+</object>
+</div>
+<p><em>{if fbalttext != ""}{fbalttext}{if:else}{fbtext}{/if}</em></p>
+{/exp:channel:entries}
+
+<!-- ************** FLIPPING BOOK ROMGRH -->
+{if:elseif segment_2 == "728"}
+{exp:channel:entries channel="homepage" status="open" limit="1" entry_id="739" disable="member_data|trackbacks"}
+<div class="bookteaser">
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="{fbwidth}" height="{fbheight}">
+      <param name="movie" value="http://famoushotels.org/flash/flippingBook.swf" />
+      <param name="quality" value="high" />
+{if fbentryid != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" />
+{if:elseif fburl != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" />
+{/if}
+      <param name="scale" value="noscale" />
+      <param name="bgcolor" value="#cccc99" />
+{if fbentryid != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{if:elseif fburl != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{/if}
+</object>
+</div>
+<p><em>{if fbalttext != ""}{fbalttext}{if:else}{fbtext}{/if}</em></p>
+{/exp:channel:entries}
+
+<!-- ************** FLIPPING BOOK MADRIT -->
+
+{if:elseif segment_2 == "PENDING"}
+{exp:channel:entries channel="homepage" status="open" limit="1" entry_id="756" disable="member_data|trackbacks"}
+<div class="bookteaser">
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="{fbwidth}" height="{fbheight}">
+      <param name="movie" value="http://famoushotels.org/flash/flippingBook.swf" />
+      <param name="quality" value="high" />
+{if fbentryid != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" />
+{if:elseif fburl != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" />
+{/if}
+      <param name="scale" value="noscale" />
+      <param name="bgcolor" value="#cccc99" />
+{if fbentryid != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{if:elseif fburl != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{/if}
+</object>
+</div>
+<p><em>{if fbalttext != ""}{fbalttext}{if:else}{fbtext}{/if}</em></p>
+{/exp:channel:entries}
+
+{/if}
+<!-- ************** FLIPPING BOOK -->
+
+</div>
+
+{/if}
+
+</div>
+
+{embed="includes/left_column"}
+{embed=includes/footer}
+
+</div>
+</body>
+</html>

@@ -1,0 +1,288 @@
+{preload_replace:my_channel="news"}
+{preload_replace:my_template_group="site"}
+<?php function url_exists($url) { $handle = @fopen($url, "r"); if ($handle === false) return false; fclose($handle); return true; } ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Testpage</title>
+<script src="/mint/?js" type="text/javascript"></script>
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="icon" href="/favicon.ico" />
+<meta http-equiv="Content-Type" content="text/html; charset={charset}" />
+<meta http-equiv="Content-Language" content="{lang}" />
+<link rel="stylesheet" type="text/css" media="all" href="site/site_css}" />
+<style type="text/css" media="screen">@import "{stylesheet=site/site_css}";</style>
+<script type="text/javascript" src="http://www.famoushotels.org/script/jquery.js"></script>
+<script type="text/javascript" src="http://www.famoushotels.org/script/jquery.cycle.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#bookshow').cycle({
+    fx:     'scrollHorz', 
+    after:   onAfter,
+    delay:    -5000,
+    timeout: 10000,
+    next:   '#next2',
+    prev:   '#prev2',
+    pause:         1
+    });
+ });
+function onAfter(curr, next, opts) {
+    var index = $(this).parent().children().index(this);
+    $('#prev')[index == 0 ? 'hide' : 'show']();
+    $('#next')[index == opts.slideCount - 1 ? 'hide' : 'show']();
+}
+</script>
+
+<script type="text/javascript">setLoadMessage('<div style="text-align: center;padding-top:50px;"><img class="n" src="http://famoushotels.org/images/loader.gif" alt="Loading ..." /></div>');</script>
+
+<meta name="description" content="The Library of Hospitality; the largest collection of famous, legendary, historic hotels in the world. Independent, reliable and scientifically researched.                                                                                                                                                         Hotels,Accommodation,bars,lodging,Inns, Restaurants,history,History,Historic,famous fotels,travel,research,Archives,Photographs,Labels,Information,Travel,History,Palace,Bristol,Savoy,Grand Hotel,De Paris,Goldener Hirsch,Grand Hotel,Imperial,Oriental,Sacher,Raffles,Waldorf-Astoria,Metropole,Strand,Caledonian" />
+
+</head>
+
+
+<body onload="if (top.location != location) { top.location.href = document.location.href ; }">
+
+<div id="container">
+
+{embed="includes/header"}
+<div id="wrapper">
+{if segment_2 == "iphonelist"}
+<div>
+{if:else}
+<div id="content">
+{/if}
+
+{if segment_1 == "flippingpages"}
+
+<h4 class="title">{exp:titleimg font="korinna_regular.ttf" size="14" color="111111"}Page of the flipping pages {/exp:titleimg}</h4>
+
+{exp:channel:entries channel="homepage" status="open" limit="10" category="23" orderby="date" disable="member_data|trackbacks"}
+<div class="bookteaser">
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="{fbwidth}" height="{fbheight}">
+      <param name="movie" value="http://famoushotels.org/flash/flippingBook.swf" />
+      <param name="quality" value="high" />
+{if fbentryid != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" />
+{if:elseif fburl != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" />
+{/if}
+      <param name="scale" value="noscale" />
+      <param name="bgcolor" value="#cccc99" />
+{if fbentryid != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{if:elseif fburl != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{/if}
+</object>
+</div><br clear="all" />
+<p><em>{fbtext}</em></p>
+{/exp:channel:entries}
+
+{if:elseif segment_2 == "iphonelist"}
+<div style="border-bottom: 2px solid turquoise;margin:0;padding:0;">country•TAB•>•TAB•city•TAB•hotel•TAB•space•TAB•opening date•TAB•job title•TAB•general manager•TAB•address•TAB•telephone•TAB•fax•TAB•e-mail address•TAB•homepage</div>
+{exp:channel:entries channel="hotels" orderby="country" sort="asc" status="open|full plan" rdf="off" limit="5000"}{!--<dl><dt style="border: 1px solid turquoise;">{count}</dt><dd>--}<div style="border-bottom: 2px solid turquoise;margin:0;padding:0;">{if country ==""} {if:else}{country}{/if}•TAB•{if city ==""} •TAB• {if:else}>•TAB•{city}{/if}•TAB•{hotel}•TAB• •TAB•{if opening_date_timeline ==""} {if:else}{opening_date_timeline}{/if}•TAB•{if general_manager ==""} •TAB• {if:else}GM•TAB•{general_manager}{/if}•TAB•{if street ==""} {if:else}{street}{/if}•TAB•{if telephone ==""} {if:else}{telephone}{/if}•TAB•{if fax ==""} {if:else}{fax}{/if}•TAB•{if hotel_email ==""} {if:else}{hotel_email}{/if}•TAB•{if my_url ==""} {if:else}{my_url}{/if}</div>{!--</dd></dl>--}{/exp:channel:entries}
+{if:else}
+
+
+{!--
+{exp:channel:entries channel="homepage" limit="1" orderby="date" status="open" category="16" disable="member_data|pagination|trackback"}
+<div id="newpub">
+<div id="placeholder"><a href="http://www.famoushotels.org/books/{newpub_num}">{newpub_picture}</a></div>
+
+{if newpub_picture_two != "" OR newpub_picture_three != "" OR newpub_picture_four != "" OR newpub_picture_five != ""}
+<div id="slideshowbuttons">
+<span>More pictures:&nbsp;</span>{if newpub_picture != ""}<a id="img0" style="background-color:#eeeed6;" href="#" onclick="return changeimg(this)" title="Change picture"><img src="/images/changepic.gif" alt=""/></a>{/if}{if newpub_picture_two != ""}<a id="img1" href="#" onclick="return changeimg(this)" title="Change picture"><img src="/images/changepic.gif" alt=""/></a>{/if}{if newpub_picture_three != ""}<a id="img2" href="#" onclick="return changeimg(this)" title="Change picture"><img src="/images/changepic.gif" alt=""/></a>{/if}{if newpub_picture_four != ""}<a id="img3" href="#" onclick="return changeimg(this)" title="Change picture"><img src="/images/changepic.gif" alt=""/></a>{/if}{if newpub_picture_five != ""}<a id="img4" href="#" onclick="return changeimg(this)" title="Change picture"><img src="/images/changepic.gif" alt=""/></a>{/if}<br clear="all"/>
+</div>
+{/if}
+<em>{newpub_summary}</em>
+</div>
+{/exp:channel:entries}
+
+
+{exp:channel:entries channel="making_history" status="open" limit="1" orderby="random" disable="member_data|trackbacks"}
+<p class="cc">{mh_picture}</p>
+{if mh_text != ""}
+<p>
+<em>{mh_text}</em>
+{if mh_link_entryid != ""}
+<span><em><a href="http://famoushotels.org/article/{mh_link_entryid}" title="{title}">{mh_link_name}</a></em></span>
+{if:elseif mh_link_url != "" && mh_link_entryid == ""}
+<span><em><a href="{mh_link_url}" title="{title}">{mh_link_name}</a></em></span>
+{/if}
+</p>
+{/if}
+
+{/exp:channel:entries}
+--}
+{!--
+{exp:channel:entries channel="homepage" status="open" limit="1" category="24" orderby="random" disable="member_data|trackbacks"}
+<div class="bookteaser">
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="{fbwidth}" height="{fbheight}">
+      <param name="movie" value="http://famoushotels.org/flash/flippingBook.swf" />
+      <param name="quality" value="high" />
+{if fbentryid != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" />
+{if:elseif fburl != ""}
+      <param name="flashVars" value="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" />
+{/if}
+      <param name="scale" value="noscale" />
+      <param name="bgcolor" value="#cccc99" />
+{if fbentryid != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{if:elseif fburl != ""}
+      <embed src="http://famoushotels.org/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=http://famoushotels.org/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+{/if}
+</object>
+</div><br clear="all" />
+<p><em>{fbtext}</em></p>
+{/exp:channel:entries}
+
+<p style="background: beige; border-top: 1px solid #cccc99; border-bottom: 1px solid #cccc99; padding: 0.35em; text-align: center;">
+<a href="http://famoushotels.org/flippingpages" title="Preview more books">
+Preview more books
+</a>
+</p>
+
+<p style="background: beige; border-top: 1px solid #cccc99; border-bottom: 1px solid #cccc99; padding: 0.35em; text-align: center;">On 2 May tropical cyclone Nargis hit Myanmar and devastated up to 95 per cent of homes. We have installed an online version of our book THE STRAND TREASURY about the hotel in Yangon. You can now download it and pay online. The full amount will be transferred to a relief committee at the hotel.
+<a href="http://famoushotels.org/article/787" title="We help in Myanmar (Burma)!">
+More…
+</a>
+</p>
+--}
+{!--
+<p id="curlist">LUXURY CAN BE BOUGHT, HISTORY MUST BE EARNED. Welcome to the library of hospitality, the archives of historic hotels. The Most Famous Hotels in the World currently list {exp:query sql="SELECT COUNT(entry_id) AS number FROM `exp_channel_titles` WHERE channel_id = '4' AND (status = 'open' OR status='Full Plan')"}
+{number} hotels in {/exp:query}
+
+{exp:query sql="SELECT COUNT(DISTINCT field_id_7) AS cities,  COUNT(DISTINCT field_id_8) AS countries FROM `exp_channel_data` WHERE field_id_7 <> '' AND channel_id = '4'"}
+{cities} cities and {countries} countries. Here you find their researched history, most popular anecdotes and latest news.</p>
+{/exp:query}
+
+<div id="teaser">
+
+<div class="teaser"><h4><a href="/archives/inspirations">{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}Inspirations: {/exp:titleimg}</a></h4><p class="teasercaption">Recently published stories from &bdquo;Inspirations&ldquo;</p></div>
+
+{exp:channel:entries category="4" parent_only="yes" orderby="date" sticky="off" limit="3" status="opener"}
+<div class="teaser">
+<a href='/article/{entry_id}' class="left">{article_thumbnail}</a>
+<h4><a href='/article/{entry_id}'>{title}</a></h4>
+{if teaser !=""}
+<p class="teasertext">{exp:char_limit total="125"}{teaser}{/exp:char_limit}&nbsp;[<a href='/article/{entry_id}'>more</a>]</p>
+{if:else}
+<div class="teasertext">{exp:char_limit total="125"}{body}{/exp:char_limit}&nbsp;[<a href='/article/{entry_id}'>more</a>]</div>
+{/if}
+<p class="teaserpublished">Recently published in: <a href="/archives/inspirations">INSPIRATIONS</a></p>
+</div>
+{/exp:channel:entries}
+
+<div class="teaser"><h4 style="margin-top:1em;"><a href="/archives/publications">{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}Publications: {/exp:titleimg}</a></h4><p class="teasercaption">Recently launched books</p></div>
+
+{exp:channel:entries category="6" orderby="date" sticky="off" limit="3" status="opener"}
+<div class="teaser">
+<a href='/article/{entry_id}' class="left">{article_thumbnail}</a>
+<h4><a href='/article/{entry_id}'>{title}</a></h4>
+{if teaser !=""}
+<p class="teasertext">{exp:char_limit total="125"}{teaser}{/exp:char_limit}&nbsp;[<a href='/article/{entry_id}'>more</a>]</p>
+{if:else}
+<div class="teasertext">{exp:char_limit total="125"}{body}{/exp:char_limit}&nbsp;[<a href='/article/{entry_id}'>more</a>]</div>
+{/if}
+<p class="teaserpublished">Recently published in: <a href="/archives/publications">PUBLICATIONS</a></p>
+</div>
+{/exp:channel:entries}
+
+<div class="teaser"><h4 style="margin-top:1em;"><a href="/archives/documentations">{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}Documentations: {/exp:titleimg}</a></h4>
+<p class="teasercaption">Around the world in {exp:query sql="SELECT COUNT(entry_id) AS number FROM `exp_channel_titles` WHERE channel_id = '4' AND (status = 'open' OR status='Full Plan')"}{number}{/exp:query} Hotels &ndash; Hotels lost in History</p></div>
+
+{exp:channel:entries category="5" orderby="date" sticky="off" limit="3" status="opener"}
+<div class="teaser">
+<a href='/article/{entry_id}' class="left">{article_thumbnail}</a>
+<h4><a href='/article/{entry_id}'>{title}</a></h4>
+{if teaser !=""}
+<p class="teasertext">{exp:char_limit total="125"}{teaser}{/exp:char_limit}&nbsp;[<a href='/article/{entry_id}'>more</a>]</p>
+{if:else}
+<div class="teasertext">{exp:char_limit total="125"}{body}{/exp:char_limit}&nbsp;[<a href='/article/{entry_id}'>more</a>]</div>
+{/if}
+<p class="teaserpublished">Recently published in: <a href="/archives/documentations">DOCUMENTATIONS</a></p>
+</div>
+{/exp:channel:entries}
+
+<div class="teaser"><h4 style="margin-top:1em;"><a href="/archives/whowherewhen">{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}Who Where When: {/exp:titleimg}</a></h4>
+<p class="teasercaption">The chronicles of the hospitality industry &ndash; Classic menus, biographies and personalities</p></div>
+
+{exp:channel:entries parent_only="yes" category="9" orderby="date" sticky="off" limit="3" status="opener"}
+<div class="teaser">
+<a href='/article/{entry_id}' class="left">{article_thumbnail}</a>
+<h4><a href='/article/{entry_id}'>{title}</a></h4>
+{if teaser !=""}
+<p class="teasertext">{exp:char_limit total="125"}{teaser}{/exp:char_limit}&nbsp;[<a href='/article/{entry_id}'>more</a>]</p>
+{if:else}
+<div class="teasertext">{exp:char_limit total="125"}{body}{/exp:char_limit}&nbsp;[<a href='/article/{entry_id}'>more</a>]</div>
+{/if}
+<p class="teaserpublished">Recently published in: <a href="/archives/whowherewhen">WHO WHERE WHEN</a></p>
+</div>
+{/exp:channel:entries}
+
+<div class="teaser"><h4 style="margin-top:1em;"><a href="/archives/whowherewhen">{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}Series: {/exp:titleimg}</a></h4>
+<p class="teasercaption"><em>High Times at the Hotel Bristol</em> by Roger Williams is a series of stories, playing at the Bristol Hotels of this world</p></div>
+
+{exp:channel:entries category="20" orderby="date" sticky="off" limit="3" status="opener"}
+<div class="teaser">
+<a href='/article/{entry_id}' class="left">{article_thumbnail}</a>
+<h4><a href='/article/{entry_id}'>{title}</a></h4>
+{if teaser !=""}
+<p class="teasertext">{exp:char_limit total="125"}{teaser}{/exp:char_limit}&nbsp;[<a href='/article/{entry_id}'>more</a>]</p>
+{if:else}
+<div class="teasertext">{exp:char_limit total="125"}{body}{/exp:char_limit}&nbsp;[<a href='/article/{entry_id}'>more</a>]</div>
+{/if}
+<p class="teaserpublished">Recently published in: <a href="/archives/whowherewhen">WHO WHERE WHEN</a></p>
+</div>
+{/exp:channel:entries}
+
+<div class="teaser"><h4 style="margin-top:1em;"><a href="/archives/breakfast">{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}Breakfast Series: {/exp:titleimg}</a></h4>
+<p class="teasercaption">with the general managers of the world</p></div>
+
+{exp:channel:entries category="19" orderby="date" sticky="off" limit="3" status="opener"}
+<div class="teaser">
+<a href='/article/{entry_id}' class="left">{article_thumbnail}</a>
+<h4><a href='/article/{entry_id}'>{title}</a></h4>
+{if teaser !=""}
+<p class="teasertext">{exp:char_limit total="125"}{teaser}{/exp:char_limit}&nbsp;[<a href='/article/{entry_id}'>more</a>]</p>
+{if:else}
+<div class="teasertext">{exp:char_limit total="125"}{body}{/exp:char_limit}&nbsp;[<a href='/article/{entry_id}'>more</a>]</div>
+{/if}
+<p class="teaserpublished">Recently published in: <a href="/archives/breakfast">BREAKFAST SERIES</a></p>
+</div>
+{/exp:channel:entries}
+
+<div class="teaser"><h4 style="margin-top:1em;"><a href="/archives/nobody_asked_me_but">{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}Nobody asked me, but&#8230; : {/exp:titleimg}</a></h4>
+<p class="teasercaption">Stanley Turkel’s regular column</p></div>
+
+{exp:channel:entries channel="nobody_asked_me_but" orderby="date" sticky="off" limit="1" status="open"}
+<div class="teaser">
+<a href='/article/{entry_id}' class="left">{namb_signature}{namb_signature:article_thumbnail}{/namb_signature}</a>
+<h4><a href='/article/{entry_id}'>{title}</a></h4>
+{if namb_subtitle !=""}
+<p class="teasertext">{exp:char_limit total="125"}{namb_subtitle}{/exp:char_limit}&nbsp;[<a href='/article/{entry_id}'>more</a>]</p>
+{if:else}
+<div class="teasertext">{exp:char_limit total="125"}{namb_body}{/exp:char_limit}&nbsp;[<a href='/article/{entry_id}'>more</a>]</div>
+{/if}
+<p class="teaserpublished">Recently published in: <a href="/archives/nobody_asked_me_but">NOBODY ASKED ME, BUT&#8230; </a></p>
+</div>
+{/exp:channel:entries}
+</div>
+--}
+{/if}
+
+</div>
+</div>
+
+{if segment_2 != "iphonelist"}
+{embed="includes/right_column"}
+{embed="includes/left_column"}
+{/if}
+{embed="includes/banner"}
+{embed=includes/footer}
+
+</div>
+</div>
+</body>
+</html>

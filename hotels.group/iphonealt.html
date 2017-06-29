@@ -1,0 +1,12 @@
+{exp:channel:entries channel="hotels"}{hotel}{/exp:channel:entries}
+
+
+{!--<div style="border-bottom: 2px solid turquoise;margin:0;padding:0;">country, city: hotel[ T A B ]opening date[ T A B ]job title[ T A B ]general manager[ T A B ]address[ T A B ]telephone[ T A B ]fax[ T A B ]e-mail address[ T A B ]homepage</div>
+{exp:channel:entries channel="hotels" orderby="country" sort="asc" status="open|full plan" rdf="off" limit="5000"}<div style="border-bottom: 2px solid turquoise;margin:0;padding:0;">{if country == "" && city == "" && hotel ==""} {if:else}{if country !=""}{country}, {/if}{if city !=""}{city}: {/if}{hotel}{/if}[ T A B ]{if opening_date_timeline ==""} {if:else}{opening_date_timeline}{/if}[ T A B ]{if general_manager ==""} [ T A B ] {if:else}GM[ T A B ]{general_manager}{/if}[ T A B ]{if street ==""} {if:else}{street}{/if}[ T A B ]{if telephone ==""} {if:else}{telephone}{/if}[ T A B ]{if fax ==""} {if:else}{fax}{/if}[ T A B ]{if hotel_email ==""} {if:else}{hotel_email}{/if}[ T A B ]{if my_url ==""} {if:else}{my_url}{/if}</div>{/exp:channel:entries}--}
+
+{!--
+{if segment_2 == "iphone"}
+<div style="border-bottom: 2px solid turquoise;margin:0;padding:0;">country,[ T A B ]>[ T A B ]city:[ T A B ]hotel[ T A B ]space[ T A B ]opening date[ T A B ]job title[ T A B ]general manager[ T A B ]address[ T A B ]telephone[ T A B ]fax[ T A B ]e-mail address[ T A B ]homepage</div>
+{exp:channel:entries channel="hotels" orderby="country" sort="asc" status="open|full plan" rdf="off" limit="5000"}{!--<dl><dt style="border: 1px solid turquoise;">{count}</dt><dd>--}<div style="border-bottom: 2px solid turquoise;margin:0;padding:0;">{if country ==""} {if:else}{country}{/if}[ T A B ]{if city ==""} [ T A B ] {if:else}>[ T A B ]{city}{/if}[ T A B ]{hotel}[ T A B ] [ T A B ]{if opening_date_timeline ==""} {if:else}{opening_date_timeline}{/if}[ T A B ]{if general_manager ==""} [ T A B ] {if:else}GM[ T A B ]{general_manager}{/if}[ T A B ]{if street ==""} {if:else}{street}{/if}[ T A B ]{if telephone ==""} {if:else}{telephone}{/if}[ T A B ]{if fax ==""} {if:else}{fax}{/if}[ T A B ]{if hotel_email ==""} {if:else}{hotel_email}{/if}[ T A B ]{if my_url ==""} {if:else}{my_url}{/if}</div>{!--</dd></dl>--}{/exp:channel:entries}
+{/if}
+--}

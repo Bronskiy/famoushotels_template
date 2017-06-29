@@ -1,0 +1,1 @@
+# famoushotels_template

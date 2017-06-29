@@ -1,0 +1,55 @@
+{exp:query sql="SELECT field_id AS the_id, field_label AS label FROM `exp_channel_fields` WHERE field_name = '{segment_4}'"}
+{exp:query sql="SELECT field_id_{the_id} AS the_value FROM `exp_channel_data` WHERE entry_id = '{segment_3}'"}
+<div>
+
+{if segment_4=="book"}
+
+{exp:channel:entries channel="hotels" status="open|Full Plan"}
+
+<h5>{exp:titleimg font="korinna_regular.ttf" size="14" color="111111"}{label}s about the {title} {/exp:titleimg}</h5>
+
+{exp:xhtml:full}{the_value}{/exp:xhtml:full}
+
+
+{parents channel="books" }
+
+{exp:simple_commerce:purchase entry_id="{parents:entry_id}" success="site/index" cancel="site/index" currency="EUR" decimal=","}
+
+<p><a href="{add_to_cart_url}" onclick="window.open(this.href);return false;">Add "{parents:title}" to your shopping cart</a></p>
+
+
+{/exp:simple_commerce:purchase}
+
+{/parents}
+{/exp:channel:entries}
+
+{if:else}
+
+
+{!-- {if segment_4=="famous_guests"}
+
+<p>
+
+<?php 
+$guests = explode("\n", "{the_value}"); 
+shuffle($guests);
+print $guests[3] . "<br />";
+print $guests[4] . "<br />";
+print $guests[5] . "<br />";
+print $guests[6] . "<br />";
+print $guests[7] . "<br />";
+print $guests[8] . "<br />";
+print $guests[9] . "<br />";
+print $guests[10] . "<br /></p>";
+
+ ?>
+
+{if:else} --} 
+
+<h5>{exp:titleimg font="korinna_regular.ttf" size="14" color="111111"}{label} {/exp:titleimg}</h5>
+
+{exp:xhtml:full}{the_value}{/exp:xhtml:full}
+
+{/if}
+</div>
+{/exp:query}{/exp:query}

@@ -1,0 +1,21 @@
+<h2>New books</h2>
+<div id="bookshow" class="display" style="position: relative;">
+{exp:channel:entries channel="bookshow" status="open" orderby="date" disable="member_data|pagination|trackback"}
+<div>
+
+{if bs_link_one_bookstore != ""}
+<p><a href="http://www.famoushotels.org/books/{bs_link_one_bookstore}" title="{title}" class="abookshow">{cover}</a><br class="spacer" /></p>
+{if:elseif bs_link_one_target != "" && bs_link_one_target == ""}
+<p><a href="{bs_link_one_target}" title="{title}" class="abookshow">{cover}</a><br class="spacer" /></p>
+{if:else}
+<p>{cover}</p>
+{/if}
+
+{if bs_link_one_name != ""}<p class="leftcolumnbook">{if bs_link_one_bookstore != ""}<a href="http://www.famoushotels.org/books/{bs_link_one_bookstore}" title="{title}">{bs_link_one_name}</a>{if:elseif bs_link_one_target != "" && bs_link_one_target == ""}<a href="{bs_link_one_target}" title="{title}">{bs_link_one_name}</a>{/if}{if bs_link_two_bookstore != ""} | <a href="http://www.famoushotels.org/books/{bs_link_two_bookstore}" title="{title}">{bs_link_two_name}</a>{if:elseif bs_link_two_target != "" && bs_link_two_target == ""}<a href="{bs_link_two_target}" title="{title}">{bs_link_two_name}</a>{/if}<br class="spacer" /></p>{/if}
+</div>
+{/exp:channel:entries}
+</div>
+<div class="bookshownav">
+<a id="prev2" href="#"><img src="{images}template/handleft.gif" alt="" /></a>
+<a id="next2" href="#"><img src="{images}template/handright.gif" alt="" /></a><br class="spacer" />
+</div>

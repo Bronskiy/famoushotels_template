@@ -1,0 +1,47 @@
+{preload_replace:my_channel="news"}
+{preload_replace:my_template_group="site"}
+
+{embed="includes/html_header" my_template_group="{my_template_group}" my_title="{basetitle} | Timeline"}
+
+<body>
+
+<div id="container">
+{embed="includes/header"}
+<div id="wrapper">
+<div id="content">
+
+<h4 class="title">{exp:titleimg font="korinna_regular.ttf" size="14" color="111122"}Timeline  {/exp:titleimg}</h4>
+<br>
+<p><img alt="arrival at hotel - 1900" height="464" src="http://www.famoushotels.org/images/hotels/000_weekly_pix/arrived_vittelpalace.jpg" width="328" /> </p>
+The complete list of all Select Member Hotels, <b>sorted by their opening date</b>. The name of the hotel is in grey and represents a link to more information about it.<br>
+
+
+Please note: "opening of the hotel" refers to either the confirmed opening date (available for most hotels after 1800), but sometimes it also refers to the "first mentioning" of the name under this address. The hotel may have started as a modest inn and developed into the hotel it is today. 
+<br><br>
+<p>
+<img alt="divider" class="dax" height="12" src="/images/divider/divider_1.gif" width="290" /> 
+</p>
+
+{exp:channel:entries channel="hotels" orderby="opening_date_timeline" sort="asc" status="open|full plan" limit="5000"}
+
+<ul id="timeline">
+ <li><span>{opening_date_timeline}:</span> opening of the hotel<span class='timelinetitle'><a href='http://famoushotels.org/hotels/{entry_id}' title='{opening_date}'>{title}</a>&middot; {!-- <a href="/hotels/search/{country}/all/{entry_id}" title="Search for more hotels in {country}">--}{city}{!--</a>--}, {!--<a href="/hotels/search/{country}/{city}/{entry_id}" title="Search for more hotels in {city}, {country}">--}{country}{!--</a>--}</span></li>
+</ul>
+
+{/exp:channel:entries}
+
+{!--count--}
+</div>
+</div>
+
+<div id="rightcolhotels">
+<img src="/images/complete_list.jpg" width="200" height="260" alt="">{!--
+<h2>Complete List</h2>
+<p>Take a look at the <a href="/hotels/search/all" title="Complete list of the most famous hotels in the world">complete list</a> of The Most Famous Hotels in the World (with links to each hotel).</p>--}
+</div>
+
+{embed="includes/left_column"}
+{embed=includes/footer}
+</div>
+</body>
+</html>

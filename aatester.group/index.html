@@ -1,0 +1,122 @@
+{preload_replace:gallery_name="aatest"}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Photo Gallery</title>
+<meta http-equiv="Content-Type" content="text/html; charset={charset}" />
+
+<link rel='stylesheet' type='text/css' media='all' href='{stylesheet=aatester/gallery_css}' /> 
+<style type='text/css' media='screen'>@import "{stylesheet=aatester/gallery_css}";</style>
+</head>
+
+<body>
+
+<div id="content">
+
+<div class="spacer">&nbsp;</div>
+
+
+{exp:gallery:categories gallery="{gallery_name}"}
+
+<table class="tableBorder" cellpadding="6" cellspacing="1" border="0" width="100%">
+<th>Category</th>
+<th>Description</th>
+<th>Files</th>
+<th>Views</th>
+<th>Comments</th>
+<th>Most Recent</th>
+
+{category_row}
+
+{row_start}<tr>{/row_start}
+	
+{row}
+<td class="categories">{subcat_marker}<img src='{cp_image_dir}cat_marker.gif' border='0' title='' />&nbsp;{/subcat_marker}<strong><a href="{category_path=aatester/category}">{category}</a></strong></td>
+<td class="categories">{category_description}</td>
+<td class="categories">{total_files}</td>
+<td class="categories">{total_views}</td>
+<td class="categories">{total_comments}</td>
+<td class="categories">{recent_entry_date format='%M %d, %Y %g:%i %A'}</td>
+{/row}
+	
+{row_end}</tr>{/row_end}
+
+{/category_row}
+
+</table>
+
+{/exp:gallery:categories}
+
+
+<div class="spacer">&nbsp;</div>
+
+
+{exp:gallery:entries gallery="{gallery_name}" orderby="entry_date" columns="4" rows="1"}
+
+<table class="tableBorder" cellpadding="6" cellspacing="1" border="0" width="100%">
+<tr>
+<th colspan='4'>Most Recent Images</th>
+</tr>
+
+{entries}
+
+{row_start}<tr>{/row_start}
+
+{row}
+<td class="thumbs">
+<a href="{id_path=aatester/image_med}" onclick="window.open(this.href, '_blank', 'width=700,height=500,location=no,menubar=no,resizable=yes,scrollbars=yes');return false;" ><img src="{thumb_url}"  class="border" width="{thumb_width}" height="{thumb_height}" border="0" title="{title}" /></a>
+<div class="title">{title}</div>
+</td>
+{/row}
+
+{row_blank}<td class="thumbs">&nbsp;</td>{/row_blank}
+
+{row_end}</tr>{/row_end}
+
+{/entries}
+
+</table>
+
+{/exp:gallery:entries}
+
+
+<div class="spacer">&nbsp;</div>
+
+
+{exp:gallery:entries gallery="{gallery_name}"  orderby="random" columns="4" rows="1"}
+
+<table class="tableBorder" cellpadding="6" cellspacing="1" border="0" width="100%">
+<tr>
+<th colspan="4">Random Images</th>
+</tr>
+
+{entries}
+	
+{row_start}<tr>{/row_start}
+		
+{row}
+<td class="thumbs">
+<a href="{id_path=aatester/image_med}" onclick="window.open(this.href, '_blank', 'width=700,height=500,location=no,menubar=no,resizable=yes,scrollbars=yes');return false;" ><img src="{thumb_url}"  class="border" width="{thumb_width}" height="{thumb_height}" border="0" title="{title}" /></a>
+<div class="title">{title}</div>
+</td>
+{/row}
+
+{row_blank}<td  class="thumbs">&nbsp;</td>{/row_blank}
+
+{row_end}</tr>{/row_end}
+
+{/entries}
+
+</table>
+
+{/exp:gallery:entries}
+
+
+</div>
+
+<div class="powered"><a href="http://www.pmachine.com/">Powered by ExpressionEngine</a></div>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+{preload_replace:my_channel="news"}
+{preload_replace:my_template_group="site"}
+
+{embed="includes/html_header" my_template_group="{my_template_group}" my_title="{basetitle} | Signup for our Free Newsletter"}
+
+<body>
+{!--
+{if member_group == "1"}<div style="position: absolute; right: 15%; top: 50px;"><a href="http://www.famoushotels.org/db/fhdb1986/index.php?S=0&C=publish&M=entry_form&channel_id=2"><img src="http://ingmar.at/images/icons/page_add.png" height="16" width="16" alt="Add a new entry" title="Add a new entry" align="bottom" class="icon" border="0" /></a>
+</div>{/if}--}
+
+<div id="container">
+
+{embed="includes/header"}
+<div id="wrapper">
+
+<div id="content">
+{!--
+<h4>{exp:titleimg font="korinna_regular.ttf" size="12" color="#000"}Newsletter Signup{/exp:titleimg}</h4>
+<div>
+
+{exp:email:contact_form user_recipients="false" recipients="contact@famoushotels.org" charset="iso-8859-1" redirect="2" return="http://www.famoushotels.org/site/newsletter"}
+
+<p><label for="from" style="width: 100%; text-align: left;">If you want to receive our free Newsletter, please fill in your <strong>e-mail</strong> address below:</label></p><br />
+<p><input type="text" id="from" name="from" size="35" maxlength="35" value="" style="width: 90%; margin-left: 1em; margin-top: 1em;" /></p>
+
+<p><input name="submit" type='submit' value='Submit Form' /></p>
+
+
+<a class="twitter-timeline"  href="https://twitter.com/famoushotels"  data-widget-id="347737026205986816">Tweets by @famoushotels</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+<input type="hidden" id="subject" name="subject" value="I want to subscribe to the Newsletter" />
+<input type="hidden" id="message" name="message" value="I want to subscribe to the Newsletter" /></p>
+
+{/exp:email:contact_form}
+
+</div>
+--}
+<p>Read our recent newsletter:</p>
+{!--
+{exp:channel:entries channel="newsletter" limit="1"}<h4>{exp:titleimg font="korinna_regular.ttf" size="14" color="111111"}{title} {/exp:titleimg}</h4>{newsletter_body}{/exp:channel:entries}--}
+
+{exp:channel:entries channel="newsletter" orderby="date" sort="desc" limit="1" rdf="off" status="pending|open" disable="member_data|trackbacks"}
+
+<p>
+{edit_date format="%F %d %Y"}
+</p>
+
+<h4 class="title">
+{title}
+</h4>
+
+<blockquote style="width:300px;">
+{smartline}
+</blockquote><br class="spacer" /><br />
+
+<strong>{if introductionalternativeheading != ""}{introductionalternativeheading}{if:else}{introductionheading}{/if}</strong><br><br>{introductiontext}{if introductionsignature == "Yes" && introductionalternativesignature == ""}<br><br><i>Andreas Augustin</i>{if:elseif introductionalternativesignature != ""}<br><br><i>{introductionalternativesignature}</i>{/if}
+
+<img width="288" height="24"  src="http://famoushotels.org/images/divider/divider_3.gif" class="dax" alt="divider"/>
+
+<p>
+{embed="newsletter/picture" nr="one"}
+</p>
+<p>
+{embed="newsletter/story" nr="one"}
+</p>
+
+<img width="290" height="12" src="/images/divider/divider_1.gif" class="dax" alt="divider"/>
+
+<p>
+{embed="newsletter/picture" nr="two"}
+</p>
+<p>
+{embed="newsletter/story" nr="two"}
+</p>
+
+<img width="290" height="12" src="/images/divider/divider_1.gif" class="dax" alt="divider"/>
+
+<p>
+{embed="newsletter/picture" nr="three"}
+</p>
+<p>
+{embed="newsletter/story" nr="three"}
+</p>
+
+
+<img width="288" height="24" src="/images/divider/divider_2.gif" class="dax" alt="divider"/>
+
+{/exp:channel:entries}
+</div>
+</div>
+
+<div id="extra">
+
+<div>
+<img src="/images/uploads/letter.jpg" alt="" />
+
+<h2 class="right">Suggest a new hotel</h2>
+
+<p>
+<a href="/index.php/hotel/suggest/">Suggest</a> a new hotel.</p></p>
+
+Please read about our <a href="/site/about/">Services</a>. </p>
+
+</div>
+</div>
+
+
+{embed="includes/left_column"}
+{embed=includes/footer}
+
+</div>
+</body>
+</html>

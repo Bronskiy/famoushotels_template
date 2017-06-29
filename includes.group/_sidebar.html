@@ -1,0 +1,144 @@
+<!-- Sidebar -->
+<div class="col-md-4">
+  <div class="widget-categories">
+    <div class="widget-title">
+      <h3>Blog Categories</h3>
+    </div>
+    <div class="categories">
+      <ul>
+        {exp:channel:categories channel="blog" dynamic="off" style="linear"}
+          <li><a href="{path='blog'}">{category_name}</a></li>
+        {/exp:channel:categories}
+      </ul>
+    </div>
+  </div>
+    <div class="widget-categories">
+      <div class="widget-title">
+        <h3>Books Categories</h3>
+      </div>
+      <div class="categories">
+        <ul>
+          {exp:channel:categories channel="books" dynamic="off" style="linear"}
+            <li><a href="{path='books'}">{category_name}</a></li>
+          {/exp:channel:categories}
+        </ul>
+      </div>
+    </div>
+  <div class="widget-breaking-news">
+    <div class="widget-title">
+      <h3>Hot History</h3>
+    </div>
+    {exp:channel:entries channel="news" limit="4" disable="categories|member_data|pagination" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
+    <div class="breaking-post">
+      <a href="#"><img src="/assets/img/breaking-news-1.jpg" alt=""></a>
+      <h4><a href="#">{title}</a></h4>
+      <p>Donec nec quam vel elit ultrices gravida ac non lacus.</p>
+    </div>
+    {/exp:channel:entries}
+  </div>
+  <div class="widget-breaking-news">
+    <div class="widget-title">
+      <h3>Good To Know</h3>
+    </div>
+    {exp:channel:entries channel="news" limit="4" disable="categories|member_data|pagination" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
+    <div class="breaking-post">
+      <a href="#"><img src="/assets/img/breaking-news-1.jpg" alt=""></a>
+      <h4><a href="#">{title}</a></h4>
+      <p>Donec nec quam vel elit ultrices gravida ac non lacus.</p>
+    </div>
+    {/exp:channel:entries}
+  </div>
+  <div class="widget-breaking-news">
+    <div class="widget-title">
+      <h3>Our Books</h3>
+    </div>
+    {exp:channel:entries channel="news" limit="4" disable="categories|member_data|pagination" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
+    <div class="breaking-post">
+      <a href="#"><img src="/assets/img/breaking-news-1.jpg" alt=""></a>
+      <h4><a href="#">{title}</a></h4>
+      <p>Donec nec quam vel elit ultrices gravida ac non lacus.</p>
+    </div>
+    {/exp:channel:entries}
+  </div>
+  <div class="widget-breaking-news">
+    <div class="widget-title">
+      <h3>Pin It</h3>
+    </div>
+    {exp:channel:entries channel="news" limit="4" disable="categories|member_data|pagination" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
+    <div class="breaking-post">
+      <a href="#"><img src="/assets/img/breaking-news-1.jpg" alt=""></a>
+      <h4><a href="#">{title}</a></h4>
+      <p>Donec nec quam vel elit ultrices gravida ac non lacus.</p>
+    </div>
+    {/exp:channel:entries}
+  </div>
+  <div class="widget-breaking-news">
+    <div class="widget-title">
+      <h3>Who Where When</h3>
+    </div>
+    {exp:channel:entries channel="news" limit="4" disable="categories|member_data|pagination" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
+    <div class="breaking-post">
+      <a href="#"><img src="/assets/img/breaking-news-1.jpg" alt=""></a>
+      <h4><a href="#">{title}</a></h4>
+      <p>Donec nec quam vel elit ultrices gravida ac non lacus.</p>
+    </div>
+    {/exp:channel:entries}
+  </div>
+  <div class="widget-breaking-news">
+    <div class="widget-title">
+      <h3>Friends Newsletters</h3>
+    </div>
+    {exp:channel:entries channel="news" limit="4" disable="categories|member_data|pagination" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
+    <div class="breaking-post">
+      <a href="#"><img src="/assets/img/breaking-news-1.jpg" alt=""></a>
+      <h4><a href="#">{title}</a></h4>
+      <p>Donec nec quam vel elit ultrices gravida ac non lacus.</p>
+    </div>
+    {/exp:channel:entries}
+  </div>
+  <div class="widget-breaking-news">
+    <div class="widget-title">
+      <h3>Interviews</h3>
+    </div>
+    {exp:channel:entries channel="news" limit="4" disable="categories|member_data|pagination" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
+    <div class="breaking-post">
+      <a href="#"><img src="/assets/img/breaking-news-1.jpg" alt=""></a>
+      <h4><a href="#">{title}</a></h4>
+      <p>Donec nec quam vel elit ultrices gravida ac non lacus.</p>
+    </div>
+    {/exp:channel:entries}
+  </div>
+  <div class="widget-subscribe">
+    <div class="widget-title">
+      <h3>Coming <strong>NEWS</strong></h3>
+    </div>
+    <input class="subscribe" placeholder="Enter Your E-Mail" type="text">
+    <span><a href="#">subscribe now</a></span>
+  </div>
+  <div class="widget-banner">
+
+    {exp:channel:entries channel="featured_hotels" status="open" limit="1" orderby="random" disable="categories|member_data|pagination"}
+    {if fe_pic}
+    <div class="widget-title">
+      <h3>Your Next Trip</h3>
+    </div>
+    <div class="banner-img">
+      <a href='{url_title_path="hotels"}'><img src="{fe_pic}" alt="{title}"></a>
+    </div>
+    <div id="featuredhotels">
+        {fe_hotel}
+        <h4>{fe_hotel:hotel}</h4>
+        <p>
+        (<span class="fhdate">{fe_hotel:opening_date_timeline}</span>)<br/>
+        {exp:snippet total="125"}
+        {fe_hotel:famous_quote}
+        {/exp:snippet}<a href='{url_title_path="hotels"}'>more</a>
+        {/fe_hotel}
+      </p>
+    </div>
+    {/if}
+    {/exp:channel:entries}
+
+  </div>
+
+</div>

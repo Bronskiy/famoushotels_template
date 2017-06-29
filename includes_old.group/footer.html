@@ -1,0 +1,41 @@
+<br clear="all" />
+<div id="footer">
+
+{if member_group == "1"}
+
+{if segment_1 == ""}<a href="/fhdb1986/index.php?S=0&C=publish&M=entry_form&channel_id=6"><img src="http://famoushotels.org/images/icons/page_add.png" height="16" width="16" alt="Edit homepage" title="Edit homepage" align="bottom" class="icon" border="0" />&nbsp;Add article to homepage</a>
+
+{if:elseif segment_1 =="article"}<a href="/fhdb1986/index.php?S=0&C=publish&M=entry_form&channel_id=2"><img src="http://famoushotels.org/images/icons/page_add.png" height="16" width="16" alt="Add a new article" title="Add a new article" align="bottom" class="icon" border="0" />&nbsp;Add a new article</a>{if segment_2 != ""} | <a href="/fhdb1986/index.php?S=0&C=edit&M=edit_entry&channel_id=2&entry_id={segment_2}"><img src="http://famoushotels.org/images/icons/page_edit.png" height="16" width="16" alt="Edit this article" title="Edit this article" align="bottom" class="icon" border="0" />&nbsp;Edit this article</a>{/if}
+
+{if:elseif segment_1 == "books"}<a href="/fhdb1986/index.php?S=0&C=publish&M=entry_form&channel_id=3"><img src="http://famoushotels.org/images/icons/page_add.png" height="16" width="16" alt="Add a new book" title="Add a new book" align="bottom" class="icon" border="0" />&nbsp;Add a new book</a>
+
+{if segment_2 != "" AND segment_2 != "C11" AND segment_2 != "C12" AND segment_2 != "C13" AND segment_2 != "C15"} | <a href="/fhdb1986/index.php?S=0&C=edit&M=edit_entry&channel_id=3&entry_id={segment_2}"><img src="http://famoushotels.org/images/icons/page_edit.png" height="16" width="16" alt="Edit this book" title="Edit this book" align="bottom" class="icon" border="0" />&nbsp;Edit this book</a>{/if}
+
+| <a href="/fhdb1986/index.php?S=0&C=modules&M=Simple_commerce"><img src="http://famoushotels.org/images/icons/cart.png" height="16" width="16" alt="Edit this book" title="Edit this book" align="bottom" class="icon" border="0" />&nbsp;Webshop</a>
+
+| <a href="/fhdb1986/index.php?S=0&C=templates&M=edit_template&id=63"><img src="http://famoushotels.org/images/icons/script_edit.png" height="16" width="16" alt="Edit this template" title="Edit this template" align="bottom" class="icon" border="0" />&nbsp;Edit this template</a>
+
+{if:elseif segment_1 == "hotels"}<a href="/fhdb1986/index.php?S=0&C=publish&M=entry_form&channel_id=4"><img src="http://famoushotels.org/images/icons/page_add.png" height="16" width="16" alt="Add a news hotel" title="Add a new hotel" align="bottom" class="icon" border="0" />&nbsp;Add a new hotel</a>
+
+{if segment_2 != "" AND segment_2 != "search"} | <a href="/fhdb1986/index.php?S=0&C=edit&M=edit_entry&channel_id=4&entry_id={segment_2}"><img src="http://famoushotels.org/images/icons/page_edit.png" height="16" width="16" alt="Edit this hotel" title="Edit this hotel" align="bottom" class="icon" border="0" />&nbsp;Edit this hotel</a>{/if}
+
+| <a href="/fhdb1986/index.php?S=0&C=templates&M=edit_template&id=65"><img src="http://famoushotels.org/images/icons/script_edit.png" height="16" width="16" alt="Edit this template" title="Edit this template" align="bottom" class="icon" border="0" />&nbsp;Edit this template</a>{/if}
+
+{if segment_1 == "" OR segment_1 == "books" OR segment_1 == "hotels" OR segment_1 == "article"} | {/if}<a href="/fhdb1986/index.php?S=0&C=myaccount&M=notepad&id={member_id}&U=1"><img src="http://famoushotels.org/images/icons/note_edit.png" height="16" width="16" alt="Notepad" title="Notepad" align="bottom" class="icon" border="0" />&nbsp;Notepad</a> | <a href="/mint/"><img src="http://famoushotels.org/images/icons/chart_bar.gif" height="16" width="16" alt="Stats" title="Stats" align="bottom" class="icon" border="0" />&nbsp;Stats</a>
+
+{if segment_1 == ""} | <a href="/fhdb1986/index.php?S=0"><img src="http://famoushotels.org/images/icons/cog.png" height="16" width="16" alt="Control Panel" title="Control Panel" align="bottom" class="icon" border="0" />&nbsp;Control Panel</a> | <a href="http://famoushotels.org/newsletter/preview" title="Newsletter"><img src="http://famoushotels.org/images/icons/cup.png" height="16" width="16" alt="Newsletter" title="Newsletter" align="bottom" class="icon" border="0" />&nbsp;Newsletter</a> | <a href="http://famoushotels.org/hotels/iphone" title="iPhone List"><img src="http://famoushotels.org/images/icons/phone_add.png" height="16" width="16" alt="iPhone List" title="iPhone List" align="bottom" class="icon" border="0" />&nbsp;iPhone List</a> | <a href="http://www.famoushotels.org/index.php/newsletter/mailinglists/" title="Mailing Lists"><img src="http://famoushotels.org/images/icons/group.png" height="16" width="16" alt="Mailing Lists" title="Mailing Lists" align="bottom" class="icon" border="0" />&nbsp;ML</a>{/if}
+
+{if:else}{!-- not a Superadmin --}
+&nbsp;All content &copy; 1986-{current_time format="%Y"} by The Most Famous Hotels in the World.
+{/if}
+
+{if logged_in} 
+<?php global $SESS, $DB;
+$query = $DB->query("SELECT private_messages FROM exp_members WHERE member_id = '".$DB->escape_str($SESS->userdata['member_id'])."'");
+$pm_count = $query->row['private_messages'];
+$msg = " new message"; if ($pm_count != "1") { $msg .= "s"; }
+$ret = '| <a href="/index.php/member/messages/view_folder/1/">
+
+<img src="http://famoushotels.org/images/icons/email.png" height="16" width="16" alt="Messages" title="Messages" align="bottom" class="icon" border="0" />&nbsp; ' . $pm_count . $msg . '</a>'; return $ret; ?>{/if}
+
+</div>

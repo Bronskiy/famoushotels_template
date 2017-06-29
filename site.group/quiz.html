@@ -1,0 +1,177 @@
+{preload_replace:my_channel="news"}
+{preload_replace:my_template_group="site"}
+
+{embed="includes/html_header" my_template_group="{my_template_group}" my_title="{basetitle} | Traveller's Quiz"}
+
+<body>
+
+{if member_group == "1"}<div style="position: absolute; right: 15%; top: 50px;"><a href="http://www.famoushotels.org/db/fhdb1986/index.php?S=0&C=publish&M=entry_form&channel_id=2"><img src="http://ingmar.at/images/icons/page_add.png" height="16" width="16" alt="Add a new entry" title="Add a new entry" align="bottom" class="icon" border="0" /></a>
+</div>{/if}
+
+<div id="container">
+
+{embed="includes/header"}
+<div id="wrapper">
+<div id="contentright">
+<div id="quiz">
+
+{if segment_2 == "submitted" OR segment_3 == "submitted"}
+
+<h4>{exp:titleimg font="korinna_regular.ttf" size="16" color="#000"}You Participated in our quiz {/exp:titleimg}</h4>
+
+<p>Thank you for your efforts. Your answers are reviewed by a real person and should you have managed to answer all questions correctly we will personally contact you via your mail address.</p>
+
+{if:else}
+
+<h4>{exp:titleimg font="korinna_regular.ttf" size="16" color="#000"}Take the Quiz {/exp:titleimg}</h4>
+<h3>Since the year 1998 this quiz puzzles our readers, so far only a handful of people were able to solve all its riddles. We update the questions from time to time, so it is never the same.<br>
+Test your knowledge in the field of hotels. </h3><br>
+<i>Your answers are reviewed by a real person and should you have managed to answer all questions correctly we will personally contact you via your mail address.<p>ATTENTION: the correct answers are not shown after posting this test. So, please don't fill in nonsense in order to see the results. We will inform you about your results only if more than 80% were correct.</i></p>
+{exp:freeform:form form_name="take_quiz" return="quiz/submitted" notify="president@famoushotels.org" template="quiz_submit" required="my_name,my_mail"}
+
+<h2>1. Who founded a South-East Asian city and had a hotel named after him some 70 years later?</h2>
+<p><label for="hotel_1">Name of the hotel:</label><input type="text" name="hotel_1" value="" class=""/></p>
+<p><label for="city_1">Name of the city:</label><input type="text" name="city_1" value="" class=""/></p>
+
+<h2>2. Vivaldi couldn't have named it better (in German) - harbour city sounds like popular fast-food. </h2>
+
+<p><label for="hotel_2">Name of the hotel:</label><input type="text" name="hotel_2" value="" class=""/></p>
+<p><label for="city_2">Name of the city:</label><input type="text" name="city_2" value="" class=""/></p>
+
+<h2>3. A new tower on a 1928 hotel block lead to a better view over original homeland China. </h2>
+
+<p><label for="hotel_3">Name of the hotel:</label><input type="text" name="hotel_3" value="" class=""/></p>
+<p><label for="city_3">Name of the city:</label><input type="text" name="city_3" value="" class=""/></p>
+
+<h2>4. First came the cake, then the hotel (1876), both were named after the same man. </h2>
+
+<p><label for="hotel_4">Name of the hotel:</label><input type="text" name="hotel_4" value="" class=""/></p>
+<p><label for="city_4">Name of the city:</label><input type="text" name="city_4" value="" class=""/></p>
+
+<h2>5. Named after a continent in a city which is not - as many erroneously believe - named after its founder. </h2>
+
+<p><label for="hotel_5">Name of the hotel:</label><input type="text" name="hotel_5" value="" class=""/></p>
+<p><label for="city_5">Name of the city:</label><input type="text" name="city_5" value="" class=""/></p>
+
+<h2>6. More than Royal, quickly refurbished palace to be opened in time for the world-expo of 1873. </h2>
+
+<p><label for="hotel_6">Name of the hotel:</label><input type="text" name="hotel_6" value="" class=""/></p>
+<p><label for="city_6">Name of the city:</label><input type="text" name="city_6" value="" class=""/></p>
+
+<h2>7. Longest surviving royal house in Europe, 'stranded' in UK capital.</h2>
+
+<p><label for="hotel_7">Name of the hotel:</label><input type="text" name="hotel_7" value="" class=""/></p>
+<p><label for="city_7">Name of the city:</label><input type="text" name="city_7" value="" class=""/></p>
+
+<h2>8. Oh, what a famous hotelier, next to the Prado. </h2>
+
+<p><label for="hotel_8">Name of the hotel:</label><input type="text" name="hotel_8" value="" class=""/></p>
+<p><label for="city_8">Name of the city:</label><input type="text" name="city_8" value="" class=""/></p>
+
+<h2>9. D for deer - NO! It's a stag, G for gold, All in Sound of Music environment and near Mozart's birthplace? </h2>
+
+<p><label for="hotel_9">Name of the hotel:</label><input type="text" name="hotel_9" value="" class=""/></p>
+<p><label for="city_9">Name of the city:</label><input type="text" name="city_9" value="" class=""/></p>
+
+<h2>10. 'Hof'!, not 'sausage'. </h2>
+
+<p><label for="hotel_10">Name of the hotel:</label><input type="text" name="hotel_10" value="" class=""/></p>
+<p><label for="city_10">Name of the city:</label><input type="text" name="city_10" value="" class=""/></p>
+
+<h2>11. On the shore of the Mother of all Waters, opposite of occidental. </h2>
+
+<p><label for="hotel_11">Name of the hotel:</label><input type="text" name="hotel_11" value="" class=""/></p>
+<p><label for="city_11">Name of the city:</label><input type="text" name="city_11" value="" class=""/></p>
+
+<h2>12. Facing the last of all remaining seven (antique) wonders of the world. </h2>
+
+<p><label for="hotel_12">Name of the hotel:</label><input type="text" name="hotel_12" value="" class=""/></p>
+<p><label for="city_12">Name of the city:</label><input type="text" name="city_12" value="" class=""/></p>
+
+<h2>13. Its terrace overlooks Elephantine Island. </h2>
+
+<p><label for="hotel_13">Name of the hotel:</label><input type="text" name="hotel_13" value="" class=""/></p>
+<p><label for="city_13">Name of the city:</label><input type="text" name="city_13" value="" class=""/></p>
+
+<h2>14. A salad bears its name and when Conrad H. bought it, he called it 'the greatest of them all'. </h2>
+
+<p><label for="hotel_14">Name of the hotel:</label><input type="text" name="hotel_14" value="" class=""/></p>
+<p><label for="city_14">Name of the city:</label><input type="text" name="city_14" value="" class=""/></p>
+
+<h2>15. Royal for sure, founded in its capital when Elisabeth was Queen of Hungary. </h2>
+
+<p><label for="hotel_15">Name of the hotel:</label><input type="text" name="hotel_15" value="" class=""/></p>
+<p><label for="city_15">Name of the city:</label><input type="text" name="city_15" value="" class=""/></p>
+
+<h2>16. A TV series star on the West Coast of America. Not in Hollywood, but on a nob(le) hill. </h2>
+
+<p><label for="hotel_16">Name of the hotel:</label><input type="text" name="hotel_16" value="" class=""/></p>
+<p><label for="city_16">Name of the city:</label><input type="text" name="city_16" value="" class=""/></p>
+
+<h2>17. Sharing the same name with a British Earl and an English city, located between an opera house and answer to 6. </h2>
+
+<p><label for="hotel_17">Name of the hotel:</label><input type="text" name="hotel_17" value="" class=""/></p>
+<p><label for="city_17">Name of the city:</label><input type="text" name="city_17" value="" class=""/></p>
+
+<h2>18. A paradise garden overlooks the Atlantic, very British in Portugal. </h2>
+
+<p><label for="hotel_18">Name of the hotel:</label><input type="text" name="hotel_18" value="" class=""/></p>
+<p><label for="city_18">Name of the city:</label><input type="text" name="city_18" value="" class=""/></p>
+
+<h2>19. Agatha Christie's Constantinopel headquarters. </h2>
+
+<p><label for="hotel_19">Name of the hotel:</label><input type="text" name="hotel_19" value="" class=""/></p>
+<p><label for="city_19">Name of the city:</label><input type="text" name="city_19" value="" class=""/></p>
+
+<h2>20. Named after a mausoleum, at the Gate of India.</h2>
+
+<p><label for="hotel_20">Name of the hotel:</label><input type="text" name="hotel_20" value="" class=""/></p>
+<p><label for="city_20">Name of the city:</label><input type="text" name="city_20" value="" class=""/></p>
+
+<h2>21. Grand Hotel with one crown at ski-jumping winter Olympics venue 1928?</h2>
+
+<p><label for="hotel_21">Name of the hotel:</label><input type="text" name="hotel_21" value="" class=""/></p>
+<p><label for="city_21">Name of the city:</label><input type="text" name="city_21" value="" class=""/></p>
+
+<h2>22. US settlement - at least by its name - in the Holy Land?</h2>
+
+<p><label for="hotel_22">Name of the hotel:</label><input type="text" name="hotel_22" value="" class=""/></p>
+<p><label for="city_22">Name of the city:</label><input type="text" name="city_22" value="" class=""/></p>
+
+<h2>23. The city became the NEW capital of its country in 1911 (called New ...), the hotel came in 1936.</h2>
+
+<p><label for="hotel_23">Name of the hotel:</label><input type="text" name="hotel_23" value="" class=""/></p>
+<p><label for="city_23">Name of the city:</label><input type="text" name="city_23" value="" class=""/></p>
+
+<h2>24. A romantic castle at Austria's warmest lake.</h2>
+
+<p><label for="hotel_24">Name of the hotel:</label><input type="text" name="hotel_24" value="" class=""/></p>
+<p><label for="city_24">Name of the city:</label><input type="text" name="city_24" value="" class=""/></p>
+
+<h2>25. The mother of all Russian cities and its "first" palace.</h2>
+
+<p><label for="hotel_25">Name of the hotel:</label><input type="text" name="hotel_25" value="" class=""/></p>
+<p><label for="city_25">Name of the city:</label><input type="text" name="city_25" value="" class=""/></p>
+
+<h2>Finally, please enter your name and e-mail address</h2>
+
+<p><label for="my_name" style="color: #F70437;"><strong>*&nbsp;Name:</strong></label><input type="text" name="my_name" value="" class=""/></p>
+<p><label for="my_mail" style="color: #F70437;"><strong>*&nbsp;E-mail address:</strong></label><input type="text" name="my_mail" value="" class=""/></p>
+
+<p id="submission"><input type="submit" name="submit" value="Submit" />
+<input type="reset" name="reset" value="Clear" />
+</p>
+
+{/exp:freeform:form}
+
+</div>
+</div>
+<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Ffamoushotels%23%21%2Fpages%2FFamous-Hotels%2F183035841713090&amp;width=192&amp;colorscheme=light&amp;connections=10&amp;stream=true&amp;header=true&amp;height=110" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:192px; height:110px;" allowTransparency="true"></iframe>
+</div>
+
+{embed="includes/left_column"}
+{embed=includes/footer}
+
+</div>
+</body>
+</html>

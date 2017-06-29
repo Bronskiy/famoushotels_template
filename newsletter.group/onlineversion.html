@@ -1,0 +1,47 @@
+{embed="includes/article_header" wblg="Newsletter" stts="Open"}
+
+{exp:channel:entries channel="Newsletter" orderby="date" sticky="off" limit="1" status="Open"}
+
+{if entry_id >= "864"}
+
+<blockquote style="width:auto;margin:0;">
+{smartline}
+</blockquote><br class="spacer" /><br />
+
+<strong>{if introductionalternativeheading != ""}{introductionalternativeheading}{if:else}{introductionheading}{/if}</strong><br><br>{introductiontext}{if introductionsignature == "Yes" && introductionalternativesignature == ""}<br><br><i>Andreas Augustin</i>{if:elseif introductionalternativesignature != ""}<br><br><i>{introductionalternativesignature}</i>{/if}
+
+<img width="288" height="24"  src="http://famoushotels.org/images/divider/divider_3.gif" class="dax" alt="divider"/>
+
+<p>
+{embed="newsletter/picture" nr="one" picstatus="Open"}
+</p>
+<p>
+{embed="newsletter/story" nr="one" pos="" sttss="Open"}
+</p>
+
+<img width="290" height="12" src="/images/divider/divider_1.gif" class="dax" alt="divider"/>
+
+<p>
+{embed="newsletter/picture" nr="two" picstatus="Open"}
+</p>
+<p>
+{embed="newsletter/story" nr="two" pos="" sttss="Open"}
+</p>
+
+<img width="290" height="12" src="/images/divider/divider_1.gif" class="dax" alt="divider"/>
+
+<p>
+{embed="newsletter/picture" nr="three" picstatus="Open"}
+</p>
+<p>
+{embed="newsletter/story" nr="three" pos="" sttss="Open"}
+</p>
+
+<img width="288" height="24" src="/images/divider/divider_2.gif" class="dax" alt="divider"/>
+
+{if:else}
+
+{if newsletter_body != ""}{newsletter_body}{/if}
+
+{/if}
+{/exp:channel:entries}

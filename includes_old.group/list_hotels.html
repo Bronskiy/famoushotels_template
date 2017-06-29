@@ -1,0 +1,29 @@
+{if segment_4 != ""}
+
+{if segment_3 == "all"}
+
+<div id="allhotels">
+<div class="allhotelsentry">
+{exp:query sql="SELECT d.field_id_7 AS city, d.field_id_8 AS country, d.entry_id, t.title FROM exp_channel_data AS d, exp_channel_titles AS t WHERE t.channel_id = '4' AND d.field_id_7 LIKE '{segment_4}' AND (t.status='open' OR t.status='Full Plan') AND t.entry_id = d.entry_id ORDER BY field_id_8, field_id_7"}
+
+<p class="allhotelshotel"><a class="allhotelsmargin" href="/hotels/{entry_id}">{title}</a></p>
+
+{/exp:query}
+</div>
+</div>
+
+{if:else}
+  {exp:query sql="SELECT d.field_id_7 AS city, d.field_id_8 AS country, d.entry_id, t.title FROM exp_channel_data AS d, exp_channel_titles AS t WHERE t.channel_id = '4' AND d.field_id_8 LIKE '{segment_3}' AND d.field_id_7 LIKE '{segment_4}' AND (t.status='open' OR t.status='Full Plan') AND t.entry_id = d.entry_id ORDER BY field_id_8, field_id_7"}
+
+<p><strong><a href="/hotels/{entry_id}">{title}</a></strong><br /></p>
+
+  {/exp:query}
+{/if}
+{if:else}{!-- segment_4 is empty, ie no city provided --}
+
+{exp:query sql="SELECT d.field_id_7 AS city, d.field_id_8 AS country, d.entry_id, t.title FROM exp_channel_data AS d, exp_channel_titles AS t WHERE d.channel_id = '4' 
+AND d.field_id_8 LIKE '{segment_3}' AND (t.status='open' OR t.status='Full Plan') AND t.entry_id = d.entry_id ORDER BY field_id_8, field_id_7"}
+
+<p><strong><a href="/hotels/{entry_id}">{title}</a></strong><br /></p>
+
+{/exp:query}{/if}
