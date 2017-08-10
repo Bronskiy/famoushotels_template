@@ -1,0 +1,12 @@
+    <div class="widget-categories">
+      <div class="widget-title">
+        <h3>Books Categories</h3>
+      </div>
+      <div class="categories">
+        <ul>
+          {exp:channel:categories channel="books" dynamic="off" style="linear"}
+            <li><a href="{path='books'}">{category_name}</a></li>
+          {/exp:channel:categories}
+        </ul>
+      </div>
+    </div>

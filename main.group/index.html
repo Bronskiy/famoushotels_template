@@ -3,381 +3,45 @@
 
 <section class="content">
   <div class="container">
-
     <div class="col-md-8">
       <div class="row">
-
+        {exp:channel:entries channel="news" disable="member_data" limit="12" cache="yes" refresh="576" paginate="bottom"}
         <div class="col-md-6">
           <div class="grid-box">
             <div class="grid-post">
               <div class="grid-post-header">
-                <a href="#"><img src="/assets/img/grid-post-1.jpg" alt=""></a>
-                <a href="index.html"><span class="category">ANIMALS</span></a>
+                {if article_photo}
+                <a href="{url_title_path='news'}"><img src="{article_photo}" alt="{title}"></a>
+                {if:else}
+                <a href="{url_title_path='news'}"><img src="http://via.placeholder.com/330x220" alt="{title}"></a>
+                {/if}
+                {categories limit="1"}<a href="/news/category/{category_url_title}"><span class="category">{category_name}</span></a>{/categories}
               </div>
               <div class="grid-post-content">
-                <h2 class="grid-post-title"><a href="#">Cats Need Love</a></h2>
-                <p>Donec nec quam vel elit ultrices gravida ac non lacus. Fusce ut convallis neque, sit amet laoreet est. Donec nec quam vel elit ultrices gravida.</p>
+                <h2 class="grid-post-title"><a href="{url_title_path='news'}">{title}</a></h2>
+                <p><small><span class="eta"></span> (<span class="words"></span> words)</small></p>
+                {if summary}
+                <p>{summary}</p>
+                {/if}
               </div>
               <div class="post-bottom clearfix">
-                <span class="grid-read-more"><a href="#">Read More</a></span>
+                <span class="grid-read-more"><a href="{url_title_path='news'}">Read More</a></span>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="grid-box">
-            <div class="grid-post">
-              <div class="grid-post-header">
-                <a href="#"><img src="/assets/img/grid-post-2.jpg" alt=""></a>
-                <a href="index.html"><span class="category">TRAVEL</span></a>
-              </div>
-              <div class="grid-post-content">
-                <h2 class="grid-post-title"><a href="#">Travel Dreams</a></h2>
-                <p>Donec nec quam vel elit ultrices gravida ac non lacus. Fusce ut convallis neque, sit amet laoreet est. Donec nec quam vel elit ultrices gravida.</p>
-              </div>
-              <div class="post-bottom clearfix">
-                <span class="grid-read-more"><a href="#">Read More</a></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="small-news">
-            <img src="/assets/img/small-news-1.jpg" alt="">
-            <span class="category">GIFTS</span>
-            <span class="small-date">Jan 12, 2017</span>
-            <h4 class="small-news-title"><a href="#">Lovely Flovers for Girls</a></h4>
-            <span class="small-read-more"><a href="#">Read More</a></span>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="small-news">
-            <img src="/assets/img/small-news-2.jpg" alt="">
-            <span class="category">HEALT</span>
-            <span class="small-date">Jan 12, 2017</span>
-            <h4 class="small-news-title"><a href="#">You Should Eat This</a></h4>
-            <span class="small-read-more"><a href="#">Read More</a></span>
-          </div>
-        </div>
+        {if count%2 == 0}
+        <div class="clearfix"></div>
+        {/if}
+        {/exp:channel:entries}
+      </div>
+      <div class="row">
         <div class="col-md-12">
-          <div class="normal-box">
-            <div class="normal-post">
-              <div class="normal-post-header">
-                <iframe src="https://www.youtube.com/embed/4tDZeDQQmxg" allowfullscreen></iframe>
-                <a href="index.html"><span class="category">Lifestyle</span></a>
-              </div>
-              <div class="normal-post-content">
-                <h2 class="normal-post-title"><a href="#">Beauty Scarlett</a></h2>
-                <p>Donec nec quam vel elit ultrices gravida ac non lacus. Fusce ut convallis neque, sit amet laoreet est.Donec nec quam vel elit ultrices gravida ac non lacus. Fusce ut convallis neque, sit amet laoreet est. Donec nec quam vel elit ultrices gravida ac non lacus. Fusce ut convallis neque, sit amet laoreet est.</p>
-              </div>
-              <div class="normal-post-bottom clearfix">
-                <span class="normal-read-more"><a href="#">Read More</a></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="normal-box">
-            <div class="normal-post">
-              <div class="normal-post-header">
-                <a href="#"><img src="/assets/img/normal-post-1.jpg" alt=""></a>
-                <a href="index.html"><span class="category">POPULAR</span></a>
-              </div>
-              <div class="normal-post-content">
-                <h2 class="normal-post-title"><a href="#">Drink Coffee</a></h2>
-                <p>Donec nec quam vel elit ultrices gravida ac non lacus. Fusce ut convallis neque, sit amet laoreet est.Donec nec quam vel elit ultrices gravida ac non lacus. Fusce ut convallis neque, sit amet laoreet est. Donec nec quam vel elit ultrices gravida ac non lacus. Fusce ut convallis neque, sit amet laoreet est.</p>
-              </div>
-              <div class="normal-post-bottom clearfix">
-                <span class="normal-read-more"><a href="#">Read More</a></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="grid-box">
-            <div class="grid-post">
-              <div class="grid-post-header">
-                <a href="#"><img src="/assets/img/grid-post-3.jpg" alt=""></a>
-                <a href="index.html"><span class="category">CAKE</span></a>
-              </div>
-              <div class="grid-post-content">
-                <h2 class="grid-post-title"><a href="#">Make a Cake</a></h2>
-                <p>Donec nec quam vel elit ultrices gravida ac non lacus. Fusce ut convallis neque, sit amet laoreet est. Donec nec quam vel elit ultrices gravida.</p>
-              </div>
-              <div class="post-bottom clearfix">
-                <span class="grid-read-more"><a href="#">Read More</a></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="grid-box">
-            <div class="grid-post">
-              <div class="grid-post-header">
-                <a href="#"><img src="/assets/img/grid-post-4.jpg" alt=""></a>
-                <a href="index.html"><span class="category">HEALT</span></a>
-              </div>
-              <div class="grid-post-content">
-                <h2 class="grid-post-title"><a href="#">Sleep Bed</a></h2>
-                <p>Donec nec quam vel elit ultrices gravida ac non lacus. Fusce ut convallis neque, sit amet laoreet est. Donec nec quam vel elit ultrices gravida.</p>
-              </div>
-              <div class="post-bottom clearfix">
-                <span class="grid-read-more"><a href="#">Read More</a></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="page-numbers">
-          <ul>
-            <li><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-            <li><a class="page-number active" href="#"><span>1</span></a></li>
-            <li><a class="page-number" href="#"><span>2</span></a></li>
-            <li><a class="page-number" href="#"><span>3</span></a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-          </ul>
+          <h2 class="normal-post-title">New Books</h2>
+          {new_books_iframe}
         </div>
       </div>
-      <div id="content">
-
-        {if segment_1 == "flippingpages"}
-
-        <h4 class="title">{exp:titleimg font="korinna_regular.ttf" size="14" color="111111"}Page of the flipping pages {/exp:titleimg}</h4>
-
-        {exp:channel:entries channel="homepage" status="open" limit="10" category="23" orderby="date" disable="member_data|trackbacks"}
-        <div class="bookteaser">
-          <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="{fbwidth}" height="{fbheight}">
-            <param name="movie" value="/flash/flippingBook.swf" />
-            <param name="quality" value="high" />
-            {if fbentryid != ""}
-            <param name="flashVars" value="xmlConfig=/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" />
-            {if:elseif fburl != ""}
-            <param name="flashVars" value="xmlConfig=/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" />
-            {/if}
-            <param name="scale" value="noscale" />
-            <param name="bgcolor" value="#cccc99" />
-            {if fbentryid != ""}
-
-            {if:elseif fburl != ""}
-
-            {/if}
-          </object>
-        </div><br clear="all" />
-        <p><em>{fbtext}</em></p>
-        {/exp:channel:entries}
-
-        {if:elseif segment_1 == "blog"}
-        {if segment_2 == "currentaffairs"}
-
-        <img src="/888/famoushotels-currentaffairs.jpg" alt="Image" width="328" height="30" />
-        {exp:channel:entries channel="blog" category="30" limit="5" status="open|opener" disable="member_data|trackbacks" paginate="both"}
-        {date_heading}<div class="dateheader"><h2>{entry_date format=' %l, %F %d, %Y '}</h2></div>{/date_heading}
-        <h4>{title}</h4>
-        {body}
-        {paginate}{if "{total_pages}" != 1}<div id="pagination">{!--<span class="totalpages">Page {current_page} of {total_pages} pages</span> --}<span class="linkstopages">{pagination_links}</span></div>{/if}{/paginate}
-        {/exp:channel:entries}
-        <img alt="divider" class="dax" height="25" src="/images/divider/divider_3.gif" width="289" />
-
-        {if:elseif segment_2 =="globaletiquette"}
-
-        <h4 class="title">{exp:titleimg font="korinna_regular.ttf" size="14" color="111111"}Global Etiquette {/exp:titleimg}</h4>
-        {exp:channel:entries channel="blog" category="28" limit="5" status="open|opener" disable="member_data|trackbacks" paginate="both"}
-        {date_heading}<div class="dateheader"><h2>{entry_date format=' %l, %F %d, %Y '}</h2></div>{/date_heading}
-        <h4>{title}</h4>
-        {body}
-        {paginate}{if "{total_pages}" != 1}<div id="pagination"><span class="totalpages">Page {current_page} of {total_pages} pages</span> <span class="linkstopages">{pagination_links}</span></div>{/if}{/paginate}
-        {/exp:channel:entries}
-        <img alt="divider" class="dax" height="25" src="/images/divider/divider_3.gif" width="289" />
-
-        {if:elseif segment_2 == "greencorner"}
-
-        <h4 class="title">{exp:titleimg font="korinna_regular.ttf" size="14" color="111111"}Green Corner {/exp:titleimg}</h4>
-        {exp:channel:entries channel="blog" category="27" limit="5" status="open|opener" disable="member_data|trackbacks" paginate="both"}
-        {date_heading}<div class="dateheader"><h2>{entry_date format=' %l, %F %d, %Y '}</h2></div>{/date_heading}
-        <h4>{title}</h4>
-        {body}
-        {paginate}{if "{total_pages}" != 1}<div id="pagination"><span class="totalpages">Page {current_page} of {total_pages} pages</span> <span class="linkstopages">{pagination_links}</span></div>{/if}{/paginate}
-        {/exp:channel:entries}
-        <img alt="divider" class="dax" height="25" src="/images/divider/divider_3.gif" width="289" />
-
-        {if:elseif segment_2 == "newbooks"}
-
-        <img src="/888/famoushotels-newbooks.jpg" alt="Image" width="328" height="88" />
-        {exp:channel:entries channel="blog" category="31" limit="5" status="open|opener" disable="member_data|trackbacks" paginate="both"}
-        {date_heading}<div class="dateheader"><h2>{entry_date format=' %l, %F %d, %Y '}</h2></div>{/date_heading}
-        <h4>{title}</h4>
-        {body}
-        {paginate}{if "{total_pages}" != 1}<div id="pagination"><span class="totalpages">Page {current_page} of {total_pages} pages</span> <span class="linkstopages">{pagination_links}</span></div>{/if}{/paginate}
-        {/exp:channel:entries}
-        <img alt="divider" class="dax" height="25" src="/images/divider/divider_3.gif" width="289" />
-
-        {if:elseif segment_2 == "newhotels"}
-
-        <h4 class="title">{exp:titleimg font="korinna_regular.ttf" size="14" color="111111"}New Hotels {/exp:titleimg}</h4>
-        {exp:channel:entries channel="blog" category="32" limit="5" status="open|opener" disable="member_data|trackbacks" paginate="both"}
-        {date_heading}<div class="dateheader"><h2>{entry_date format=' %l, %F %d, %Y '}</h2></div>{/date_heading}
-        <h4>{title}</h4>
-        {body}
-        {paginate}{if "{total_pages}" != 1}<div id="pagination"><span class="totalpages">Page {current_page} of {total_pages} pages</span> <span class="linkstopages">{pagination_links}</span></div>{/if}{/paginate}
-        {/exp:channel:entries}
-        <img alt="divider" class="dax" height="25" src="/images/divider/divider_3.gif" width="289" />
-
-        {if:elseif segment_2 == "termsofbusiness"}
-
-        <h4 class="title">{exp:titleimg font="korinna_regular.ttf" size="14" color="111111"}Terms of Business {/exp:titleimg}</h4>
-        {exp:channel:entries channel="blog" category="29" limit="5" status="open|opener" disable="member_data|trackbacks" paginate="both"}
-        {date_heading}<div class="dateheader"><h2>{entry_date format=' %l, %F %d, %Y '}</h2></div>{/date_heading}
-        <h4>{title}</h4>
-        {body}
-        {paginate}{if "{total_pages}" != 1}<div id="pagination"><span class="totalpages">Page {current_page} of {total_pages} pages</span> <span class="linkstopages">{pagination_links}</span></div>{/if}{/paginate}
-        {/exp:channel:entries}
-        <img alt="divider" class="dax" height="25" src="/images/divider/divider_3.gif" width="289" />
-
-        {/if}
-        {if:else}
-
-        {exp:channel:entries channel="homepage" limit="1" orderby="date" status="open" category="16" disable="member_data|pagination|trackback"}
-        <div id="newpub">
-          <div id="placeholder"><a href="http://www.famoushotels.org/books/{newpub_num}">{newpub_picture}</a></div>
-
-          {if newpub_picture_two != "" OR newpub_picture_three != "" OR newpub_picture_four != "" OR newpub_picture_five != ""}
-          <div id="slideshowbuttons">
-            <span>More pictures:&nbsp;</span>{if newpub_picture != ""}<a id="img0" style="background-color:#eeeed6;" href="#" onclick="return changeimg(this)" title="Change picture"><img src="/images/changepic.gif" alt=""/></a>{/if}{if newpub_picture_two != ""}<a id="img1" href="#" onclick="return changeimg(this)" title="Change picture"><img src="/images/changepic.gif" alt=""/></a>{/if}{if newpub_picture_three != ""}<a id="img2" href="#" onclick="return changeimg(this)" title="Change picture"><img src="/images/changepic.gif" alt=""/></a>{/if}{if newpub_picture_four != ""}<a id="img3" href="#" onclick="return changeimg(this)" title="Change picture"><img src="/images/changepic.gif" alt=""/></a>{/if}{if newpub_picture_five != ""}<a id="img4" href="#" onclick="return changeimg(this)" title="Change picture"><img src="/images/changepic.gif" alt=""/></a>{/if}<br clear="all"/>
-          </div>
-          {/if}
-          <em>{newpub_summary}</em>
-        </div>
-        {/exp:channel:entries}
-
-        {embed="includes/making_history"}
-
-        {!--
-          {exp:channel:entries channel="homepage" status="open" limit="1" category="24" orderby="random" disable="member_data|trackbacks"}
-          <div class="bookteaser">
-            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="{fbwidth}" height="{fbheight}">
-              <param name="movie" value="/flash/flippingBook.swf" />
-              <param name="quality" value="high" />
-              {if fbentryid != ""}
-              <param name="flashVars" value="xmlConfig=/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" />
-              {if:elseif fburl != ""}
-              <param name="flashVars" value="xmlConfig=/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" />
-              {/if}
-              <param name="scale" value="noscale" />
-              <param name="bgcolor" value="#cccc99" />
-              {if fbentryid != ""}
-              <embed src="/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=/flippingbook/{fbentryid}/{fbpages}/entryid/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
-              {if:elseif fburl != ""}
-              <embed src="/flash/flippingBook.swf" width="{fbwidth}" height="{fbheight}" quality="high" bgcolor="#cccc99" flashvars="xmlConfig=/flippingbook/url/{fbpages}/{fburl}/{fbwidth}/{fbheight}" scale="noscale" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
-              {/if}
-            </object>
-          </div><br clear="all" />
-          <p><em>{fbtext}</em></p>
-          {/exp:channel:entries}
-
-          <p style="background: beige; border-top: 1px solid #cccc99; border-bottom: 1px solid #cccc99; padding: 0.35em; text-align: center;">
-            <a href="/flippingpages" title="Preview more books">
-              Preview more books
-            </a>
-          </p>
-
-          <p style="background: beige; border-top: 1px solid #cccc99; border-bottom: 1px solid #cccc99; padding: 0.35em; text-align: center;">On 2 May tropical cyclone Nargis hit Myanmar and devastated up to 95 per cent of homes. We have installed an online version of our book THE STRAND TREASURY about the hotel in Yangon. You can now download it and pay online. The full amount will be transferred to a relief committee at the hotel.
-            <a href="/article/787" title="We help in Myanmar (Burma)!">
-              More…
-            </a>
-          </p>
-          --}
-
-
-          <br><a href="http://pathofhistory.com/"><img alt="pathofhistory" height="87" src="/images/banners/pathofhistory_by_famoushotels330.jpg" width="330" /></a>
-          <br><br>
-          <h2>New Books</h2>
-          {new_books_iframe}
-          <br>
-
-          <div id="teaser">
-
-            {exp:channel:entries category="4" parent_only="yes" orderby="date" sticky="off" limit="3" status="opener"}
-            <div class="teaser">
-              <a href='/article/{entry_id}' class="left">{article_thumbnail}</a>
-              <h4><a href='/article/{entry_id}'>{title}</a></h4>
-              {if teaser !=""}
-              <p class="teasertext">{exp:snippet total="125"}{teaser}{/exp:snippet}&nbsp;[<a href='/article/{entry_id}'>more</a>]</p>
-              {if:else}
-              <div class="teasertext">{exp:snippet total="125"}{body}{/exp:snippet}&nbsp;[<a href='/article/{entry_id}'>more</a>]</div>
-              {/if}
-              <p class="teaserpublished">Recently published in: <a href="/archives/inspirations">INSPIRATIONS</a></p>
-            </div>
-            {/exp:channel:entries}
-
-
-            {exp:channel:entries category="6" orderby="date" sticky="off" limit="3" status="opener"}
-            <div class="teaser">
-              <a href='/article/{entry_id}' class="left">{article_thumbnail}</a>
-              <h4><a href='/article/{entry_id}'>{title}</a></h4>
-              {if teaser !=""}
-              <p class="teasertext">{exp:snippet total="125"}{teaser}{/exp:snippet}&nbsp;[<a href='/article/{entry_id}'>more</a>]</p>
-              {if:else}
-              <div class="teasertext">{exp:snippet total="125"}{body}{/exp:snippet}&nbsp;[<a href='/article/{entry_id}'>more</a>]</div>
-              {/if}
-              <p class="teaserpublished">Recently published in: <a href="/archives/publications">PUBLICATIONS</a></p>
-            </div>
-            {/exp:channel:entries}
-
-
-
-            {exp:channel:entries category="5" orderby="date" sticky="off" limit="3" status="opener"}
-            <div class="teaser">
-              <a href='/article/{entry_id}' class="left">{article_thumbnail}</a>
-              <h4><a href='/article/{entry_id}'>{title}</a></h4>
-              {if teaser !=""}
-              <p class="teasertext">{exp:snippet total="125"}{teaser}{/exp:snippet}&nbsp;[<a href='/article/{entry_id}'>more</a>]</p>
-              {if:else}
-              <div class="teasertext">{exp:snippet total="125"}{body}{/exp:snippet}&nbsp;[<a href='/article/{entry_id}'>more</a>]</div>
-              {/if}
-              <p class="teaserpublished">Recently published in: <a href="/archives/documentations">DOCUMENTATIONS</a></p>
-            </div>
-            {/exp:channel:entries}
-
-
-            {exp:channel:entries parent_only="yes" category="9" orderby="date" sticky="off" limit="3" status="opener"}
-            <div class="teaser">
-              <a href='/article/{entry_id}' class="left">{article_thumbnail}</a>
-              <h4><a href='/article/{entry_id}'>{title}</a></h4>
-              {if teaser !=""}
-              <p class="teasertext">{exp:snippet total="125"}{teaser}{/exp:snippet}&nbsp;[<a href='/article/{entry_id}'>more</a>]</p>
-              {if:else}
-              <div class="teasertext">{exp:snippet total="125"}{body}{/exp:snippet}&nbsp;[<a href='/article/{entry_id}'>more</a>]</div>
-              {/if}
-              <p class="teaserpublished">Recently published in: <a href="/archives/whowherewhen">WHO WHERE WHEN</a></p>
-            </div>
-            {/exp:channel:entries}
-
-
-            {exp:channel:entries category="19" orderby="date" sticky="off" limit="3" status="opener"}
-
-            <div class="teaser">
-              <a href='/article/{entry_id}' class="left">{article_thumbnail}</a>
-              <h4><a href='/article/{entry_id}'>{title}</a></h4>
-              {if teaser !=""}
-              <p class="teasertext">{exp:snippet total="125"}{teaser}{/exp:snippet}&nbsp;[<a href='/article/{entry_id}'>more</a>]</p>
-              {if:else}
-              <div class="teasertext">{exp:snippet total="125"}{body}{/exp:snippet}&nbsp;[<a href='/article/{entry_id}'>more</a>]</div>
-              {/if}
-              <p class="teaserpublished">Recently published in: <a href="/archives/breakfast">BREAKFAST INTERVIEWS</a></p>
-            </div>
-
-
-            {/exp:channel:entries}
-
-
-          </div>
-
-          {/if}
-
-        </div>
     </div>
-
-
-
     {embed="includes/_sidebar"}
   </div>
 </section>

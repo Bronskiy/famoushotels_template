@@ -1,33 +1,37 @@
-    <section class="featured-posts">
-      <div class="container">
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-8">
-              <div class="big-post">
-                <a href="#"><img src="/assets/img/big-post.jpg" alt=""></a>
-                <a href="index.html"><span class="category">TRAVEL</span></a>
-                <h2 class="big-post-title"><a href="#">LET'S GO MOON</a></h2>
-              </div>
+<section class="featured-posts">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="main-slider owl-carousel owl-theme">
+            {exp:channel:entries channel="making_history" disable="member_data" limit="12" cache="yes" refresh="576" dynamic="no"}
+            <div class="item big-post">
+              <a href="#"><img src="{mh_picture}" alt="{title}"></a>
+              <h2 class="big-post-title"><a href="#">{title}</a></h2>
+              {if mh_text}
+              <p class="big-post-description">{mh_text}</p>
+              {/if}
             </div>
-            <div class="col-md-4">
-              <div class="featured-box">
-                <div class="featured-post">
-                  <a href="#"><img src="/assets/img/featured-post-1.jpg" alt=""></a>
-                  <a href="index.html"><span class="category">FIND</span></a>
-                  <h2 class="featured-post-title"><a href="#">WAYS</a></h2>
-                </div>
-              </div>
+            {/exp:channel:entries}
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="featured-box">
+            <div class="featured-post">
+              <a href="/hotels"><img src="http://via.placeholder.com/350x210" alt="Featured Hotels"></a>
+              <h2 class="featured-post-title"><a href="/hotels">Featured Hotels</a></h2>
             </div>
-            <div class="col-md-4">
-              <div class="featured-box">
-                <div class="featured-post">
-                  <a href="#"><img src="/assets/img/featured-post-2.jpg" alt=""></a>
-                  <a href="index.html"><span class="category">BOOKS</span></a>
-                  <h2 class="featured-post-title"><a href="#">READ</a></h2>
-                </div>
-              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="featured-box">
+            <div class="featured-post">
+              <a href="/books"><img src="http://via.placeholder.com/350x210" alt="Books"></a>
+              <h2 class="featured-post-title"><a href="/books">Books</a></h2>
             </div>
           </div>
         </div>
       </div>
-    </section><!-- featured-posts-END -->
+    </div>
+  </div>
+</section>

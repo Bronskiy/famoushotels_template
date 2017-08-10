@@ -1,0 +1,12 @@
+  <div class="widget-categories">
+    <div class="widget-title">
+      <h3>News Categories</h3>
+    </div>
+    <div class="categories">
+      <ul>
+        {exp:channel:categories channel="news" dynamic="off" style="linear"}
+          <li><a href="{path='news'}">{category_name}</a></li>
+        {/exp:channel:categories}
+      </ul>
+    </div>
+  </div>

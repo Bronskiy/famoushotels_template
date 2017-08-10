@@ -1,0 +1,7 @@
+{exp:channel:entries channel="news" disable="categories|member_data|pagination" cache="yes" refresh="576" dynamic="no"}
+                {if hotel_history_date}
+                {if {current_time format="%j"} == {hotel_history_date format="%j"}}
+                <h4 class="item"><a href="{url_title_path='news'}" title="{title}">{title}</a></h4>
+                {/if}
+                {/if}
+                {/exp:channel:entries}

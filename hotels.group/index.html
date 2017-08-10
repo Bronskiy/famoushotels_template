@@ -1,147 +1,559 @@
 {layout="includes/_wrapper"}
-{preload_replace:my_channel="news"}
-{preload_replace:my_template_group="site"}
+<section class="breadcrumbs">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li>You are here: <a href="/">Home</a></li>
+            {if segment_1 == 'hotels' && segment_2 == ''}
+              <li class="active">Hotels</li>
+            {if:else}
+              <li><a href="/hotels/">Hotels</a></li>
+            {/if}
+            {if segment_2 == 'category'}
+              {exp:channel:category_heading channel="hotels"}
+              <li class="active">{category_name}</li>
+              {/exp:channel:category_heading}
+            {if:elseif segment_2 != ''}
+              {exp:channel:entries channel="hotels" disable="member_data" limit="1" cache="yes" refresh="576"}
+              {categories}
+                {if category_group != 3}
+                <li><a href="{path='hotels'}">{category_name}</a></li>
+                {/if}
+              {/categories}
+              <li class="active">{title}</li>
+              {/exp:channel:entries}
+            {/if}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-{embed="includes/html_header" my_template_group="{my_template_group}" my_title="{basetitle} | Hotels"}
+{exp:switchee variable="{segment_2}" parse="inward"}
+{case value="category"}
+<section class="content">
+  <div class="container">
+    <div class="col-md-8">
+      <div class="row">
 
-<body>
+        {exp:channel:entries channel="hotels" disable="member_data" limit="12" cache="yes" refresh="576" dynamic="yes"}
 
-<div id="container">
+        <div class="col-md-6">
+          <div class="grid-box">
+            <div class="grid-post">
+              <div class="grid-post-header">
+                {if hotel_photo_url}
+                <a href="{url_title_path='hotels'}"><img src="{hotel_photo_url}" alt="{title}"></a>
+                {if:elseif hotel_heading_present_picture}
+                <a href="{url_title_path='hotels'}"><img src="{hotel_heading_present_picture}" alt="{title}"></a>
+                {if:else}
+                <a href="{url_title_path='hotels'}"><img src="http://via.placeholder.com/330x220" alt="{title}"></a>
+                {/if}
+                {categories limit="1"}
+                <a href="{path='hotels'}"><span class="category">{category_name}</span></a>
+                {/categories}
+              </div>
+              <div class="grid-post-content">
+                <h2 class="grid-post-title"><a href="{url_title_path='hotels'}">{title}</a></h2>
+                <p>
+                  {exp:snippet total="250" word=“true" ellipsis="..."}{famous_quote}{/exp:snippet}
+                </p>
+              </div>
+              <div class="post-bottom clearfix">
+                <span class="grid-read-more"><a href="{url_title_path='hotels'}">Read More</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/exp:channel:entries}
+        <div class="col-md-12">
+          <div class="widget-banner">
+            <div class="widget-title">
+              <h3>Google <strong>Adbox</strong></h3>
+            </div>
+            <div class="banner-img">
+              <img src="http://via.placeholder.com/682x250" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {embed="includes/_sidebar" section_var="{segment_1}"}
+  </div>
+</section>
+{/case}
+{case value="|#P([0-9]+)#"}
+<section class="featured-posts">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="main-slider owl-carousel owl-theme">
+            {exp:channel:entries channel="making_history" disable="member_data" limit="12" cache="yes" refresh="576"}
+            <div class="item big-post home-full">
+              <a href="#"><img src="{mh_picture}" alt="{title}"></a>
+              <h2 class="big-post-title"><a href="#">{title}</a></h2>
+              {if mh_text}
+              <p class="big-post-description">{mh_text}</p>
+              {/if}
+            </div>
+            {/exp:channel:entries}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-{embed="includes/header"}
+<section class="nav-search">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4">
+          <h2>All Hotels</h2>
+          <p><strong>{exp:query sql="SELECT COUNT(entry_id) AS number FROM `exp_channel_titles` WHERE channel_id = '4' AND (status = 'open' OR status='Full Plan')"}{number} hotels in {/exp:query}{exp:query sql="SELECT COUNT(DISTINCT field_id_7) AS cities,  COUNT(DISTINCT field_id_8) AS countries FROM `exp_channel_data` WHERE field_id_7 <> '' AND channel_id = '4'"}{cities} cities and {countries} countries{/exp:query}</strong> are allowed to bear the title "<strong>A Select Member of The Most Famous Hotels in the World</strong>". Find all hotels here:</p>
 
-<div id="wrapper">
-<div id="content">
+          <div id="dropdown">
+            <form>
+              <p><select onchange="request(this.options[this.selectedIndex].value,'city_replace'); elem = document.getElementById('hotel_replace'); elem.style.visibility = 'hidden';">
 
-{if segment_2 != ""}
+                <option value="/includes/_city_info/all/">Choose a country ... </option>
+                {exp:query sql="SELECT DISTINCT field_id_8 AS countries FROM `exp_channel_data` JOIN exp_channel_titles ON exp_channel_data.entry_id = exp_channel_titles.entry_id WHERE exp_channel_data.channel_id = '4' AND exp_channel_titles.status = 'open' ORDER BY field_id_8 ASC"}
+                <option value="/includes/_city_info/{countries}/">{countries} </option>
+                {/exp:query}
+              </select></p>
 
-{exp:channel:entries channel="hotels" status="open|Full Plan" limit="1" disable="categories|member_data|trackbacks"}
+              <div id="city_replace">
+                <p><select onchange="request(this.options[this.selectedIndex].value,'hotel_replace');">
+                  <option value="">... or choose a city ... </option>
+                  {exp:query sql="SELECT DISTINCT field_id_7 AS cities FROM `exp_channel_data` JOIN exp_channel_titles ON  exp_channel_data.entry_id = exp_channel_titles.entry_id WHERE exp_channel_data.channel_id = '4' AND exp_channel_titles.status = 'open' ORDER BY field_id_7 ASC"}
+                  <option value="/includes/_list_hotels/all/{cities}">{cities} </option>
+                  {/exp:query}
+                </select>
+              </p>
+            </div>
+          </form>
 
-<h4>{exp:titleimg font="korinna_regular.ttf" size="14" color="111111"}{title} {/exp:titleimg}</h4>
-<div id="replace">
+          <div id="hotel_replace">
 
-{if hotel_photo_url != ""}
-<div id="hotelphoto">{hotel_photo_url}{hotel_photo_caption}</div><br clear="all"/>
-{/if}
-
-{if famous_quote != ""}<div class="summary"><em>{famous_quote}</em></div>{/if}
-
-
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="grid-box">
+          <div class="grid-post">
+            <div class="grid-post-content">
+              <h2 class="grid-post-title"><a href="/hotels/search/all">All hotels listed</a></h2>
+              <p>A LIST of The Most Famous Hotels in the World gives you a list of all hotels, sorted by country.</p>
+            </div>
+            <div class="post-bottom clearfix">
+              <span class="grid-read-more"><a href="/hotels/search/all">Hotel List</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="grid-box">
+          <div class="grid-post">
+            <div class="grid-post-content">
+              <h2 class="grid-post-title"><a href="/hotels/timeline">All hotels in a Timeline</a></h2>
+              <p>A TIMELINE of The Most Famous Hotels in the World gives you a list of all hotels, sorted by their opening date.</p>
+            </div>
+            <div class="post-bottom clearfix">
+              <span class="grid-read-more"><a href="/hotels/timeline">Timeline</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
+</section>
 
-<div id="rightcolhotels">
+<section class="content">
+  <div class="container">
+    <div class="col-md-8">
+      <div class="row">
+        {exp:channel:entries channel="hotels" category="39" disable="member_data" limit="12" cache="yes" refresh="576" dynamic="no"}
+        <div class="col-md-6">
+          <div class="grid-box">
+            <div class="grid-post">
+              <div class="grid-post-header">
+                {if hotel_photo_url}
+                <a href="{url_title_path='hotels'}"><img src="{hotel_photo_url}" alt="{title}"></a>
+                {if:elseif hotel_heading_present_picture}
+                <a href="{url_title_path='hotels'}"><img src="{hotel_heading_present_picture}" alt="{title}"></a>
+                {if:else}
+                <a href="{url_title_path='hotels'}"><img src="http://via.placeholder.com/330x220" alt="{title}"></a>
+                {/if}
+                <span class="category">Featured</span>
+              </div>
+              <div class="grid-post-content">
+                <h2 class="grid-post-title"><a href="{url_title_path='hotels'}">{title}</a></h2>
+                <p>
+                  {exp:snippet total="250" word=“true" ellipsis="..."}{famous_quote}{/exp:snippet}
+                </p>
+              </div>
+              <div class="post-bottom clearfix">
+                <span class="grid-read-more"><a href="{url_title_path='hotels'}">Read More</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/exp:channel:entries}
+        <div class="col-md-12">
+          <div class="widget-banner">
+            <div class="widget-title">
+              <h3>Google <strong>Adbox</strong></h3>
+            </div>
+            <div class="banner-img">
+              <img src="http://via.placeholder.com/682x250" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {embed="includes/_sidebar" section_var="{segment_1}"}
+  </div>
+</section>
+{/case}
 
-{!--mr<h1 class="right" style="text-align: left;">Our Select Member</h1>
-<div style="text-align: center;">
-<?php $file2 = '/www/pmh5017/public_html/images/hotels/hotel_{entry_id}/{entry_id}_002.jpg';
-if (file_exists($file2)) {
-echo "<img src=\"/images/hotels/hotel_{entry_id}/{entry_id}_002.jpg\" alt=\"\" />";
-} else { echo "<img src=\"/images/crest.jpg\" alt=\"\">"; } ?>
-</div>--}
+{case value="tags"}
+<h1>
+  Entries tagged with:
+  {exp:tag:tag_name
+    tag="{segment_3}"
+    case="title"
+  }
+</h1>
 
-<h2 style="margin-top:0px;">Our Select Member Hotel</h2>
+{exp:tag:entries
+  tag="{segment_3}"
+  inclusive="yes"
+  orderby="title" sort="asc"
+  limit="20"
+  paginate="bottom"
+}
 
-<p><strong>{title}</strong><br /><b>Country: </b>{!--<a href="/hotels/search/{country}/all/{entry_id}" title="Search for more hotels in {country}">--}{country}{!--</a>--}<br /><b>City: </b>{!--<a href="/hotels/search/{country}/{city}/{entry_id}" title="Search for more hotels in {city}, {country}">--}{city}{!--</a>--}<br />
-<strong>Opening date</strong>: {opening_date}<br />
-<h2 style="margin-top:0px;">Note from the Host</h2>
-General Manager  {general_manager}<br />
-{if hotel_manager != ""}<strong>Hotel Manager</strong>: {hotel_manager}<br />{/if}
+<h2>{title}</h2>
+<p>{body}</p>
 
-{if concierge != ""}<strong>Concierge</strong>: {concierge}<br />{/if}
+{tag_paginate}
+<ul class="pagination">
+  {tag_pagination_links}
+  {first_page}
+  <li><a href="{pagination_url}">First</a></li>
+  {/first_page}
+  {previous_page}
+  <li><a href="{pagination_url}">&laquo; Previous</a></li>
+  {/previous_page}
+  {page}
+  <li{if current_page} class="active"{/if}><a href="{pagination_url}">{pagination_page_number}</a></li>
+  {/page}
+  {next_page}
+  <li><a href="{pagination_url}">Next &raquo;</a></li>
+  {/next_page}
+  {last_page}
+  <li><a href="{pagination_url}">Last</a></li>
+  {/last_page}
+  {/tag_pagination_links}
+</ul>
+{/tag_paginate}
+
+{/exp:tag:entries}
+{/case}
+{case value="#P([0-9]+)#"}
+Content to show
+{/case}
+{case default="Yes"}
+<section class="content single-post-content">
+  <div class="container">
+    {exp:channel:entries channel="hotels" limit="1" disable="member_data|pagination" cache="yes" refresh="576"}
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="normal-box single-post-box">
+            <div class="normal-post">
+              {if hotel_photo_url}
+              <div class="normal-post-header" id="twentytwenty-container">
+                {if hotel_photo_url}<img src="{hotel_photo_url}" alt="History {title}">{/if}
+                {if hotel_heading_present_picture}<img src="{hotel_heading_present_picture}" alt="Present {title}">{/if}
+              </div>
+              {hotel_photo_caption}
+              {/if}
+              <div class="normal-post-content">
+                <h1 class="normal-post-title">{title}</h1>
+                {famous_quote}
+                <div class="post-comments">
+                  <ul class="nav nav-tabs nav-justified" role="tablist">
+                    <li role="presentation" class="active"><a href="#the-history" aria-controls="the-history" role="tab" data-toggle="tab">The History</a></li>
+                    <li role="presentation"><a href="#the-present" aria-controls="the-present" role="tab" data-toggle="tab">The Present</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="the-history">
+                      <ul class="nav nav-pills nav-stacked" id="theHistoryTabs" role="tablist">
+                        {if historic_data}<li role="presentation"><a href="#historic_data" aria-controls="historic_data" role="tab" data-toggle="tab">History</a></li>{/if}
+                        {if famous_guests}<li role="presentation"><a href="#famous_guests" aria-controls="famous_guests" role="tab" data-toggle="tab">Famous Guests</a></li>{/if}
+                        {if legendary_stories}<li role="presentation"><a href="#legendary_stories" aria-controls="legendary_stories" role="tab" data-toggle="tab">Legendary Stories/Literature</a></li>{/if}
+                        {if film_appearances}<li role="presentation"><a href="#film_appearances" aria-controls="film_appearances" role="tab" data-toggle="tab">In the Movies</a></li>{/if}
+                        {if managers_history}<li role="presentation"><a href="#managers_history" aria-controls="managers_history" role="tab" data-toggle="tab">Former Managers</a></li>{/if}
+                        {if book != "" AND book != "NO"}<li role="presentation"><a href="#book" aria-controls="book" role="tab" data-toggle="tab">History Book</a></li>{/if}
+                      </ul>
+                      <div class="tab-content">
+                        {if historic_data}<div role="tabpanel" class="tab-pane" id="historic_data">{historic_data}</div>{/if}
+                        {if famous_guests}<div role="tabpanel" class="tab-pane" id="famous_guests">{famous_guests}</div>{/if}
+                        {if legendary_stories}<div role="tabpanel" class="tab-pane" id="legendary_stories">{legendary_stories}</div>{/if}
+                        {if film_appearances}<div role="tabpanel" class="tab-pane" id="film_appearances">{film_appearances}</div>{/if}
+                        {if managers_history}<div role="tabpanel" class="tab-pane" id="managers_history">{managers_history}</div>{/if}
+                        {if book != "" AND book != "NO"}<div role="tabpanel" class="tab-pane" id="book">{book}</div>{/if}
+                      </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="the-present">
+                      <ul class="nav nav-pills nav-stacked" id="thePresentTabs" role="tablist">
+                        <li role="presentation"><a href="#common" aria-controls="common" role="tab" data-toggle="tab">Common</a></li>
+                        {if room_features}<li role="presentation"><a href="#room_features" aria-controls="room_features" role="tab" data-toggle="tab">Room features</a></li>{/if}
+                        {if famous_suites}<li role="presentation"><a href="#famous_suites" aria-controls="famous_suites" role="tab" data-toggle="tab">Famous Suites</a></li>{/if}
+                        {if situated}<li role="presentation"><a href="#situated" aria-controls="situated" role="tab" data-toggle="tab">Situated</a></li>{/if}
+                        {if f_b_outlets}<li role="presentation"><a href="#f_b_outlets" aria-controls="f_b_outlets" role="tab" data-toggle="tab">Restaurants &amp; Bars</a></li>{/if}
+                        {if must_do}<li role="presentation"><a href="#must_do" aria-controls="must_do" role="tab" data-toggle="tab">Must-do at the hotel</a></li>{/if}
+                        {if kids_info}<li role="presentation"><a href="#kids_info" aria-controls="kids_info" role="tab" data-toggle="tab">Kid's Info</a></li>{/if}
+                        {if body_mind_soul}<li role="presentation"><a href="#body_mind_soul" aria-controls="body_mind_soul" role="tab" data-toggle="tab">Body, Mind and Soul</a></li>{/if}
+                        {if banqueting_MICE}<li role="presentation"><a href="#banqueting_MICE" aria-controls="banqueting_MICE" role="tab" data-toggle="tab">Banqueting / MICE</a></li>{/if}
+                        {if dress_code}<li role="presentation"><a href="#dress_code" aria-controls="dress_code" role="tab" data-toggle="tab">Dress Code</a></li>{/if}
+                      </ul>
+                      <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane" id="common">
+                          {if managed_by_company != ""}<strong>Managed by:</strong> {managed_by_company}<br />{/if}
+                          {number_of_rooms} Rooms<br />
+                          {if number_suites != ""}{number_suites} Suites <br />{/if}
+                        </div>
+                        {if room_features}<div role="tabpanel" class="tab-pane" id="room_features">{room_features}</div>{/if}
+                        {if famous_suites}<div role="tabpanel" class="tab-pane" id="famous_suites">{famous_suites}</div>{/if}
+                        {if situated}<div role="tabpanel" class="tab-pane" id="situated">{situated}</div>{/if}
+                        {if f_b_outlets}<div role="tabpanel" class="tab-pane" id="f_b_outlets">{f_b_outlets}</div>{/if}
+                        {if must_do}<div role="tabpanel" class="tab-pane" id="must_do">{must_do}</div>{/if}
+                        {if kids_info}<div role="tabpanel" class="tab-pane" id="kids_info">{kids_info}</div>{/if}
+                        {if body_mind_soul}<div role="tabpanel" class="tab-pane" id="body_mind_soul">{body_mind_soul}</div>{/if}
+                        {if banqueting_MICE}<div role="tabpanel" class="tab-pane" id="banqueting_MICE">{banqueting_MICE}</div>{/if}
+                        {if dress_code}<div role="tabpanel" class="tab-pane" id="dress_code">{dress_code}</div>{/if}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="widget-categories">
+        <div class="widget-title">
+          <h3>Our Select Member Hotel</h3>
+        </div>
+        <div class="categories">
+          <p>
+            <strong>{title}</strong><br />
+            {categories}
+            {if category_group != 3}
+            <b>{if category_group == 10}Country:{if:elseif category_group == 11}City:{/if} </b><a href="{path='hotels'}">{category_name}</a><br />
+            {/if}
+            {/categories}
+
+            <strong>Opening date</strong>: {opening_date}<br />
+          </p>
+        </div>
+      </div>
+
+      <div class="widget-categories">
+        <div class="widget-title">
+          <h3>Note from the Host</h3>
+        </div>
+        <div class="categories">
+          <p>
+            General Manager  {general_manager}<br />
+            {if hotel_manager != ""}<strong>Hotel Manager</strong>: {hotel_manager}<br />{/if}
+            {if concierge != ""}<strong>Concierge</strong>: {concierge}<br />{/if}
+          </p>
+        </div>
+      </div>
+
+      <div class="widget-categories">
+        <div class="widget-title">
+          <h3>Coordinates</h3>
+        </div>
+        <div class="categories">
+          <p><strong>{if street}{street}<br>{/if} {zip} {city}, {country}</strong><br />
+            {if telephone}Tel: <strong>{telephone}</strong><br />{/if}
+            {if fax}Fax: <strong>{fax}</strong><br />{/if}
+
+          </p>
+        </div>
+      </div>
+
+      <div class="widget-categories">
+        <div class="widget-title">
+          <h3>Book a Room</h3>
+        </div>
+        <div class="categories">
+          Click on the link below to start your trip (no booking fees)!<br>
+          {if url_reservation}
+          <a href="{url_reservation}" target="_blank"><img src="http://nurburgring.org.uk/where/bookingcom.png" ></a>
+          {/if}
 
 
-</p>
+          {if status=="Full Plan"}<h2><b>Book a Room</b><br> powered by booking.com</h2>
+          <p>
+            {if url_reservation != ""}<strong>&raquo;</strong>&nbsp;<"{url_reservation}"Check availability </a><br />{/if}
 
-<h2>The History</h2>
-<p>
-{if historic_data != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/historic_data','replace');">History</a><br />{/if}
+          </p>
+          {/if}
+        </div>
+      </div>
 
-{if famous_guests != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/famous_guests','replace');">Famous Guests</a><br />{/if}
+      <div class="widget-banner">
+        <div class="widget-title">
+          <h3>Google <strong>Adbox</strong></h3>
+        </div>
+        <div class="banner-img">
+          <img src="http://via.placeholder.com/300x250" alt="">
+        </div>
+      </div>
 
-{if legendary_stories != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/legendary_stories','replace');">Legendary Stories / Literature</a><br />{/if}
+    </div>
+    {/exp:channel:entries}
+  </div>
+</section>
+{/case}
 
-{if film_appearances != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/film_appearances','replace');">In the Movies</a><br />{/if}
+{/exp:switchee}
+{!--
+  {preload_replace:my_channel="news"}
+  {preload_replace:my_template_group="site"}
 
-{if managers_history != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/managers_history','replace');">Former Managers</a><br />{/if}
+  {embed="includes/html_header" my_template_group="{my_template_group}" my_title="{basetitle} | Hotels"}
 
-{if book != "" AND book != "NO"}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/book','replace');">History Book</a><br />{/if}
-</p>
+  <body>
 
-<h2>The Present</h2>
+    <div id="container">
 
-<p>
-{if managed_by_company != ""}<strong>Managed by:</strong> {managed_by_company}<br />{/if}
-{number_of_rooms} Rooms<br />
-{if number_suites != ""}{number_suites} Suites <br />{/if}
+      {embed="includes/header"}
 
-{if room_features != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/room_features','replace');">Room features</a><br />{/if}
-{if famous_suites != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/famous_suites','replace');">Famous Suites</a><br />{/if}
+      <div id="wrapper">
+        <div id="content">
 
-{if situated != "" || f_b_outlets != "" || must_do != "" || kids_info != "" || body_mind_soul != "" || banqueting_MICE != "" || dress_code != ""}
+          {if segment_2 != ""}
 
-{if situated != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/situated','replace');">Situated</a><br />{/if}
+          {exp:channel:entries channel="hotels" status="open|Full Plan" limit="1" disable="categories|member_data|trackbacks"}
 
-{if f_b_outlets != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/f_b_outlets','replace');">Restaurants &amp; Bars</a><br />{/if}
+          <h4>{exp:titleimg font="korinna_regular.ttf" size="14" color="111111"}{title} {/exp:titleimg}</h4>
+          <div id="replace">
 
-{if must_do != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/must_do','replace');">Must-do at the hotel</a><br />{/if}
+            {if hotel_photo_url != ""}
+            <div id="hotelphoto">{hotel_photo_url}{hotel_photo_caption}</div><br clear="all"/>
+            {/if}
 
-{if kids_info != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/kids_info','replace');">Kid's Info</a><br />{/if}
-
-{if body_mind_soul != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/body_mind_soul','replace');">Body, Mind and Soul</a><br />{/if}
-
-{if banqueting_MICE != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/banqueting_MICE','replace');">Banqueting / MICE</a><br />{/if}
-
-{if dress_code != ""}<a href="javascript:void(0)" onclick="request('/index.php/includes/hotel_info/{segment_2}/dress_code','replace');">Dress Code</a><br />{/if}
-
-</p>
-{/if}
-
-<h2>Coordinates</h2>
-<p><strong>{if street != ""}{street}<br>{/if} {zip} {city}, {country}</strong><br />
-{if telephone != “”}Tel: <strong>{telephone}</strong><br />{/if}
-{if fax != “”}Fax: <strong>{fax}</strong><br />{/if}
-
-</p>
-
-<h2>Reload this Hotel</h2>
-<p>
-<a href="/hotels/{entry_id}">Start again</a></p>
-<p>
-<h2><b>Book a Room</b>
-Click on the link below to start your trip (no booking fees)!<br>
+            {if famous_quote != ""}<div class="summary"><em>{famous_quote}</em></div>{/if}
 
 
-{if url_reservation != ""}<strong>&raquo;</strong>&nbsp;"{url_reservation}"<br>or copy this link into your browser</a><br />{/if}
+          </div>
+        </div>
+      </div>
+
+      <div id="rightcolhotels">
 
 
 
-{if status=="Full Plan"}<h2><b>Book a Room</b><br> powered by booking.com</h2>
-<p>
-{if url_reservation != ""}<strong>&raquo;</strong>&nbsp;<"{url_reservation}"Check availability </a><br />{/if}
+        <h2 style="margin-top:0px;">Our Select Member Hotel</h2>
 
-</p>
-{/if}
+        <p><strong>{title}</strong><br /><b>Country: </b>{country}<br />
+          <b>City: </b>{city}<br />
+          <strong>Opening date</strong>: {opening_date}<br />
+          <h2 style="margin-top:0px;">Note from the Host</h2>
+          General Manager  {general_manager}<br />
+          {if hotel_manager != ""}<strong>Hotel Manager</strong>: {hotel_manager}<br />{/if}
 
-{/exp:channel:entries}
-
-{if:else}
-
-{embed="includes/making_history"}
-
-</div>
-</div>
-
-{embed="includes/rightnav"}
-
-{/if}
+          {if concierge != ""}<strong>Concierge</strong>: {concierge}<br />{/if}
 
 
-</div>
+        </p>
 
-{embed="includes/left_column"}
-{embed=includes/footer}
-</div>
-</body>
-</html>
+
+
+        <h2>The Present</h2>
+
+        <p>
+          {if managed_by_company != ""}<strong>Managed by:</strong> {managed_by_company}<br />{/if}
+          {number_of_rooms} Rooms<br />
+          {if number_suites != ""}{number_suites} Suites <br />{/if}
+
+          {if room_features != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/room_features','replace');">Room features</a><br />{/if}
+          {if famous_suites != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/famous_suites','replace');">Famous Suites</a><br />{/if}
+
+          {if situated != "" || f_b_outlets != "" || must_do != "" || kids_info != "" || body_mind_soul != "" || banqueting_MICE != "" || dress_code != ""}
+
+          {if situated != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/situated','replace');">Situated</a><br />{/if}
+
+          {if f_b_outlets != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/f_b_outlets','replace');">Restaurants &amp; Bars</a><br />{/if}
+
+          {if must_do != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/must_do','replace');">Must-do at the hotel</a><br />{/if}
+
+          {if kids_info != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/kids_info','replace');">Kid's Info</a><br />{/if}
+
+          {if body_mind_soul != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/body_mind_soul','replace');">Body, Mind and Soul</a><br />{/if}
+
+          {if banqueting_MICE != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/banqueting_MICE','replace');">Banqueting / MICE</a><br />{/if}
+
+          {if dress_code != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/dress_code','replace');">Dress Code</a><br />{/if}
+
+        </p>
+        {/if}
+
+        <h2>Coordinates</h2>
+        <p><strong>{if street != ""}{street}<br>{/if} {zip} {city}, {country}</strong><br />
+          {if telephone != “"}Tel: <strong>{telephone}</strong><br />{/if}
+          {if fax != “"}Fax: <strong>{fax}</strong><br />{/if}
+
+        </p>
+
+        <p>
+          <h2><b>Book a Room</b>
+            Click on the link below to start your trip (no booking fees)!<br>
+
+
+            {if url_reservation != ""}<strong>&raquo;</strong>&nbsp;"{url_reservation}"<br>or copy this link into your browser</a><br />{/if}
+
+
+
+            {if status=="Full Plan"}<h2><b>Book a Room</b><br> powered by booking.com</h2>
+            <p>
+              {if url_reservation != ""}<strong>&raquo;</strong>&nbsp;<"{url_reservation}"Check availability </a><br />{/if}
+
+            </p>
+            {/if}
+
+            {/exp:channel:entries}
+
+            {if:else}
+
+            {embed="includes/making_history"}
+
+          </div>
+        </div>
+
+        {embed="includes/rightnav"}
+
+        {/if}
+
+
+      </div>
+
+      {embed="includes/left_column"}
+      {embed=includes/footer}
+    </div>
+  </body>
+  </html>
+  --}

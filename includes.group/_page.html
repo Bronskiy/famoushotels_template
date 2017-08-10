@@ -1,5 +1,4 @@
 {layout="includes/_wrapper"}
-
 <section class="content single-post-content">
   <div class="container">
     {exp:channel:entries channel="pages" disable="categories|member_data|pagination" cache="yes" refresh="576"}
@@ -16,6 +15,30 @@
               <div class="normal-post-content">
                 <h1 class="normal-post-title">{title}</h1>
                 {page_body}
+                {if segment_1 == 'contact' && segment_2 == ''}
+                {exp:freeform:form
+                  form_id="3"
+                  form:class="contact-form"
+                  required="name|my_mail|message"
+                  return="contact/thank-you"
+                }
+                {freeform:field:name attr:placeholder="Your Name"}
+                {freeform:field:my_mail attr:placeholder="Your Email"}
+                <p>
+                  <strong>Request</strong>: You want to know something about a historic hotel? <br>Report an endangered historic hotel? <br>
+                  Want to know more about our work? <br>We will answer any request - please feel free to ask:
+                </p>
+                {freeform:field:message}
+                {if freeform:captcha}
+                <p>Please enter the word you see in the image below:</p>
+                <p class="captcha">
+                  {freeform:captcha}
+                </p>
+                <input class="captcha-input" type="text" name="captcha"  />
+                {/if}
+                {freeform:submit}
+                {/exp:freeform:form}
+                {/if}
               </div>
             </div>
           </div>
@@ -23,6 +46,6 @@
       </div>
     </div>
     {/exp:channel:entries}
-    {embed="includes/_sidebar"}
+    {embed="includes/_sidebar" section_var="{segment_1}"}
   </div>
 </section>

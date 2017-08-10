@@ -1,21 +1,14 @@
-{preload_replace:my_channel="news"}
-{preload_replace:my_template_group="site"}
-{embed="includes/html_header" my_template_group="{my_template_group}" my_title="{basetitle} | Search Results"}
-<body>
-<div id="container">
-{embed="includes/header"}
-<div id="wrapper">
-<div id="contentright">
 
-<h4>{exp:titleimg font="korinna_regular.ttf" size="14" color="#000"}Search Results from 'Articles', 'Hotels' and 'Books',  {/exp:titleimg}</h4>
+<h4>Search Results from 'Articles', 'Hotels' and 'Books',</h4>
 
 <div id="list">
-
+  <p>{segment_1} | {segment_2} | {segment_3}</p>
+{if segment_1=='search'}
 <p id="listHeader">
 <span><strong>{lang:keywords}</strong> {exp:search:keywords}</span><br />
 <span><strong>{lang:total_search_results}</strong> {exp:search:total_results}</span>
 </p>
-
+{/if}
 {exp:search:search_results switch="resultRowOne|resultRowTwo"}
 
 {if weblog == "Hotels"}
@@ -42,10 +35,3 @@
 
 </div>
 </div>
-
-{embed="includes/left_column"}
-{embed=includes/footer}
-
-</div>
-</body>
-</html>

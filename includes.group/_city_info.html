@@ -1,0 +1,21 @@
+<p><select id="city_pulldown" onchange="request(this.options[this.selectedIndex].value,'hotel_replace'); elem.style.visibility = 'visible';"
+onfocus="request(this.options[0].value,'hotel_replace'); elem.style.visibility = 'visible';">
+
+{if segment_3 == "all" OR segment_3 == ""}
+
+<option>Choose a city</option>
+{exp:query sql="SELECT DISTINCT field_id_7 AS cities FROM `exp_channel_data` JOIN exp_channel_titles ON  exp_channel_data.entry_id = exp_channel_titles.entry_id WHERE exp_channel_data.channel_id = '4' AND (exp_channel_titles.status = 'open'
+OR exp_channel_titles.status = 'Full Plan') ORDER BY field_id_7 ASC"}
+<option>{cities} </option>
+{/exp:query}
+
+{if:else}
+
+{exp:query sql="SELECT DISTINCT field_id_7 AS cities FROM `exp_channel_data` JOIN exp_channel_titles ON  exp_channel_data.entry_id = exp_channel_titles.entry_id WHERE exp_channel_data.channel_id = '4' AND (exp_channel_titles.status = 'open' OR exp_channel_titles.status = 'Full Plan') AND exp_channel_data.field_id_8 = '{segment_3} 'ORDER BY field_id_7 ASC"}
+
+<option value="/index.php/includes/_list_hotels/all/{cities}">{cities} </option>
+{/exp:query}
+
+{/if}
+
+</select></p>

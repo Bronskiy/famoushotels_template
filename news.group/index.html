@@ -2,24 +2,32 @@
 {exp:switchee variable="{segment_2}" parse="inward"}
 
 {case value="|category|#P([0-9]+)#"}
-<section class="content">
+<section class="content news">
   <div class="container">
     <div class="col-md-8">
       <div class="row">
-        {exp:channel:entries channel="blog" disable="member_data" limit="12" cache="yes" refresh="576" paginate="bottom"}
+        {exp:channel:entries channel="news" disable="member_data" limit="12" cache="yes" refresh="576" paginate="bottom"}
         <div class="col-md-6">
           <div class="grid-box">
-            <div class="grid-post">
+            <div class="grid-post reading-class" data-file="{url_title_path='news'}" data-target=".reading-class">
               <div class="grid-post-header">
-                <a href="{url_title_path='blog'}"><img src="images/grid-post-3.jpg" alt="{title}"></a>
-                {categories limit="1"}<a href="/blog/category/{category_url_title}"><span class="category">{category_name}</span></a>{/categories}
+                {if article_photo}
+                <a href="{url_title_path='news'}"><img src="{article_photo}" alt="{title}"></a>
+                {categories limit="1"}<a href="/news/category/{category_url_title}"><span class="category">{category_name}</span></a>{/categories}
+                {if:else}
+                <a href="{url_title_path='news'}"><img src="http://via.placeholder.com/330x220" alt="{title}"></a>
+                {categories limit="1"}<a href="/news/category/{category_url_title}"><span class="category">{category_name}</span></a>{/categories}
+                {/if}
               </div>
               <div class="grid-post-content">
-                <h2 class="grid-post-title"><a href="{url_title_path='blog'}">{title}</a></h2>
-                <p>Donec nec quam vel elit ultrices gravida ac non lacus. Fusce ut convallis neque, sit amet laoreet est. Donec nec quam vel elit ultrices gravida.</p>
+                <h2 class="grid-post-title"><a href="{url_title_path='news'}">{title}</a></h2>
+                <p><small><span class="eta"></span> (<span class="words"></span> words)</small></p>
+                {if summary}
+                <p>{summary}</p>
+                {/if}
               </div>
               <div class="post-bottom clearfix">
-                <span class="grid-read-more"><a href="{url_title_path='blog'}">Read More</a></span>
+                <span class="grid-read-more"><a href="{url_title_path='news'}">Read More</a></span>
               </div>
             </div>
           </div>
@@ -50,13 +58,54 @@
         {/exp:channel:entries}
       </div>
     </div>
-    {embed="includes/_sidebar"}
+    {embed="includes/_sidebar" section_var="{segment_1}"}
   </div>
 </section>
 {/case}
 
 {case value="tags"}
-<p>tags</p>
+<h1>
+    Entries tagged with:
+    {exp:tag:tag_name
+        tag="{segment_3}"
+        case="title"
+    }
+</h1>
+
+{exp:tag:entries
+    tag="{segment_3}"
+    inclusive="yes"
+    orderby="title" sort="asc"
+    limit="20"
+    paginate="bottom"
+}
+
+    <h2>{title}</h2>
+    <p>{body}</p>
+
+    {tag_paginate}
+    <ul class="pagination">
+        {tag_pagination_links}
+            {first_page}
+                <li><a href="{pagination_url}">First</a></li>
+            {/first_page}
+            {previous_page}
+                <li><a href="{pagination_url}">&laquo; Previous</a></li>
+            {/previous_page}
+            {page}
+                <li{if current_page} class="active"{/if}><a href="{pagination_url}">{pagination_page_number}</a></li>
+            {/page}
+            {next_page}
+                <li><a href="{pagination_url}">Next &raquo;</a></li>
+            {/next_page}
+            {last_page}
+                <li><a href="{pagination_url}">Last</a></li>
+            {/last_page}
+        {/tag_pagination_links}
+    </ul>
+    {/tag_paginate}
+
+{/exp:tag:entries}
 {/case}
 
 {case value="#P([0-9]+)#"}
@@ -66,20 +115,22 @@ Content to show
 {case default="Yes"}
 <section class="content single-post-content">
   <div class="container">
-    {exp:channel:entries channel="blog" disable="categories|member_data|pagination" cache="yes" refresh="576"}
+    {exp:channel:entries channel="news" disable="member_data|pagination" cache="yes" refresh="576"}
     <div class="col-md-8">
       <div class="row">
         <div class="col-md-12">
           <div class="normal-box single-post-box">
-            <div class="normal-post">
-              {if page_image}
+            <div class="normal-post reading-class" data-file="{url_title_path='news'}" data-target=".reading-class">
+              {if article_photo}
               <div class="normal-post-header">
-                <img src="{page_image}" alt="{title}">
+                <img src="{article_photo}" alt="{title}">
+                {categories limit="1"}<a href="/news/category/{category_url_title}"><span class="category">{category_name}</span></a>{/categories}
               </div>
               {/if}
               <div class="normal-post-content">
                 <h1 class="normal-post-title">{title}</h1>
-                {page_body}
+                <p><small><span class="eta"></span> (<span class="words"></span> words)</small></p>
+                {body}
               </div>
             </div>
           </div>
@@ -87,10 +138,9 @@ Content to show
       </div>
     </div>
     {/exp:channel:entries}
-    {embed="includes/_sidebar"}
+    {embed="includes/_sidebar" section_var="{segment_1}"}
   </div>
 </section>
-
 {/case}
 
 {/exp:switchee}
