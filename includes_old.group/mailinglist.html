@@ -1,6 +1,0 @@
-<?php
-header('Content-type: text/csv');
-header('Content-Disposition: attachment; filename="{segment_4}.csv"');
-?>
-{exp:query sql="select email from exp_mailing_list where list_id = '{segment_3}' order by email asc"}{email}
-{/exp:query}

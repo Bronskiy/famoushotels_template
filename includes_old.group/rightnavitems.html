@@ -1,9 +1,0 @@
-<ul>
-{exp:channel:entries channel="{embed:weblog}" category="{embed:cat}" status="{embed:status}" limit="{embed:items}" sticky="{embed:sticky}" dynamic="off"}
-{if segment_1 == "archives" || segment_1 == "article"}
-<li><a href="javascript:void(0)" onclick="request('/includes/article_info/{entry_id}','replacer');">{title}</a></li>
-{if:else}
-<li><a href="/article/{entry_id}">{title}</a></li>
-{/if}
-{/exp:channel:entries}
-</ul>
