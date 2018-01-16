@@ -1,0 +1,8 @@
+{exp:gwcode_categories cat_id="{segment_3}" style="linear" last_only="yes"}
+{if count == 1}
+<script>
+$('#hotel-replace').load('/search/hotels2/{cat_id}');
+</script>
+{/if}
+<option value="{cat_id}">{cat_name}</option>
+{/exp:gwcode_categories}

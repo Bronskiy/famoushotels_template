@@ -1,0 +1,33 @@
+{exp:freeform:form
+  form_id="1"
+  form:class="hotels-suggest-form contact-form"
+  required="my_name|my_mail"
+  return="hotels/thank-you"
+  admin_notify="contact@famoushotels.org|bronskiy@hotmail.com"
+}
+
+<h3>Your Suggestion</h3>
+<p>I would like to suggest the following hotel to be considered a new member of THE MOST FAMOUS HOTELS IN THE WORLD: (Please try to answer as many questions as possible. Fields marked * are mandatory.)</p>
+{freeform:field:hotel_name attr:id="suggest-hotel" attr:placeholder="Name of hotel *" attr:required="required"}
+<span class="suggest-notify"></span>
+{freeform:field:city attr:placeholder="City *" attr:required="required"}
+{freeform:field:country attr:id="country_selector" attr:placeholder="Country *" attr:required="required"}
+
+{freeform:field:url attr:placeholder="URL (webaddress)"}
+{freeform:field:manager attr:placeholder="General Manager"}
+{freeform:field:phone attr:placeholder="Telephone"}
+<h3>What makes this hotel a qualified member?</h3>
+<p>Please give us your personal view why you think this hotel would be a suitable member of The Most Famous Hotels in the World:</p>
+{freeform:field:reasons}
+{freeform:field:my_name attr:placeholder="Your Name *" attr:required="required"}
+{freeform:field:my_mail attr:placeholder="Your Email *" attr:required="required"}
+
+{if freeform:captcha}
+<p>Please enter the word you see in the image below:</p>
+<p class="captcha">
+  {freeform:captcha}
+</p>
+<input class="captcha-input" type="text" name="captcha" attr:required="required" />
+{/if}
+{freeform:submit}
+{/exp:freeform:form}

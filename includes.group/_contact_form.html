@@ -1,0 +1,32 @@
+{exp:freeform:form
+  form_id="3"
+  form:class="contact-form"
+  required="name|my_mail|message"
+  return="contact/thank-you"
+  admin_notify="contact@famoushotels.org|bronskiy@hotmail.com"
+}
+{freeform:field:name attr:placeholder="Your Name" attr:required="required"}
+{freeform:field:my_mail attr:placeholder="Your Email" attr:required="required"}
+<div class="clearfix"></div>
+<p>
+  <label>Request:</label><br/>
+  <div class="select-wrapper">
+  <select name="request" required>
+    <option value="">-- Choose --</option>
+    <option value="You have historic documents / images to share">You have historic documents / images to share</option>
+    <option value="Report an endangered hotel">Report an endangered hotel</option>
+    <option value="Looking for somebody from hospitality industry (in history!)">Looking for somebody from hospitality industry (in history!)</option>
+    <option value="The unusual request">The unusual request</option>
+  </select>
+</div>
+</p>
+{freeform:field:message attr:placeholder="Message" attr:required="required"}
+{if freeform:captcha}
+<p>Please enter the word you see in the image below:</p>
+<p class="captcha">
+  {freeform:captcha}
+</p>
+<input class="captcha-input" type="text" name="captcha" attr:required="required" />
+{/if}
+{freeform:submit}
+{/exp:freeform:form}

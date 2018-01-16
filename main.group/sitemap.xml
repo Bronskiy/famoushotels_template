@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<url>
+  <loc>https://famoushotels.org/</loc>
+  <lastmod>{exp:stats}{last_entry_date format="{DATE_W3C}"}{/exp:stats}</lastmod>
+  <changefreq>always</changefreq> 
+  <priority>1.0</priority>
+</url>
+
+<url>
+  <loc>https://famoushotels.org/about/</loc>
+  <lastmod>{exp:stats}{last_entry_date format="{DATE_W3C}"}{/exp:stats}</lastmod>
+  <changefreq>weekly</changefreq> 
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://famoushotels.org/team/</loc>
+  <lastmod>{exp:stats}{last_entry_date format="{DATE_W3C}"}{/exp:stats}</lastmod>
+  <changefreq>weekly</changefreq> 
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://famoushotels.org/about/affiliates-partners/</loc>
+  <lastmod>{exp:stats}{last_entry_date format="{DATE_W3C}"}{/exp:stats}</lastmod>
+  <changefreq>weekly</changefreq> 
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://famoushotels.org/about/research-archives/</loc>
+  <lastmod>{exp:stats}{last_entry_date format="{DATE_W3C}"}{/exp:stats}</lastmod>
+  <changefreq>weekly</changefreq> 
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://famoushotels.org/contact/</loc>
+  <lastmod>{exp:stats}{last_entry_date format="{DATE_W3C}"}{/exp:stats}</lastmod>
+  <changefreq>weekly</changefreq> 
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://famoushotels.org/hotels/suggest/</loc>
+  <lastmod>{exp:stats}{last_entry_date format="{DATE_W3C}"}{/exp:stats}</lastmod>
+  <changefreq>weekly</changefreq> 
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://famoushotels.org/hotels/all/</loc>
+  <lastmod>{exp:stats}{last_entry_date format="{DATE_W3C}"}{/exp:stats}</lastmod>
+  <changefreq>weekly</changefreq> 
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>https://famoushotels.org/hotels/timeline/</loc>
+  <lastmod>{exp:stats}{last_entry_date format="{DATE_W3C}"}{/exp:stats}</lastmod>
+  <changefreq>weekly</changefreq> 
+  <priority>0.5</priority>
+</url>
+
+{exp:channel:entries channel="news" disable="categories|custom_fields|member_data|pagination|trackbacks" limit="9999" rdf="off" dynamic="off" status="Open"}
+<url>
+  <loc>https://famoushotels.org/news/{url_title}</loc>
+  <lastmod>{exp:stats}{last_entry_date format="{DATE_W3C}"}{/exp:stats}</lastmod>
+  <changefreq>weekly</changefreq> 
+  <priority>0.5</priority>
+</url>
+{/exp:channel:entries}
+
+{exp:channel:entries channel="team" disable="categories|custom_fields|member_data|pagination|trackbacks" limit="9999" rdf="off" dynamic="off" status="Open"}
+<url>
+  <loc>https://famoushotels.org/team/{url_title}</loc>
+  <lastmod>{exp:stats}{last_entry_date format="{DATE_W3C}"}{/exp:stats}</lastmod>
+  <changefreq>weekly</changefreq> 
+  <priority>0.5</priority>
+</url>
+{/exp:channel:entries}
+
+{exp:channel:entries channel="books" disable="categories|custom_fields|member_data|pagination|trackbacks" limit="9999" rdf="off" dynamic="off" status="Open"}
+<url>
+  <loc>https://famoushotels.org/books/{url_title}</loc>
+  <lastmod>{exp:stats}{last_entry_date format="{DATE_W3C}"}{/exp:stats}</lastmod>
+  <changefreq>weekly</changefreq> 
+  <priority>0.5</priority>
+</url>
+{/exp:channel:entries}
+
+{exp:channel:entries channel="hotels" disable="categories|custom_fields|member_data|pagination|trackbacks" limit="9999" rdf="off" dynamic="off" status="Open"}
+<url>
+  <loc>https://famoushotels.org/hotels/{url_title}</loc>
+  <lastmod>{exp:stats}{last_entry_date format="{DATE_W3C}"}{/exp:stats}</lastmod>
+  <changefreq>weekly</changefreq> 
+  <priority>0.5</priority>
+</url>
+{/exp:channel:entries}
+</urlset>

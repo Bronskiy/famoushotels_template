@@ -2,20 +2,31 @@
 {exp:switchee variable="{segment_2}" parse="inward"}
 
 {case value="|category|#P([0-9]+)#"}
+{embed="includes/_swiper_feature_posts"}
 <section class="content news">
   <div class="container">
     <div class="col-md-8">
       <div class="row">
+        <div class="col-md-12">
+          {exp:channel:category_heading channel="news" cache="yes" refresh="576" }
+          <h1 class="normal-post-title">{category_name}</h1>
+          {if category_description}
+          <div class="normal-post-content mb30">
+            <p>{category_description}</p>
+          </div>
+          {/if}
+          {/exp:channel:category_heading}
+        </div>
         {exp:channel:entries channel="news" disable="member_data" limit="12" cache="yes" refresh="576" paginate="bottom"}
         <div class="col-md-6">
           <div class="grid-box">
             <div class="grid-post reading-class" data-file="{url_title_path='news'}" data-target=".reading-class">
               <div class="grid-post-header">
                 {if article_photo}
-                <a href="{url_title_path='news'}"><img src="{article_photo}" alt="{title}"></a>
+                <a href="{url_title_path='news'}"><img src="{article_photo:thumb_news_small}" alt="{title}"></a>
                 {categories limit="1"}<a href="/news/category/{category_url_title}"><span class="category">{category_name}</span></a>{/categories}
                 {if:else}
-                <a href="{url_title_path='news'}"><img src="http://via.placeholder.com/330x220" alt="{title}"></a>
+                <a href="{url_title_path='news'}"><img src="https://via.placeholder.com/350x220" alt="{title}"></a>
                 {categories limit="1"}<a href="/news/category/{category_url_title}"><span class="category">{category_name}</span></a>{/categories}
                 {/if}
               </div>
@@ -34,6 +45,9 @@
         </div>
         {if count%2 == 0}
         <div class="clearfix"></div>
+        <div class="col-md-12">
+          {google_ads_wide_2}
+        </div>
         {/if}
         {paginate}
         <div class="clearfix"></div>
@@ -64,48 +78,90 @@
 {/case}
 
 {case value="tags"}
-<h1>
-    Entries tagged with:
-    {exp:tag:tag_name
-        tag="{segment_3}"
-        case="title"
-    }
-</h1>
+<section class="content">
+  <div class="container">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="normal-post-title">
+            Entries tagged with:
+            {exp:tag:tag_name
+              tag="{segment_3}"
+              case="title"
+            }
+          </h1>
+        </div>
 
-{exp:tag:entries
-    tag="{segment_3}"
-    inclusive="yes"
-    orderby="title" sort="asc"
-    limit="20"
-    paginate="bottom"
-}
+        {exp:tag:entries
+          tag="{segment_3}"
+          channel="news"
+          tag_group_id="3"
+          inclusive="yes"
+          orderby="title" sort="asc"
+          limit="20"
+          paginate="bottom"
+        }
+        <div class="col-md-6">
+          <div class="grid-box">
+            <div class="grid-post">
+              <div class="grid-post-header">
+                {if article_photo}
+                <a href="{url_title_path='news'}"><img src="{article_photo:thumb_news_small}" alt="{title}"></a>
+                {if:else}
+                <a href="{url_title_path='news'}"><img src="https://via.placeholder.com/330x220" alt="{title}"></a>
+                {/if}
+                {categories limit="1"}
+                <a href="{path='news'}"><span class="category">{category_name}</span></a>
+                {/categories}
+              </div>
+              <div class="grid-post-content">
+                <h2 class="grid-post-title"><a href="{url_title_path='news'}">{title}</a></h2>
+                <p>
+                  {exp:snippet total="250" word="true" ellipsis="..."}{body}{/exp:snippet}
+                </p>
+              </div>
+              <div class="post-bottom clearfix">
+                <span class="grid-read-more"><a href="{url_title_path='news'}">Read More</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {if count%2 == 0}
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+          {google_ads_wide_2}
+        </div>
+        {/if}
+        {tag_paginate}
+        <ul class="pagination">
+          {tag_pagination_links}
+          {first_page}
+          <li><a href="{pagination_url}">First</a></li>
+          {/first_page}
+          {previous_page}
+          <li><a href="{pagination_url}">&laquo; Previous</a></li>
+          {/previous_page}
+          {page}
+          <li{if current_page} class="active"{/if}><a href="{pagination_url}">{pagination_page_number}</a></li>
+          {/page}
+          {next_page}
+          <li><a href="{pagination_url}">Next &raquo;</a></li>
+          {/next_page}
+          {last_page}
+          <li><a href="{pagination_url}">Last</a></li>
+          {/last_page}
+          {/tag_pagination_links}
+        </ul>
+        {/tag_paginate}
 
-    <h2>{title}</h2>
-    <p>{body}</p>
+        {/exp:tag:entries}
 
-    {tag_paginate}
-    <ul class="pagination">
-        {tag_pagination_links}
-            {first_page}
-                <li><a href="{pagination_url}">First</a></li>
-            {/first_page}
-            {previous_page}
-                <li><a href="{pagination_url}">&laquo; Previous</a></li>
-            {/previous_page}
-            {page}
-                <li{if current_page} class="active"{/if}><a href="{pagination_url}">{pagination_page_number}</a></li>
-            {/page}
-            {next_page}
-                <li><a href="{pagination_url}">Next &raquo;</a></li>
-            {/next_page}
-            {last_page}
-                <li><a href="{pagination_url}">Last</a></li>
-            {/last_page}
-        {/tag_pagination_links}
-    </ul>
-    {/tag_paginate}
+      </div>
+    </div>
+    {embed="includes/_sidebar" section_var="{segment_1}"}
+  </div>
+</section>
 
-{/exp:tag:entries}
 {/case}
 
 {case value="#P([0-9]+)#"}
@@ -113,34 +169,140 @@ Content to show
 {/case}
 
 {case default="Yes"}
+{if no_results} {redirect="404"} {/if}
 <section class="content single-post-content">
   <div class="container">
-    {exp:channel:entries channel="news" disable="member_data|pagination" cache="yes" refresh="576"}
+    {exp:channel:entries channel="news" status="Opener|open|Top" disable="member_data|pagination" cache="yes" refresh="576"}
+    {if no_results}{redirect="404"}{/if}
+    {layout:set name='edit_entry_id' value='{entry_id}'}
     <div class="col-md-8">
-      <div class="row">
+      {image_slider}
+      {if image_slider:count == 1}
+      <div class="row mb30">
         <div class="col-md-12">
-          <div class="normal-box single-post-box">
-            <div class="normal-post reading-class" data-file="{url_title_path='news'}" data-target=".reading-class">
-              {if article_photo}
-              <div class="normal-post-header">
-                <img src="{article_photo}" alt="{title}">
-                {categories limit="1"}<a href="/news/category/{category_url_title}"><span class="category">{category_name}</span></a>{/categories}
+          <div class="news-entry-slider swiper-container">
+            <div class="swiper-wrapper">
+              {/if}
+              <div class="swiper-slide" style="background-image:url({image_slider:image:detail_slider_image})"></div>
+              {if image_slider:count == image_slider:total_rows}
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination swiper-pagination-white"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-prev swiper-button-white"></div>
+            <div class="swiper-button-next swiper-button-white"></div>
+          </div>
+        </div>
+      </div>
+      {/if}
+      {/image_slider}
+        <div class="row">
+          <div class="col-md-12">
+            <div class="normal-box single-post-box">
+              <div class="normal-post reading-class" data-file="{url_title_path='news'}" data-target=".reading-class">
+                {if article_photo}
+                <div class="normal-post-header">
+                  <img src="{article_photo:detail_image}" alt="{title}">
+                  {categories limit="1"}<a href="/news/category/{category_url_title}"><span class="category">{category_name}</span></a>{/categories}
+                </div>
+                {/if}
+                <div class="normal-post-content">
+                  <h1 class="normal-post-title">{title}</h1>
+                  <p><small><span class="eta"></span> (<span class="words"></span> words)</small></p>
+                  {body}
+                </div>
+                {addthis_inline}
+              </div>
+            </div>
+            <div class="post-footer clearfix">
+              <div class="post-tags">
+                <div class="post-tags-list">
+                  <ul>
+                    {exp:tag:tags
+                      entry_id="{entry_id}"
+                      orderby="tag_name" sort="asc"
+                      tag_group_id="3"
+                    }
+                    <li><a href="{path='news/tags'}/{websafe_tag}"><span class="tag">{tag}</span></a></li>
+                    {/exp:tag:tags}
+                  </ul>
+                </div>
+              </div>
+              {/exp:channel:entries}
+
+
+              {exp:tag:related_entries
+                orderby="relevance" sort="desc"
+                tag_group_id="3"
+                limit="6"
+                paginate="bottom"
+              }
+              {if tag_count == 1}
+              <div class="widget-title">
+                <h3>Related News</h3>
               </div>
               {/if}
-              <div class="normal-post-content">
-                <h1 class="normal-post-title">{title}</h1>
-                <p><small><span class="eta"></span> (<span class="words"></span> words)</small></p>
-                {body}
+              <div class="col-md-6">
+                <div class="grid-box">
+                  <div class="grid-post">
+                    <div class="grid-post-header">
+                      {if article_photo}
+                      <a href="{url_title_path='news'}"><img src="{article_photo:thumb_news_small}" alt="{title}"></a>
+                      {if:else}
+                      <a href="{url_title_path='news'}"><img src="https://via.placeholder.com/350x220" alt="{title}"></a>
+                      {/if}
+                      {categories limit="1"}<a href="/news/category/{category_url_title}"><span class="category" {if news_category_color} style="background-color:#{news_category_color}"{/if}>{category_name}</span></a>{/categories}
+                    </div>
+                    <div class="grid-post-content">
+                      <h2 class="grid-post-title"><a href="{url_title_path='news'}">{title}</a></h2>
+                      <p>Relevance: {tag_relevance} matches ({tag_relevance_percent}%)</p>
+                      {if summary}<p>{exp:snippet total="135" word="true" ellipsis="..."}{summary}{/exp:snippet}</p>{/if}
+                    </div>
+                    <div class="post-bottom clearfix">
+                      <span class="grid-read-more"><a href="{url_title_path='news'}">Read More</a></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {if count%2 == 0}
+              <div class="clearfix"></div>
+              <div class="col-md-12">
+                {google_ads_wide_2}
+              </div>
+              {/if}
+              {!--
+                {tag_paginate}
+                <ul class="pagination">
+                  {tag_pagination_links}
+                  {first_page}
+                  <li><a href="{pagination_url}">First</a></li>
+                  {/first_page}
+                  {previous_page}
+                  <li><a href="{pagination_url}">&laquo; Previous</a></li>
+                  {/previous_page}
+                  {page}
+                  <li{if current_page} class="active"{/if}><a href="{pagination_url}">{pagination_page_number}</a></li>
+                  {/page}
+                  {next_page}
+                  <li><a href="{pagination_url}">Next &raquo;</a></li>
+                  {/next_page}
+                  {last_page}
+                  <li><a href="{pagination_url}">Last</a></li>
+                  {/last_page}
+                  {/tag_pagination_links}
+                </ul>
+                {/tag_paginate}
+                --}
+
+                {/exp:tag:related_entries}
+
               </div>
             </div>
           </div>
         </div>
+        {embed="includes/_sidebar" section_var="{segment_1}"}
       </div>
-    </div>
-    {/exp:channel:entries}
-    {embed="includes/_sidebar" section_var="{segment_1}"}
-  </div>
-</section>
-{/case}
+    </section>
+    {/case}
 
-{/exp:switchee}
+    {/exp:switchee}

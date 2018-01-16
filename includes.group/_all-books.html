@@ -1,0 +1,15 @@
+{exp:channel:entries channel="books" status="open" orderby="entry_date" sort="desc" category="{embed:cat_id}" dynamic="no"}
+<div class="col-md-2">
+	<div class="grid-post-header">
+		{if book_image}
+		<a href="{url_title_path='books'}"><img src="{book_image}" alt="{title}"></a>
+		{if:else}
+		<a href="{url_title_path='books'}"><img src="https://via.placeholder.com/165x239" alt="{title}"></a>
+		{/if}
+		<h4><a href="{url_title_path='books'}">{title}</a></h4>
+	</div>
+</div>
+{if count == total_results || count%6 == 0}
+<div class="clearfix"></div>
+{/if}
+{/exp:channel:entries}

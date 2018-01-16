@@ -1,0 +1,63 @@
+<h5>
+    {super_search_total_results}
+    results for the keyword search:
+    "{super_search_keywords}"
+</h5>
+
+{exp:super_search:results
+    orderby="channel_id+desc+date+desc"
+    sticky="off"
+    channel="hotels|news|books"
+    limit="20"
+    status="not closed"
+
+}
+<div class="header-detail">
+  {if channel_name == 'hotels'}
+  <div>
+    <ul class="via">
+      <li>Hotels</li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
+  <div class="info">
+    <span class="date"><i class="fa fa-map-marker" aria-hidden="true"></i> {categories backspace="2"}{if category_group != 3}{category_name}, {/if}{/categories}</span>
+  </div>
+  <div class="caption"><a href="{path='hotels/{url_title}'}">{title}</a></div>
+  <p>{exp:snippet total="60" word="true" ellipsis="..."}{famous_quote}{/exp:snippet}</p>
+  {if:elseif channel_name == 'news'}
+  <div>
+    <ul class="via">
+      <li>News</li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
+  <div class="info">
+    <span class="date"><i class="fa fa-calendar-o" aria-hidden="true"></i> {entry_date format="%m/%d/%Y"}</span>
+  </div>
+  <div class="caption"><a href="{path='news/{url_title}'}">{title}</a></div>
+  <p>{exp:snippet total="60" word="true" ellipsis="..."}{summary}{/exp:snippet}</p>
+  {if:elseif channel_name == 'books'}
+  <div>
+    <ul class="via">
+      <li>Books</li>
+    </ul>
+    <div class="clearfix"></div>
+  </div>
+  {exp:simple_commerce:purchase entry_id="{entry_id}" currency="EUR" success="site/success" cancel="site/index"}
+  <div class="info">
+    <span class="date"><i class="fa fa-tag" aria-hidden="true"></i> € {item_sale_price}</span>
+  </div>
+  {/exp:simple_commerce:purchase}
+
+  <div class="caption"><a href="{path='books/{url_title}'}">{title}</a></div>
+  <p>{exp:snippet total="60" word="true" ellipsis="..."}{book_blurb}{/exp:snippet}</p>
+  {/if}
+
+
+    </div>
+    {if super_search_no_results}
+    <p><strong>Sorry, no results matched the search terms you provided.</strong></p>
+    {/if}
+
+{/exp:super_search:results}

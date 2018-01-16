@@ -7,23 +7,45 @@
           <ol class="breadcrumb">
             <li>You are here: <a href="/">Home</a></li>
             {if segment_1 == 'hotels' && segment_2 == ''}
-              <li class="active">Hotels</li>
+            <li class="active">Hotels</li>
             {if:else}
-              <li><a href="/hotels/">Hotels</a></li>
+            <li><a href="/hotels/">Hotels</a></li>
             {/if}
             {if segment_2 == 'category'}
-              {exp:channel:category_heading channel="hotels"}
-              <li class="active">{category_name}</li>
-              {/exp:channel:category_heading}
+            {exp:channel:category_heading channel="hotels"}
+            {if parent_id != 0}
+            {exp:gwcode_categories cat_id="{category_id}" style="linear" show_trail="yes" depth="1"}
+            <li class="country-parent">
+              <a href="/hotels/category/{cat_url_title}">{cat_name}</a>
+              {embed="includes/_drop_down_countries" ex_cat="{cat_id}"}
+            </li>
+            {/exp:gwcode_categories}
+            {/if}
+            <li class="{if parent_id == 0}country-parent{/if} active">
+              {category_name}
+              {if parent_id == 0}
+              {embed="includes/_drop_down_countries" ex_cat="{category_id}"}
+              {/if}
+            </li>
+            {/exp:channel:category_heading}
+            {if:elseif segment_2 == 'all'}
+            <li class="active">All Hotels</li>
+            {if:elseif segment_2 == 'tags'}
+            <li class="active">Tag: {exp:tag:tag_name tag="{segment_3}" case="title"}</li>
+            {if:elseif segment_2 == 'timeline'}
+            <li class="active">Timeline</li>
             {if:elseif segment_2 != ''}
-              {exp:channel:entries channel="hotels" disable="member_data" limit="1" cache="yes" refresh="576"}
-              {categories}
-                {if category_group != 3}
-                <li><a href="{path='hotels'}">{category_name}</a></li>
-                {/if}
-              {/categories}
-              <li class="active">{title}</li>
-              {/exp:channel:entries}
+            {exp:channel:entries channel="hotels" disable="member_data" status="open|Full Plan" limit="1" cache="yes" refresh="576"}
+            {exp:gwcode_categories entry_id="{entry_id}" channel="hotels" group_id="10" style="linear"}
+            <li {if parent_id == 0}class="country-parent"{/if}>
+              <a href="/hotels/category/{cat_url_title}">{cat_name}</a>
+              {if parent_id == 0}
+              {embed="includes/_drop_down_countries" ex_cat="{cat_id}"}
+              {/if}
+            </li>
+            {/exp:gwcode_categories}
+            <li class="active">{title}</li>
+            {/exp:channel:entries}
             {/if}
           </ol>
         </div>
@@ -33,51 +55,25 @@
 </section>
 
 {exp:switchee variable="{segment_2}" parse="inward"}
-{case value="category"}
+
+{case value="timeline"}
 <section class="content">
   <div class="container">
     <div class="col-md-8">
       <div class="row">
-
-        {exp:channel:entries channel="hotels" disable="member_data" limit="12" cache="yes" refresh="576" dynamic="yes"}
-
-        <div class="col-md-6">
-          <div class="grid-box">
-            <div class="grid-post">
-              <div class="grid-post-header">
-                {if hotel_photo_url}
-                <a href="{url_title_path='hotels'}"><img src="{hotel_photo_url}" alt="{title}"></a>
-                {if:elseif hotel_heading_present_picture}
-                <a href="{url_title_path='hotels'}"><img src="{hotel_heading_present_picture}" alt="{title}"></a>
-                {if:else}
-                <a href="{url_title_path='hotels'}"><img src="http://via.placeholder.com/330x220" alt="{title}"></a>
-                {/if}
-                {categories limit="1"}
-                <a href="{path='hotels'}"><span class="category">{category_name}</span></a>
-                {/categories}
-              </div>
-              <div class="grid-post-content">
-                <h2 class="grid-post-title"><a href="{url_title_path='hotels'}">{title}</a></h2>
-                <p>
-                  {exp:snippet total="250" word=“true" ellipsis="..."}{famous_quote}{/exp:snippet}
-                </p>
-              </div>
-              <div class="post-bottom clearfix">
-                <span class="grid-read-more"><a href="{url_title_path='hotels'}">Read More</a></span>
-              </div>
-            </div>
+        <div class="col-md-12">
+          <div class="normal-box all-hotels-post">
+            <p>The complete list of all Select Member Hotels, <strong>sorted by their opening date</strong>. The name of the hotel is in grey and represents a link to more information about it.</p>
+            <p>Please note: "opening of the hotel" refers to either the confirmed opening date (available for most hotels after 1800), but sometimes it also refers to the "first mentioning" of the name under this address. The hotel may have started as a modest inn and developed into the hotel it is today.</p>
+            {exp:channel:entries channel="hotels" orderby="opening_date_timeline" status="open|Full Plan" limit="999" sort="asc" dynamic="no"}
+            <h3>{opening_date_timeline}: opening of the hotel <a href="{url_title_path='hotels'}">{title}</a></h3>
+            <p class="pb20">{categories backspace="2"}{if category_group != 3}<a href="{path='hotels'}">{category_name}</a>, {/if}{/categories}</p>
+            {/exp:channel:entries}
           </div>
         </div>
-        {/exp:channel:entries}
+
         <div class="col-md-12">
-          <div class="widget-banner">
-            <div class="widget-title">
-              <h3>Google <strong>Adbox</strong></h3>
-            </div>
-            <div class="banner-img">
-              <img src="http://via.placeholder.com/682x250" alt="">
-            </div>
-          </div>
+          {google_ads_wide_1}
         </div>
       </div>
     </div>
@@ -85,23 +81,98 @@
   </div>
 </section>
 {/case}
+
+{case value="all"}
+<section class="content">
+  <div class="container">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="normal-box all-hotels-post">
+            {exp:gwcode_categories channel="hotels" show_empty="no" depth="1|2" status="open|Full Plan" excl_group_id="3" parse="inward" style="linear"}
+            {if depth == 1}
+            <h3><a href="/hotels/category/{cat_url_title}">{cat_name}</a></h3>
+            {if:else}
+            <h4><a href="/hotels/category/{cat_url_title}">{cat_name}</a></h4>
+            {exp:channel:entries channel="hotels" status="open|Full Plan" category="{cat_id}" dynamic="no"}
+            <p><a href="{url_title_path='hotels'}">{title}</a></p>
+            {/exp:channel:entries}
+            {/if}
+
+            {/exp:gwcode_categories}
+
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          {google_ads_wide_1}
+        </div>
+      </div>
+    </div>
+    {embed="includes/_sidebar" section_var="{segment_1}"}
+  </div>
+</section>
+{/case}
+
+{case value="category"}
+<section class="content">
+  <div class="container">
+    <div class="col-md-8">
+      <div class="row">
+
+        {exp:channel:entries channel="hotels" disable="member_data" status="open|Full Plan" limit="12" cache="yes" refresh="576" dynamic="yes"}
+
+        <div class="col-md-6">
+          <div class="grid-box">
+            <div class="grid-post">
+              <div class="grid-post-header">
+                {if hotel_photo_url}
+                <a href="{url_title_path='hotels'}"><img src="{hotel_photo_url:thumb_news_small}" alt="{title}"></a>
+                {if:elseif hotel_heading_present_picture}
+                <a href="{url_title_path='hotels'}"><img src="{hotel_heading_present_picture:thumb_news_small}" alt="{title}"></a>
+                {if:else}
+                <a href="{url_title_path='hotels'}"><img src="https://via.placeholder.com/330x220" alt="{title}"></a>
+                {/if}
+                {categories limit="1"}
+                <a href="{path='hotels'}"><span class="category">{category_name}</span></a>
+                {/categories}
+              </div>
+              <div class="grid-post-content">
+                <h2 class="grid-post-title"><a href="{url_title_path='hotels'}">{title}</a></h2>
+                <p>{exp:snippet total="250" word="true" ellipsis="..."}{famous_quote}{/exp:snippet}</p>
+              </div>
+              <div class="post-bottom clearfix">
+                <span class="grid-read-more"><a href="{url_title_path='hotels'}">Read More</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {if count%2 == 0}
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+          {google_ads_wide_2}
+        </div>
+        {/if}
+        {/exp:channel:entries}
+        {!--
+        <div class="col-md-12">
+          {google_ads_wide_1}
+        </div>
+        --}
+      </div>
+    </div>
+    {embed="includes/_sidebar" section_var="{segment_1}"}
+  </div>
+</section>
+{/case}
+
 {case value="|#P([0-9]+)#"}
-<section class="featured-posts">
+<section class="hotels-map">
   <div class="container">
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-12">
-          <div class="main-slider owl-carousel owl-theme">
-            {exp:channel:entries channel="making_history" disable="member_data" limit="12" cache="yes" refresh="576"}
-            <div class="item big-post home-full">
-              <a href="#"><img src="{mh_picture}" alt="{title}"></a>
-              <h2 class="big-post-title"><a href="#">{title}</a></h2>
-              {if mh_text}
-              <p class="big-post-description">{mh_text}</p>
-              {/if}
-            </div>
-            {/exp:channel:entries}
-          </div>
+          <div id="all-hotels-map-canvas" style="width: 100%;height: 450px;"></div>
         </div>
       </div>
     </div>
@@ -113,88 +184,97 @@
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-4">
-          <h2>All Hotels</h2>
-          <p><strong>{exp:query sql="SELECT COUNT(entry_id) AS number FROM `exp_channel_titles` WHERE channel_id = '4' AND (status = 'open' OR status='Full Plan')"}{number} hotels in {/exp:query}{exp:query sql="SELECT COUNT(DISTINCT field_id_7) AS cities,  COUNT(DISTINCT field_id_8) AS countries FROM `exp_channel_data` WHERE field_id_7 <> '' AND channel_id = '4'"}{cities} cities and {countries} countries{/exp:query}</strong> are allowed to bear the title "<strong>A Select Member of The Most Famous Hotels in the World</strong>". Find all hotels here:</p>
+          <div class="grid-box">
+            <div class="grid-post">
+              <div class="grid-post-content">
+                <h2 class="grid-post-title">All Hotels</h2>
+                <p>
+                  <strong>
+                    {exp:query sql="SELECT COUNT(entry_id) AS number FROM `exp_channel_titles` WHERE channel_id = '4' AND (status = 'open' OR status='Full Plan')"}{number} hotels in {/exp:query}
+                    {exp:query sql="SELECT COUNT(cat_id) AS cities FROM `exp_categories` WHERE parent_id != '0' AND group_id = '10'"}{cities} cities and {/exp:query}
+                    {exp:query sql="SELECT COUNT(cat_id) AS countries FROM `exp_categories` WHERE parent_id = '0' AND group_id = '10'"}{countries} countries{/exp:query}
+                  </strong> are allowed to bear the title "<strong>A Select Member of The Most Famous Hotels in the World</strong>". Find all hotels here:
+                </p>
+              </div>
 
-          <div id="dropdown">
-            <form>
-              <p><select onchange="request(this.options[this.selectedIndex].value,'city_replace'); elem = document.getElementById('hotel_replace'); elem.style.visibility = 'hidden';">
-
-                <option value="/includes/_city_info/all/">Choose a country ... </option>
-                {exp:query sql="SELECT DISTINCT field_id_8 AS countries FROM `exp_channel_data` JOIN exp_channel_titles ON exp_channel_data.entry_id = exp_channel_titles.entry_id WHERE exp_channel_data.channel_id = '4' AND exp_channel_titles.status = 'open' ORDER BY field_id_8 ASC"}
-                <option value="/includes/_city_info/{countries}/">{countries} </option>
-                {/exp:query}
-              </select></p>
-
-              <div id="city_replace">
-                <p><select onchange="request(this.options[this.selectedIndex].value,'hotel_replace');">
-                  <option value="">... or choose a city ... </option>
-                  {exp:query sql="SELECT DISTINCT field_id_7 AS cities FROM `exp_channel_data` JOIN exp_channel_titles ON  exp_channel_data.entry_id = exp_channel_titles.entry_id WHERE exp_channel_data.channel_id = '4' AND exp_channel_titles.status = 'open' ORDER BY field_id_7 ASC"}
-                  <option value="/includes/_list_hotels/all/{cities}">{cities} </option>
-                  {/exp:query}
-                </select>
-              </p>
-            </div>
-          </form>
-
-          <div id="hotel_replace">
-
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="grid-box">
-          <div class="grid-post">
-            <div class="grid-post-content">
-              <h2 class="grid-post-title"><a href="/hotels/search/all">All hotels listed</a></h2>
-              <p>A LIST of The Most Famous Hotels in the World gives you a list of all hotels, sorted by country.</p>
-            </div>
-            <div class="post-bottom clearfix">
-              <span class="grid-read-more"><a href="/hotels/search/all">Hotel List</a></span>
+              <div id="dropdown">
+                <form id="hotel-filter">
+                  <div id="countries-dropdown">
+                    <select>
+                      <option value="">Choose a country ... </option>
+                      {exp:query sql="SELECT cat_name, cat_id FROM exp_categories WHERE parent_id = '0' AND group_id = '10' ORDER BY cat_name ASC"}
+                      <option value="{cat_id}">{cat_name}</option>
+                      {/exp:query}
+                    </select>
+                  </div>
+                  <div id="cities-dropdown">
+                    <select>
+                      <option value="">... or choose a city ... </option>
+                      {exp:query sql="SELECT cat_name, cat_id FROM exp_categories WHERE parent_id != '0' AND group_id = '10' ORDER BY cat_name ASC"}
+                      <option value="{cat_id}">{cat_name}</option>
+                      {/exp:query}
+                    </select>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="grid-box">
-          <div class="grid-post">
-            <div class="grid-post-content">
-              <h2 class="grid-post-title"><a href="/hotels/timeline">All hotels in a Timeline</a></h2>
-              <p>A TIMELINE of The Most Famous Hotels in the World gives you a list of all hotels, sorted by their opening date.</p>
+        <div class="col-md-4">
+          <div class="grid-box">
+            <div class="grid-post">
+              <div class="grid-post-content">
+                <h2 class="grid-post-title"><a href="/hotels/all">All hotels listed</a></h2>
+                <p>The Most Famous Hotels in the World — sorted by country and city.</p>
+              </div>
+              <div class="post-bottom clearfix">
+                <span class="grid-read-more"><a href="/hotels/all">Hotel List</a></span>
+              </div>
             </div>
-            <div class="post-bottom clearfix">
-              <span class="grid-read-more"><a href="/hotels/timeline">Timeline</a></span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="grid-box">
+            <div class="grid-post">
+              <div class="grid-post-content">
+                <h2 class="grid-post-title"><a href="/hotels/timeline">All hotels in a Timeline</a></h2>
+                <p>The Most Famous Hotels in the World — sorted by their opening year.</p>
+              </div>
+              <div class="post-bottom clearfix">
+                <span class="grid-read-more"><a href="/hotels/timeline">Timeline</a></span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </section>
+
+<section class="filter-content" id="hotel-replace"></section>
 
 <section class="content">
   <div class="container">
     <div class="col-md-8">
       <div class="row">
-        {exp:channel:entries channel="hotels" category="39" disable="member_data" limit="12" cache="yes" refresh="576" dynamic="no"}
+        {exp:channel:entries channel="hotels" category="39" disable="member_data" status="open|Full Plan" limit="12" cache="yes" refresh="576" dynamic="no"}
         <div class="col-md-6">
           <div class="grid-box">
             <div class="grid-post">
               <div class="grid-post-header">
                 {if hotel_photo_url}
-                <a href="{url_title_path='hotels'}"><img src="{hotel_photo_url}" alt="{title}"></a>
+                <a href="{url_title_path='hotels'}"><img src="{hotel_photo_url:thumb_news_small}" alt="{title}"></a>
                 {if:elseif hotel_heading_present_picture}
-                <a href="{url_title_path='hotels'}"><img src="{hotel_heading_present_picture}" alt="{title}"></a>
+                <a href="{url_title_path='hotels'}"><img src="{hotel_heading_present_picture:thumb_news_small}" alt="{title}"></a>
                 {if:else}
-                <a href="{url_title_path='hotels'}"><img src="http://via.placeholder.com/330x220" alt="{title}"></a>
+                <a href="{url_title_path='hotels'}"><img src="https://via.placeholder.com/330x220" alt="{title}"></a>
                 {/if}
                 <span class="category">Featured</span>
               </div>
               <div class="grid-post-content">
                 <h2 class="grid-post-title"><a href="{url_title_path='hotels'}">{title}</a></h2>
                 <p>
-                  {exp:snippet total="250" word=“true" ellipsis="..."}{famous_quote}{/exp:snippet}
+                  {exp:snippet total="250" word="true" ellipsis="..."}{famous_quote}{/exp:snippet}
                 </p>
               </div>
               <div class="post-bottom clearfix">
@@ -203,17 +283,18 @@
             </div>
           </div>
         </div>
-        {/exp:channel:entries}
+        {if count%2 == 0}
+        <div class="clearfix"></div>
         <div class="col-md-12">
-          <div class="widget-banner">
-            <div class="widget-title">
-              <h3>Google <strong>Adbox</strong></h3>
-            </div>
-            <div class="banner-img">
-              <img src="http://via.placeholder.com/682x250" alt="">
-            </div>
-          </div>
+          {google_ads_wide_2}
         </div>
+        {/if}
+        {/exp:channel:entries}
+        {!--
+        <div class="col-md-12">
+          {google_ads_wide_1}
+        </div>
+        --}
       </div>
     </div>
     {embed="includes/_sidebar" section_var="{segment_1}"}
@@ -222,56 +303,99 @@
 {/case}
 
 {case value="tags"}
-<h1>
-  Entries tagged with:
-  {exp:tag:tag_name
-    tag="{segment_3}"
-    case="title"
-  }
-</h1>
+<section class="content">
+  <div class="container">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="normal-post-title">
+            Hotels tagged with:
+            {exp:tag:tag_name
+              tag="{segment_3}"
+              case="title"
+            }
+          </h1>
+        </div>
 
-{exp:tag:entries
-  tag="{segment_3}"
-  inclusive="yes"
-  orderby="title" sort="asc"
-  limit="20"
-  paginate="bottom"
-}
+        {exp:tag:entries
+          tag="{segment_3}"
+          channel="hotels"
+          inclusive="yes"
+          orderby="title" sort="asc"
+          limit="20"
+          paginate="bottom"
+        }
+        <div class="col-md-6">
+          <div class="grid-box">
+            <div class="grid-post">
+              <div class="grid-post-header">
+                {if hotel_photo_url}
+                <a href="{url_title_path='hotels'}"><img src="{hotel_photo_url:thumb_news_small}" alt="{title}"></a>
+                {if:elseif hotel_heading_present_picture}
+                <a href="{url_title_path='hotels'}"><img src="{hotel_heading_present_picture:thumb_news_small}" alt="{title}"></a>
+                {if:else}
+                <a href="{url_title_path='hotels'}"><img src="https://via.placeholder.com/330x220" alt="{title}"></a>
+                {/if}
+                {categories limit="1"}
+                <a href="{path='hotels'}"><span class="category">{category_name}</span></a>
+                {/categories}
+              </div>
+              <div class="grid-post-content">
+                <h2 class="grid-post-title"><a href="{url_title_path='hotels'}">{title}</a></h2>
+                <p>
+                  {exp:snippet total="250" word="true" ellipsis="..."}{famous_quote}{/exp:snippet}
+                </p>
+              </div>
+              <div class="post-bottom clearfix">
+                <span class="grid-read-more"><a href="{url_title_path='hotels'}">Read More</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {if count%2 == 0}
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+          {google_ads_wide_2}
+        </div>
+        {/if}
+        {tag_paginate}
+        <ul class="pagination">
+          {tag_pagination_links}
+          {first_page}
+          <li><a href="{pagination_url}">First</a></li>
+          {/first_page}
+          {previous_page}
+          <li><a href="{pagination_url}">&laquo; Previous</a></li>
+          {/previous_page}
+          {page}
+          <li{if current_page} class="active"{/if}><a href="{pagination_url}">{pagination_page_number}</a></li>
+          {/page}
+          {next_page}
+          <li><a href="{pagination_url}">Next &raquo;</a></li>
+          {/next_page}
+          {last_page}
+          <li><a href="{pagination_url}">Last</a></li>
+          {/last_page}
+          {/tag_pagination_links}
+        </ul>
+        {/tag_paginate}
 
-<h2>{title}</h2>
-<p>{body}</p>
-
-{tag_paginate}
-<ul class="pagination">
-  {tag_pagination_links}
-  {first_page}
-  <li><a href="{pagination_url}">First</a></li>
-  {/first_page}
-  {previous_page}
-  <li><a href="{pagination_url}">&laquo; Previous</a></li>
-  {/previous_page}
-  {page}
-  <li{if current_page} class="active"{/if}><a href="{pagination_url}">{pagination_page_number}</a></li>
-  {/page}
-  {next_page}
-  <li><a href="{pagination_url}">Next &raquo;</a></li>
-  {/next_page}
-  {last_page}
-  <li><a href="{pagination_url}">Last</a></li>
-  {/last_page}
-  {/tag_pagination_links}
-</ul>
-{/tag_paginate}
-
-{/exp:tag:entries}
+        {/exp:tag:entries}
+        <div class="col-md-12">
+          {google_ads_wide_1}
+        </div>
+      </div>
+    </div>
+    {embed="includes/_sidebar" section_var="{segment_1}"}
+  </div>
+</section>
 {/case}
-{case value="#P([0-9]+)#"}
-Content to show
-{/case}
+
 {case default="Yes"}
 <section class="content single-post-content">
   <div class="container">
-    {exp:channel:entries channel="hotels" limit="1" disable="member_data|pagination" cache="yes" refresh="576"}
+    {exp:channel:entries channel="hotels" limit="1" disable="member_data|pagination" status="open|Full Plan" cache="yes" refresh="576"}
+    {layout:set name='edit_entry_id' value='{entry_id}'}
     <div class="col-md-8">
       <div class="row">
         <div class="col-md-12">
@@ -279,14 +403,15 @@ Content to show
             <div class="normal-post">
               {if hotel_photo_url}
               <div class="normal-post-header" id="twentytwenty-container">
-                {if hotel_photo_url}<img src="{hotel_photo_url}" alt="History {title}">{/if}
-                {if hotel_heading_present_picture}<img src="{hotel_heading_present_picture}" alt="Present {title}">{/if}
+                {if hotel_photo_url}<img src="{hotel_photo_url:detail_image}" alt="History {title}">{/if}
+                {if hotel_heading_present_picture}<img src="{hotel_heading_present_picture:detail_image}" alt="Present {title}">{/if}
               </div>
               {hotel_photo_caption}
               {/if}
               <div class="normal-post-content">
                 <h1 class="normal-post-title">{title}</h1>
                 {famous_quote}
+                {google_ads_wide_1}
                 <div class="post-comments">
                   <ul class="nav nav-tabs nav-justified" role="tablist">
                     <li role="presentation" class="active"><a href="#the-history" aria-controls="the-history" role="tab" data-toggle="tab">The History</a></li>
@@ -343,9 +468,18 @@ Content to show
                     </div>
                   </div>
                 </div>
+                <div class="clearfix"></div>
+                {google_ads_wide_1}
+                <h5 class="normal-post-title">Google Map</h5>
+                <div id="map-canvas"></div>
+                <div id="panel" class="hidden">
+                  <input id="address" type="textbox" value="{title}, {street}, {categories backspace="2"}{if category_group != 3}{category_name}, {/if}{/categories}, {zip}">
+                </div>
               </div>
+              {addthis_inline}
             </div>
           </div>
+          {embed="includes/_related_hotels" entry_id="{entry_id}"}
         </div>
       </div>
     </div>
@@ -359,11 +493,12 @@ Content to show
             <strong>{title}</strong><br />
             {categories}
             {if category_group != 3}
-            <b>{if category_group == 10}Country:{if:elseif category_group == 11}City:{/if} </b><a href="{path='hotels'}">{category_name}</a><br />
+            <b>{if parent_id == 0}Country:{if:else}City:{/if} </b><a href="{path='hotels'}">{category_name}</a><br />
             {/if}
             {/categories}
-
-            <strong>Opening date</strong>: {opening_date}<br />
+            {if opening_date}<strong>Opening date</strong>: {opening_date}<br />{/if}
+            {if hotels_architects}<strong>Architects</strong>: {hotels_architects}<br />{/if}
+            {if hotels_first_owner_manager}<strong>First owner/Manager</strong>: {hotels_first_owner_manager}<br />{/if}
           </p>
         </div>
       </div>
@@ -386,174 +521,56 @@ Content to show
           <h3>Coordinates</h3>
         </div>
         <div class="categories">
-          <p><strong>{if street}{street}<br>{/if} {zip} {city}, {country}</strong><br />
-            {if telephone}Tel: <strong>{telephone}</strong><br />{/if}
-            {if fax}Fax: <strong>{fax}</strong><br />{/if}
+          <p><strong>{if street}{street}<br>{/if} {zip}
+            {categories backspace="2"}{if category_group != 3}<a href="{path='hotels'}">{category_name}</a>, {/if}{/categories}
+          </strong><br />
+          {if telephone}Tel: <strong>{telephone}</strong><br />{/if}
+          {if fax}Fax: <strong>{fax}</strong><br />{/if}
+        </p>
+        <p><a href="#map-canvas">Google Map</a></p>
 
-          </p>
-        </div>
+
       </div>
-
-      <div class="widget-categories">
-        <div class="widget-title">
-          <h3>Book a Room</h3>
-        </div>
-        <div class="categories">
-          Click on the link below to start your trip (no booking fees)!<br>
-          {if url_reservation}
-          <a href="{url_reservation}" target="_blank"><img src="http://nurburgring.org.uk/where/bookingcom.png" ></a>
-          {/if}
-
-
-          {if status=="Full Plan"}<h2><b>Book a Room</b><br> powered by booking.com</h2>
-          <p>
-            {if url_reservation != ""}<strong>&raquo;</strong>&nbsp;<"{url_reservation}"Check availability </a><br />{/if}
-
-          </p>
-          {/if}
-        </div>
-      </div>
-
-      <div class="widget-banner">
-        <div class="widget-title">
-          <h3>Google <strong>Adbox</strong></h3>
-        </div>
-        <div class="banner-img">
-          <img src="http://via.placeholder.com/300x250" alt="">
-        </div>
-      </div>
-
     </div>
-    {/exp:channel:entries}
+
+    <div class="widget-categories">
+      <div class="widget-title">
+        <h3>Book a Room</h3>
+      </div>
+      <div class="categories">
+        Click on the link below to start your trip (no booking fees)!<br>
+        {if url_reservation}
+        <a href="{url_reservation}" target="_blank"><img src="http://nurburgring.org.uk/where/bookingcom.png" ></a>
+        {/if}
+
+        {if status=="Full Plan"}<h2><b>Book a Room</b><br> powered by booking.com</h2>
+        <p>
+          {if url_reservation != ""}<strong>&raquo;</strong>&nbsp;<"{url_reservation}"Check availability </a><br />{/if}
+        </p>
+        {/if}
+      </div>
+    </div>
+    <div class="widget-tags">
+      <div class="widget-title">
+        <h3>Popular Hotels <strong>Tags</strong></h3>
+      </div>
+      <div class="tags">
+        <ul>
+          {exp:tag:cloud
+            channel="hotels"
+            limit="25"
+            orderby="total_entries"
+            tag_group_id="2"
+          }
+          <li><a href="{path='hotels/tags'}/{websafe_tag}"><span class="tag">{tag} ({total_entries})</span></a></li>
+          {/exp:tag:cloud}
+        </ul>
+      </div>
+    </div>
+    {google_ads_sidebar}
   </div>
+  {/exp:channel:entries}
+</div>
 </section>
 {/case}
-
 {/exp:switchee}
-{!--
-  {preload_replace:my_channel="news"}
-  {preload_replace:my_template_group="site"}
-
-  {embed="includes/html_header" my_template_group="{my_template_group}" my_title="{basetitle} | Hotels"}
-
-  <body>
-
-    <div id="container">
-
-      {embed="includes/header"}
-
-      <div id="wrapper">
-        <div id="content">
-
-          {if segment_2 != ""}
-
-          {exp:channel:entries channel="hotels" status="open|Full Plan" limit="1" disable="categories|member_data|trackbacks"}
-
-          <h4>{exp:titleimg font="korinna_regular.ttf" size="14" color="111111"}{title} {/exp:titleimg}</h4>
-          <div id="replace">
-
-            {if hotel_photo_url != ""}
-            <div id="hotelphoto">{hotel_photo_url}{hotel_photo_caption}</div><br clear="all"/>
-            {/if}
-
-            {if famous_quote != ""}<div class="summary"><em>{famous_quote}</em></div>{/if}
-
-
-          </div>
-        </div>
-      </div>
-
-      <div id="rightcolhotels">
-
-
-
-        <h2 style="margin-top:0px;">Our Select Member Hotel</h2>
-
-        <p><strong>{title}</strong><br /><b>Country: </b>{country}<br />
-          <b>City: </b>{city}<br />
-          <strong>Opening date</strong>: {opening_date}<br />
-          <h2 style="margin-top:0px;">Note from the Host</h2>
-          General Manager  {general_manager}<br />
-          {if hotel_manager != ""}<strong>Hotel Manager</strong>: {hotel_manager}<br />{/if}
-
-          {if concierge != ""}<strong>Concierge</strong>: {concierge}<br />{/if}
-
-
-        </p>
-
-
-
-        <h2>The Present</h2>
-
-        <p>
-          {if managed_by_company != ""}<strong>Managed by:</strong> {managed_by_company}<br />{/if}
-          {number_of_rooms} Rooms<br />
-          {if number_suites != ""}{number_suites} Suites <br />{/if}
-
-          {if room_features != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/room_features','replace');">Room features</a><br />{/if}
-          {if famous_suites != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/famous_suites','replace');">Famous Suites</a><br />{/if}
-
-          {if situated != "" || f_b_outlets != "" || must_do != "" || kids_info != "" || body_mind_soul != "" || banqueting_MICE != "" || dress_code != ""}
-
-          {if situated != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/situated','replace');">Situated</a><br />{/if}
-
-          {if f_b_outlets != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/f_b_outlets','replace');">Restaurants &amp; Bars</a><br />{/if}
-
-          {if must_do != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/must_do','replace');">Must-do at the hotel</a><br />{/if}
-
-          {if kids_info != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/kids_info','replace');">Kid's Info</a><br />{/if}
-
-          {if body_mind_soul != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/body_mind_soul','replace');">Body, Mind and Soul</a><br />{/if}
-
-          {if banqueting_MICE != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/banqueting_MICE','replace');">Banqueting / MICE</a><br />{/if}
-
-          {if dress_code != ""}<a href="javascript:void(0)" onclick="request('/includes/hotel_info/{segment_2}/dress_code','replace');">Dress Code</a><br />{/if}
-
-        </p>
-        {/if}
-
-        <h2>Coordinates</h2>
-        <p><strong>{if street != ""}{street}<br>{/if} {zip} {city}, {country}</strong><br />
-          {if telephone != “"}Tel: <strong>{telephone}</strong><br />{/if}
-          {if fax != “"}Fax: <strong>{fax}</strong><br />{/if}
-
-        </p>
-
-        <p>
-          <h2><b>Book a Room</b>
-            Click on the link below to start your trip (no booking fees)!<br>
-
-
-            {if url_reservation != ""}<strong>&raquo;</strong>&nbsp;"{url_reservation}"<br>or copy this link into your browser</a><br />{/if}
-
-
-
-            {if status=="Full Plan"}<h2><b>Book a Room</b><br> powered by booking.com</h2>
-            <p>
-              {if url_reservation != ""}<strong>&raquo;</strong>&nbsp;<"{url_reservation}"Check availability </a><br />{/if}
-
-            </p>
-            {/if}
-
-            {/exp:channel:entries}
-
-            {if:else}
-
-            {embed="includes/making_history"}
-
-          </div>
-        </div>
-
-        {embed="includes/rightnav"}
-
-        {/if}
-
-
-      </div>
-
-      {embed="includes/left_column"}
-      {embed=includes/footer}
-    </div>
-  </body>
-  </html>
-  --}

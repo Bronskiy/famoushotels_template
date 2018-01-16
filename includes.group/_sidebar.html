@@ -1,16 +1,98 @@
 <div class="col-md-4">
+  {booking_widget}
+
   {if embed:section_var == 'news'}
+  {!--
   {news-category-widget}
   {books-category-widget}
+  --}
+  <div class="widget-tags">
+    <div class="widget-title">
+      <h3>Popular News <strong>Tags</strong></h3>
+    </div>
+    <div class="tags">
+      <ul>
+        {exp:tag:cloud
+          channel="news"
+          limit="25"
+          orderby="total_entries"
+          tag_group_id="3"
+        }
+        <li><a href="{path='news/tags'}/{websafe_tag}"><span class="tag">{tag} ({total_entries})</span></a></li>
+        {/exp:tag:cloud}
+      </ul>
+    </div>
+  </div>
   {if:elseif embed:section_var == 'about'}
   {about-menu-widget}
   {if:elseif embed:section_var == 'contact'}
   {contact-menu-widget}
   {if:elseif embed:section_var == 'books'}
+  {exp:channel:entries channel="widgets" category="457" orderby="random" disable="member_data|pagination" dynamic="no" limit="1" cache="yes" refresh="576"}
+  {if widget_text_1}
+  <div class="widget-breaking-news widget-recommendation">
+    <div class="widget-title">
+      <h3>Publisher's <strong>recommendations</strong></h3>
+    </div>
+    <div class="breaking-post">
+      {widget_text_1}
+    </div>
+  </div>
+  {/if}
+  {if widget_quotes}
+  <div class="widget-breaking-news widget-quotes">
+    {widget_quotes limit="1" orderby="random"}
+    <div class="widget-title">
+      <h3>{widget_quotes:quote}</h3>
+    </div>
+    <div class="breaking-post">
+      <p class="quote-author">{widget_quotes:name}</p>
+      <p class="quote-years">{widget_quotes:years}</p>
+      <p class="quote-post">{widget_quotes:the_post}</p>
+    </div>
+    {/widget_quotes}
+  </div>
+  {/if}
+  {/exp:channel:entries}
+  {!--
   {books-category-widget}
   {news-category-widget}
+  --}
+  <div class="widget-tags">
+    <div class="widget-title">
+      <h3>Popular Books <strong>Tags</strong></h3>
+    </div>
+    <div class="tags">
+      <ul>
+        {exp:tag:cloud
+          channel="books"
+          limit="25"
+          orderby="total_entries"
+          tag_group_id="4"
+        }
+        <li><a href="{path='books/tags'}/{websafe_tag}"><span class="tag">{tag} ({total_entries})</span></a></li>
+        {/exp:tag:cloud}
+      </ul>
+    </div>
+  </div>
   {if:elseif embed:section_var == 'hotels'}
-
+  <div class="widget-tags">
+    <div class="widget-title">
+      <h3>Popular Hotels <strong>Tags</strong></h3>
+    </div>
+    <div class="tags">
+      <ul>
+        {exp:tag:cloud
+          channel="hotels"
+          limit="25"
+          orderby="total_entries"
+          tag_group_id="2"
+        }
+        <li><a href="{path='hotels/tags'}/{websafe_tag}"><span class="tag">{tag} ({total_entries})</span></a></li>
+        {/exp:tag:cloud}
+      </ul>
+    </div>
+  </div>
   {if:else}
 
   {/if}
@@ -18,14 +100,14 @@
     <div class="widget-title">
       <h3>Most <strong>Popular</strong></h3>
     </div>
-    {exp:channel:entries channel="hotels" disable="member_data" orderby="view_count_one" limit="5" cache="yes" refresh="576" dynamic="no"}
+    {exp:channel:entries channel="hotels" disable="member_data" orderby="view_count_one" status="open|Full Plan" limit="5" cache="yes" refresh="576" dynamic="no"}
     <div class="breaking-post">
       {if hotel_photo_url}
       <a href="{url_title_path='hotels'}"><img src="{hotel_photo_url}" alt="{title}"></a>
       {if:elseif hotel_heading_present_picture}
       <a href="{url_title_path='hotels'}"><img src="{hotel_heading_present_picture}" alt="{title}"></a>
       {if:else}
-      <a href="{url_title_path='hotels'}"><img src="http://via.placeholder.com/68x68" alt="{title}"></a>
+      <a href="{url_title_path='hotels'}"><img src="https://via.placeholder.com/68x68" alt="{title}"></a>
       {/if}
       <h4><a href="{url_title_path='hotels'}">{title}</a></h4>
       <p>
@@ -34,38 +116,30 @@
     </div>
     {/exp:channel:entries}
   </div>
-  <div class="widget-banner">
-    <div class="widget-title">
-      <h3>Google <strong>Adbox</strong></h3>
-    </div>
-    <div class="banner-img">
-      <img src="http://via.placeholder.com/300x250" alt="">
-    </div>
-  </div>
+    {google_ads_sidebar}
+
   {if embed:section_var == ''}
-  {news-category-widget}
-  {books-category-widget}
   <div class="widget-banner">
-    {exp:channel:entries channel="featured_hotels" status="open" limit="1" orderby="random" disable="categories|member_data|pagination" dynamic="no"}
-    {if fe_pic}
+    {exp:channel:entries channel="hotels" category="39" status="open" limit="1" status="open|Full Plan" orderby="random" disable="member_data|pagination" cache="yes" refresh="576" dynamic="no"}
     <div class="widget-title">
       <h3>Your Next Trip</h3>
     </div>
     <div class="banner-img">
-      <a href='{url_title_path="hotels"}'><img src="{fe_pic}" alt="{title}"></a>
+    {if hotel_photo_url}
+    <a href="{url_title_path='hotels'}"><img src="{hotel_photo_url:thumb_news_small}" alt="{title}"></a>
+    {if:elseif hotel_heading_present_picture}
+    <a href="{url_title_path='hotels'}"><img src="{hotel_heading_present_picture:thumb_news_small}" alt="{title}"></a>
+    {if:else}
+    <a href="{url_title_path='hotels'}"><img src="https://via.placeholder.com/350x220" alt="{title}"></a>
+    {/if}
     </div>
     <div id="featuredhotels">
-      {fe_hotel}
-      <h4>{fe_hotel:hotel}</h4>
+      <a href='{url_title_path="hotels"}'><h4>{title}<br>(<span class="fhdate">{opening_date}</span>)</h4></a>
       <p>
-        (<span class="fhdate">{fe_hotel:opening_date_timeline}</span>)<br/>
-        {exp:snippet total="125"}
-        {fe_hotel:famous_quote}
-        {/exp:snippet}<a href='{url_title_path="hotels"}'>more</a>
-        {/fe_hotel}
+        {exp:snippet total="120" word=“true" ellipsis="..."}{famous_quote}{/exp:snippet}
+        <a href='{url_title_path="hotels"}'>Read more</a>
       </p>
     </div>
-    {/if}
     {/exp:channel:entries}
   </div>
   <div class="widget-subscribe">
@@ -75,5 +149,24 @@
     <input class="subscribe" placeholder="Enter Your E-Mail" type="text">
     <span><a href="#">subscribe now</a></span>
   </div>
+  <div class="widget-tags">
+    <div class="widget-title">
+      <h3>Popular Hotels <strong>Tags</strong></h3>
+    </div>
+    <div class="tags">
+      <ul>
+        {exp:tag:cloud
+          channel="hotels"
+          limit="25"
+          orderby="total_entries"
+          tag_group_id="2"
+        }
+        <li><a href="{path='hotels/tags'}/{websafe_tag}"><span class="tag">{tag} ({total_entries})</span></a></li>
+        {/exp:tag:cloud}
+      </ul>
+    </div>
+  </div>
+  {news-category-widget}
+  {books-category-widget}
   {/if}
 </div>

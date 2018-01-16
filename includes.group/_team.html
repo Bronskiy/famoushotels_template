@@ -1,0 +1,20 @@
+
+  {exp:channel:entries channel="team" status="open" category="{embed:cat_id}" disable="member_data|pagination" cache="yes" refresh="576" dynamic="no"}
+  <div class="col-md-4 col-sm-6 team-member">
+    {if team_photo}
+    <a href="{url_title_path='team'}"><img src="{team_photo:team}" alt="team member" class="img-responsive"></a>
+    {if:else}
+    <a href="{url_title_path='team'}"><img src="http://via.placeholder.com/380x340" alt="team member" class="img-responsive"></a>
+    {/if}
+    <div class="desk">
+      <a href="{url_title_path='team'}"><h3>{title}</h3></a>
+      <p>{team_teaser}<br><a href="{url_title_path='team'}">Read More</a></p>
+    </div>
+  </div>
+  {if count%2 == 0 || count == total_results}
+  <div class="clearfix visible-sm-block visible-xs-block"></div>
+  {/if}
+  {if count%3 == 0 || count == total_results}
+  <div class="clearfix visible-md-block visible-lg-block"></div>
+  {/if}
+  {/exp:channel:entries}

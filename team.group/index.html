@@ -1,0 +1,67 @@
+{layout="includes/_wrapper"}
+{exp:switchee variable="{segment_2}" parse="inward"}
+{case value="|category|#P([0-9]+)#"}
+{exp:channel:entries channel="pages" disable="categories|member_data|pagination" cache="yes" refresh="576"}
+<section class="content team">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12 text-center section-heading">
+          <h1 class="normal-post-title">{title}</h1>
+          <h2 class="normal-post-subtitle">It needs great collaborators to produce great results.</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="normal-box single-post-box">
+            <div class="normal-post">
+              {if page_image}
+              <div class="normal-post-header">
+                <img src="{page_image}" alt="{title}">
+              </div>
+              {/if}
+              <div class="normal-post-content">
+                {page_body}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {exp:gwcode_categories channel="team" show_empty="no" depth="1" parse="inward" style="linear"}
+      <h5 class="normal-post-title">{cat_name}</h5>
+      <div class="row team-1">
+      {embed="includes/_team" cat_id="{cat_id}"}
+    </div>
+    {/exp:gwcode_categories}
+    </div>
+  </div>
+</section>
+{/exp:channel:entries}
+{/case}
+{case default="Yes"}
+<section class="content single-team-member">
+  <div class="container">
+    {exp:channel:entries channel="team" status="open" disable="member_data|pagination" cache="yes" refresh="576"}
+    {if no_results}{redirect="404"}{/if}
+    {layout:set name='edit_entry_id' value='{entry_id}'}
+    <div class="row">
+      <div class="col-md-12">
+        <div class="normal-box single-team-box">
+          <div class="normal-post">
+            <div class="normal-post-content">
+              <h1 class="normal-post-title">{title}</h1>
+              {if team_photo}
+              <img src="{team_photo}" alt="{title}" class="single-team-photo">
+              {/if}
+              {team_about}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {/exp:channel:entries}
+  </div>
+</section>
+{/case}
+
+{/exp:switchee}

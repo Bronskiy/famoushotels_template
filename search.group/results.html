@@ -1,37 +1,67 @@
+{layout="includes/_wrapper"}
 
-<h4>Search Results from 'Articles', 'Hotels' and 'Books',</h4>
+<section class="content">
+  <div class="container">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12">
+        <h1 class="normal-post-title">
+            {super_search_total_results}
+            results from 'Articles', 'Hotels' and 'Books' for the keyword search:
+            "{super_search_keywords}"
+        </h1>
+      </div>
+        {exp:super_search:results
+            channel="hotels|news|books"
+            limit="10"
+        }
+        {if super_search_no_results}
+            <p>No results matched your query.</p>
+        {/if}
+        <div class="col-md-6">
+          <div class="grid-box">
+            <div class="grid-post">
+              <div class="grid-post-header">
+                {if hotel_photo_url}
+                <a href="{url_title_path='hotels'}"><img src="{hotel_photo_url}" alt="{title}"></a>
+                {if:elseif hotel_heading_present_picture}
+                <a href="{url_title_path='hotels'}"><img src="{hotel_heading_present_picture}" alt="{title}"></a>
+                {if:else}
+                <a href="{url_title_path='hotels'}"><img src="http://via.placeholder.com/330x220" alt="{title}"></a>
+                {/if}
+                {categories limit="1"}
+                <a href="{path='hotels'}"><span class="category">{category_name}</span></a>
+                {/categories}
+              </div>
+              <div class="grid-post-content">
+                <h2 class="grid-post-title"><a href="{url_title_path='hotels'}">{title}</a></h2>
+                <p>
+                  {exp:snippet total="250" word=“true" ellipsis="..."}{excerpt}{/exp:snippet}
+                </p>
+              </div>
+              <div class="post-bottom clearfix">
+                <span class="grid-read-more"><a href="{url_title_path='hotels'}">Read More</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {if count%2 == 0}
+        <div class="clearfix"></div>
+        {/if}
+        {/exp:super_search:results}
 
-<div id="list">
-  <p>{segment_1} | {segment_2} | {segment_3}</p>
-{if segment_1=='search'}
-<p id="listHeader">
-<span><strong>{lang:keywords}</strong> {exp:search:keywords}</span><br />
-<span><strong>{lang:total_search_results}</strong> {exp:search:total_results}</span>
-</p>
-{/if}
-{exp:search:search_results switch="resultRowOne|resultRowTwo"}
-
-{if weblog == "Hotels"}
-<p class="{switch}">
-<span class="listMargin"><strong>&raquo;</strong>&nbsp;Hotels: <a href="http://www.famoushotels.org/hotels/{entry_id}">{title}</a></span>
-</p>
-{if:elseif weblog == "Books"}
-<p class="{switch}">
-<span class="listMargin"><strong>&raquo;</strong>&nbsp;Books: <a href="http://www.famoushotels.org/books/{entry_id}">{title}</a></span>
-</p>
-{if:else}
-<div class="{switch}">
-<span class="listMargin"><strong>&raquo;</strong>&nbsp;Article: <a href="http://famoushotels.org/article/{entry_id}">{title}</a></span>
-<p class="listPadding">{excerpt}<span><a href="http://famoushotels.org/article/{entry_id}"> [more]</a></span></p>
-</div>
-{/if}
-
-{/exp:search:search_results}
-
-{if paginate}<div class='paginate'><span class='pagecount'>{page_count}</span>&nbsp; {paginate}</div>{/if}
-
-</div>
-
-
-</div>
-</div>
+        <div class="col-md-12">
+          <div class="widget-banner">
+            <div class="widget-title">
+              <h3>Google <strong>Adbox</strong></h3>
+            </div>
+            <div class="banner-img">
+              <img src="http://via.placeholder.com/682x150" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {embed="includes/_sidebar" section_var="{segment_1}"}
+  </div>
+</section>

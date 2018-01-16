@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="normal-box single-post-box">
-            <div class="normal-post">
+            <div class="normal-post pb20">
               {if page_image}
               <div class="normal-post-header">
                 <img src="{page_image}" alt="{title}">
@@ -16,28 +16,13 @@
                 <h1 class="normal-post-title">{title}</h1>
                 {page_body}
                 {if segment_1 == 'contact' && segment_2 == ''}
-                {exp:freeform:form
-                  form_id="3"
-                  form:class="contact-form"
-                  required="name|my_mail|message"
-                  return="contact/thank-you"
-                }
-                {freeform:field:name attr:placeholder="Your Name"}
-                {freeform:field:my_mail attr:placeholder="Your Email"}
-                <p>
-                  <strong>Request</strong>: You want to know something about a historic hotel? <br>Report an endangered historic hotel? <br>
-                  Want to know more about our work? <br>We will answer any request - please feel free to ask:
-                </p>
-                {freeform:field:message}
-                {if freeform:captcha}
-                <p>Please enter the word you see in the image below:</p>
-                <p class="captcha">
-                  {freeform:captcha}
-                </p>
-                <input class="captcha-input" type="text" name="captcha"  />
-                {/if}
-                {freeform:submit}
-                {/exp:freeform:form}
+                {embed="includes/_contact_form"}
+                {if:elseif segment_1 == 'quiz' && segment_2 == ''}
+                {embed="includes/_quiz_form"}
+                {if:elseif segment_1 == 'hotels' && segment_2 == 'suggest'}
+                {embed="includes/_suggest_hotel"}
+                {if:elseif segment_1 == 'subscription' && segment_2 == ''}
+                {embed="includes/_subscription_form"}
                 {/if}
               </div>
             </div>

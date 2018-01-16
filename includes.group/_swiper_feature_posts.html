@@ -1,0 +1,27 @@
+<section class="featured-posts">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="swiper-container hotel-index">
+            <div class="swiper-wrapper">
+              {exp:channel:entries channel="making_history" category="467" disable="member_data" limit="12" cache="yes" refresh="576" dynamic="no"}
+              <div class="swiper-slide" style="background-image:url({mh_picture})">
+                <div class="text">
+                  <div class="title">{title}</div>
+                  {if mh_text}
+                  <p>{mh_text}</p>
+                  {/if}
+                </div>
+              </div>
+              {/exp:channel:entries}
+            </div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-prev swiper-button-white"></div>
+            <div class="swiper-button-next swiper-button-white"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

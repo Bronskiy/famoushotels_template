@@ -2,264 +2,435 @@
 {exp:switchee variable="{segment_2}" parse="inward"}
 
 {case value="|category|#P([0-9]+)#"}
+{embed="includes/_swiper_books"}
 <section class="content books">
 	<div class="container">
 		<div class="col-md-8">
-			<div class="row">
-				{exp:channel:entries channel="books" disable="member_data" limit="12" cache="yes" refresh="576" paginate="bottom"}
-				<div class="col-md-6">
-					<div class="grid-box">
-						<div class="grid-post">
-							<div class="grid-post-header">
-								{if book_image}
-								<a href="{url_title_path='books'}"><img src="{book_image}" alt="{title}"></a>
-								{if:else}
-								<a href="{url_title_path='books'}"><img src="http://via.placeholder.com/330x304" alt="{title}"></a>
-								{/if}
-								{categories limit="1"}<a href="/books/category/{category_url_title}"><span class="category">{category_name}</span></a>{/categories}
-							</div>
-							<div class="grid-post-content">
-								<h2 class="grid-post-title"><a href="{url_title_path='books'}">{title}</a></h2>
-								{if book_blurb}{exp:snippet total="200" word="true" ellipsis="..."}{book_blurb}{/exp:snippet} <a href="{url_title_path='books'}">Read more</a>{/if}
-							</div>
-							<div class="post-bottom clearfix">
-								<span class="grid-read-more"><a href="{url_title_path='books'}">Add to Cart</a></span>
-							</div>
-						</div>
-					</div>
-				</div>
-				{if count%2 == 0}
-				<div class="clearfix"></div>
-				{/if}
-				{paginate}
-				<div class="clearfix"></div>
-				<div class="page-numbers">
-					{pagination_links}
-					<ul>
-						{previous_page}
-						<li class="previous-page"><a href="{pagination_url}"><i class="fa fa-angle-double-left"></i></a></li>
-						{/previous_page}
-
-						{page}
-						<li><a href="{pagination_url}" class="page-number {if current_page}active{/if}"><span>{pagination_page_number}</span></a></li>
-						{/page}
-
-						{next_page}
-						<li class="next-page"><a href="{pagination_url}"><i class="fa fa-angle-double-right"></i></a></li>
-						{/next_page}
-					</ul>
-					{/pagination_links}
-				</div>
-				{/paginate}
-				{/exp:channel:entries}
-			</div>
-		</div>
-		{embed="includes/_sidebar" section_var="{segment_1}"}
-	</div>
-</section>
-{/case}
-
-{case value="tags"}
-<section class="content books">
-	<div class="container">
-
-		<div class="col-md-8">
-			<div class="row">
-				<div class="col-md-12">
-							<h1 class="normal-post-title">Entries tagged with: {exp:tag:tag_name tag="{segment_3}" case="title"}</h1>
-						</div>
-						{exp:tag:entries
-						    tag="{segment_3}"
-						    inclusive="yes"
-						    orderby="title" sort="asc"
-						    limit="20"
-						    paginate="bottom"
-						}
-				<div class="col-md-6">
-					<div class="grid-box">
-						<div class="grid-post">
-							<div class="grid-post-header">
-								{if book_image}
-								<a href="{url_title_path='books'}"><img src="{book_image}" alt="{title}"></a>
-								{if:else}
-								<a href="{url_title_path='books'}"><img src="http://via.placeholder.com/330x304" alt="{title}"></a>
-								{/if}
-								{categories limit="1"}<a href="/books/category/{category_url_title}"><span class="category">{category_name}</span></a>{/categories}
-							</div>
-							<div class="grid-post-content">
-								<h2 class="grid-post-title"><a href="{url_title_path='books'}">{title}</a></h2>
-								{if book_blurb}{exp:snippet total="200" word="true" ellipsis="..."}{book_blurb}{/exp:snippet} <a href="{url_title_path='books'}">Read more</a>{/if}
-							</div>
-							<div class="post-bottom clearfix">
-								<span class="grid-read-more"><a href="{url_title_path='books'}">Add to Cart</a></span>
-							</div>
-						</div>
-					</div>
-				</div>
-				{if count%2 == 0}
-				<div class="clearfix"></div>
-				{/if}
-				{tag_paginate}
-				<div class="clearfix"></div>
-				<div class="page-numbers">
-					{tag_pagination_links}
-					<ul>
-						{previous_page}
-						<li class="previous-page"><a href="{pagination_url}"><i class="fa fa-angle-double-left"></i></a></li>
-						{/previous_page}
-
-						{page}
-						<li><a href="{pagination_url}" class="page-number {if current_page}active{/if}"><span>{pagination_page_number}</span></a></li>
-						{/page}
-
-						{next_page}
-						<li class="next-page"><a href="{pagination_url}"><i class="fa fa-angle-double-right"></i></a></li>
-						{/next_page}
-					</ul>
-					{/tag_pagination_links}
-				</div>
-				{/tag_paginate}
-				{/exp:tag:entries}
-			</div>
-		</div>
-		{embed="includes/_sidebar" section_var="{segment_1}"}
-	</div>
-</section>
-{/case}
-
-{case value="#P([0-9]+)#"}
-Content to show
-{/case}
-
-{case default="Yes"}
-<section class="content single-post-content books">
-	<div class="container">
-		{exp:channel:entries channel="books" disable="categories|member_data|pagination" cache="yes" refresh="576"}
-		<div class="col-md-8 normal-box">
-			<div class="row">
-				<div class="col-md-12">
-					<h1 class="normal-post-title">{title}</h1>
-				</div>
-				<div class="col-md-6">
-					<div class=" single-post-box">
-						<div class="normal-post">
-							{if book_image}
-							<div class="normal-post-header">
-								<img src="{book_image}" alt="{title}">
-							</div>
-							{/if}
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="single-post-box">
-						<div class="normal-post">
-							<div class="normal-post-content">
-								<div class="properties">
-									{if author_name}<div class="row"><div class="col-md-4 name"><h5>Author</h5></div><div class="col-md-8"><p>{author_name}</p></div></div>{/if}
-									{if pages}<div class="row"><div class="col-md-4 name"><h5>Pages</h5></div><div class="col-md-8"><p>{pages}</p></div></div>{/if}
-									{if binding}<div class="row"><div class="col-md-4 name"><h5>Binding</h5></div><div class="col-md-8"><p>{binding}, laminated jacket</p></div></div>{/if}
-									{if acessories}<div class="row"><div class="col-md-4 name"><h5>Pages</h5></div><div class="col-md-8"><p>{acessories}</p></div></div>{/if}
-									<div class="row"><div class="col-md-4 name"><h5>ISBN</h5></div><div class="col-md-8"><p>{if isbn && isbn_13}{isbn}, {isbn_13}{if:elseif isbn || isbn_13}{isbn}{isbn_13}{if:else}0-0000000-00-0{/if}</p></div></div>
-									{if width || height || weight}<div class="row"><div class="col-md-4 name"><h5>Properties</h5></div><div class="col-md-8"><p>{if width && height}{width} x {height} mm{/if}{if weight}, {weight} g{/if}</p></div></div>{/if}
-									{if other_languages != "None"}<div class="row"><div class="col-md-4 name"><h5>Also available in</h5></div><div class="col-md-8"><p>{other_languages}</p></div></div>{/if}
-								</div>
-								{exp:simple_commerce:purchase entry_id="{entry_id}" success="site/success" cancel="site/index"}
-								<div class="add-to-cart">
-									<p class="price">Price: <span>${item_sale_price}</span></p>
-									<a class="cart-button" href="{add_to_cart_url}">Add to cart</a>
-								</div>
-								{/exp:simple_commerce:purchase}
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-12">
-					<div class="single-post-box">
-						<div class="normal-post">
-							<div class="normal-post-content">
-								{book_blurb}
-							</div>
-						</div>
-					</div>
-					<div class="post-footer clearfix">
-						<div class="post-tags">
-							<div class="post-tags-list">
-								<ul>
-									{exp:tag:tags
-											entry_id="{entry_id}"
-											orderby="tag_name" sort="asc"
-											limit="10"
-									}
-									<li><a href="{path='books/tags'}/{websafe_tag}"><span class="tag">{tag}</span></a></li>
-									{/exp:tag:tags}
-								</ul>
+			{!--
+				<div class="swiper-container books-index">
+					<div class="swiper-wrapper">
+						{exp:channel:entries channel="books_slider" disable="member_data|pagination" limit="12" cache="yes" refresh="576" dynamic="no"}
+						<div class="swiper-slide" style="background-image:url({books_slider_image:books_cover})">
+							<div class="text" data-swiper-parallax="-100">
+								<p>{books_slider_description}</p>
 							</div>
 						</div>
 						{/exp:channel:entries}
+					</div>
+					<div class="swiper-button-next swiper-button-white"></div>
+					<div class="swiper-button-prev swiper-button-white"></div>
+				</div>
 
-						<div class="widget-title">
-							<h3>Related Books</h3>
+				<div id="example5" class="slider-pro">
+					<div class="sp-slides">
+						{exp:channel:entries channel="books_slider" disable="member_data|pagination" limit="12" cache="yes" refresh="576" dynamic="no"}
+						<div class="sp-slide">
+							<img class="sp-image" src="../src/css/images/blank.gif"
+							data-src="{books_slider_image}"
+							data-retina="{books_slider_image}"/>
+
+							<div class="sp-caption">{books_slider_description}</div>
 						</div>
-						{exp:tag:related_entries
-    channel="books"
-    orderby="relevance" sort="desc"
-    limit="5"
-    paginate="bottom"
-}
+						{/exp:channel:entries}
 
-    <h3><a href="{url_title_path='books'}">{title}</a></h3>
-    <p>Relevance: {tag_relevance} matches ({tag_relevance_percent}%)</p>
-    <p>{book_blurb}</p>
+					</div>
 
-    {tag_paginate}
-    <ul class="pagination">
-        {tag_pagination_links}
-            {first_page}
-                <li><a href="{pagination_url}">First</a></li>
-            {/first_page}
-            {previous_page}
-                <li><a href="{pagination_url}">&laquo; Previous</a></li>
-            {/previous_page}
-            {page}
-                <li{if current_page} class="active"{/if}><a href="{pagination_url}">{pagination_page_number}</a></li>
-            {/page}
-            {next_page}
-                <li><a href="{pagination_url}">Next &raquo;</a></li>
-            {/next_page}
-            {last_page}
-                <li><a href="{pagination_url}">Last</a></li>
-            {/last_page}
-        {/tag_pagination_links}
-    </ul>
-    {/tag_paginate}
-
-{/exp:tag:related_entries}
-						<div class="col-md-6">
-							<div class="small-news">
-								<img src="http://via.placeholder.com/80x80" alt="">
-								<span class="category">GIFTS</span>
-								<span class="small-date">Jan 12, 2017</span>
-								<h4 class="small-news-title"><a href="#">Lovely Flovers for Girls</a></h4>
-								<span class="small-read-more"><a href="#">Prev Post</a></span>
+					<div class="sp-thumbnails">
+						{exp:channel:entries channel="books_slider" disable="member_data|pagination" limit="12" cache="yes" refresh="576" dynamic="no"}
+						<div class="sp-thumbnail">
+							<div class="sp-thumbnail-image-container">
+								<img class="sp-thumbnail-image" src="{books_slider_image}"/>
+							</div>
+							<div class="sp-thumbnail-text">
+								<div class="sp-thumbnail-title">{title}</div>
+								<div class="sp-thumbnail-description">{books_slider_description}</div>
 							</div>
 						</div>
-						<div class="col-md-6">
-							<div class="small-news">
-								<img src="http://via.placeholder.com/80x80" alt="">
-								<span class="category">HEALT</span>
-								<span class="small-date">Jan 12, 2017</span>
-								<h4 class="small-news-title"><a href="#">You Should Eat This</a></h4>
-								<span class="small-read-more"><a href="#">Next Post</a></span>
+						{/exp:channel:entries}
+					</div>
+				</div>
+				--}
+				<div class="row">
+					<div class="col-md-12">
+						{exp:channel:entries channel="widgets" category="457" orderby="random" disable="member_data|pagination" dynamic="no" limit="1" cache="yes" refresh="576"}
+						{if widget_text_1}
+						<div class="widget-breaking-news widget-simple-text">
+							<div class="widget-title">
+								{widget_simple_text}
 							</div>
 						</div>
+						{/if}
+
+						{/exp:channel:entries}
+
+					</div>
+
+					<div class="col-md-12">
+						{exp:channel:category_heading channel="books" cache="yes" refresh="576" }
+						<h1 class="normal-post-title">{category_name}</h1>
+						{if category_description}
+						<div class="normal-post-content mb30">
+							<p>{category_description}</p>
+						</div>
+						{/if}
+						{/exp:channel:category_heading}
+					</div>
+					{exp:channel:entries channel="books" disable="member_data" limit="12" orderby="entry_date" sort="desc" cache="yes" refresh="576" paginate="bottom"}
+					<div class="col-md-6">
+						<div class="grid-box">
+							<div class="grid-post">
+								<div class="grid-post-header">
+									{if book_image}
+									<a href="{url_title_path='books'}"><img src="{book_image}" alt="{title}"></a>
+									{if:else}
+									<a href="{url_title_path='books'}"><img src="https://via.placeholder.com/330x304" alt="{title}"></a>
+									{/if}
+									{categories limit="1"}<a href="/books/category/{category_url_title}"><span class="category" {if books_category_color} style="background-color:#{books_category_color}"{/if}>{category_name}</span></a>{/categories}
+									{!--	{if in_stock}<span class="category in-stock">In Stock: {in_stock}</span>{/if} --}
+								</div>
+								<div class="grid-post-content">
+									<h2 class="grid-post-title"><a href="{url_title_path='books'}">{title}</a></h2>
+									{exp:simple_commerce:purchase entry_id="{entry_id}" currency="EUR" success="site/success" cancel="site/index"}
+									<p class="price">Price: <span>€ {item_sale_price}</span></p>
+									{/exp:simple_commerce:purchase}
+									{if book_blurb}<p>{exp:snippet total="135" word="true" ellipsis="..."}{book_blurb}{/exp:snippet}</p>{/if}
+								</div>
+								<div class="post-bottom clearfix">
+									<div class="add-to-cart">
+									</div>
+									{exp:simple_commerce:purchase entry_id="{entry_id}" currency="EUR" success="site/success" cancel="site/index"}
+									<span class="grid-read-more add-to-cart"><a href="{add_to_cart_url}" onclick="window.open(this.href);return false;">Add to Cart</a></span>
+									{/exp:simple_commerce:purchase}
+									<span class="grid-read-more"><a href="{url_title_path='books'}">Read More</a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					{if count%2 == 0}
+					<div class="clearfix"></div>
+					{/if}
+					{paginate}
+					<div class="clearfix"></div>
+					<div class="page-numbers">
+						{pagination_links}
+						<ul>
+							{previous_page}
+							<li class="previous-page"><a href="{pagination_url}"><i class="fa fa-angle-double-left"></i></a></li>
+							{/previous_page}
+
+							{page}
+							<li><a href="{pagination_url}" class="page-number {if current_page}active{/if}"><span>{pagination_page_number}</span></a></li>
+							{/page}
+
+							{next_page}
+							<li class="next-page"><a href="{pagination_url}"><i class="fa fa-angle-double-right"></i></a></li>
+							{/next_page}
+						</ul>
+						{/pagination_links}
+					</div>
+					{/paginate}
+					{/exp:channel:entries}
+				</div>
+			</div>
+			{embed="includes/_sidebar" section_var="{segment_1}"}
+		</div>
+	</section>
+	{/case}
+
+	{case value="all-books"}
+	<section class="content books">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="normal-post-title">All Books</h1>
+				</div>
+				<div class="col-md-12">
+					<div class="normal-box all-books-post">
+						{exp:gwcode_categories channel="books" show_empty="no" depth="1" excl_group_id="3" parse="inward" style="linear"}
+						{if depth == 1}
+						<div class="row margin0">
+							<div class="col-md-8 col-md-offset-2">
+								<h3><a href="/books/category/{cat_url_title}">{cat_name}</a></h3>
+								{if cat_description}
+								<div class="normal-post-content mb30">
+									<p>{cat_description}</p>
+								</div>
+								{/if}
+							</div>
+							<div class="clearfix"></div>
+							{embed="includes/_all-books" cat_id="{cat_id}"}
+
+						</div>
+						{/if}
+
+						{/exp:gwcode_categories}
+
 					</div>
 				</div>
 			</div>
 		</div>
-		{embed="includes/_sidebar" section_var="{segment_1}"}
-	</div>
-</section>
-{/case}
+	</section>
 
-{/exp:switchee}
+	{/case}
+	{case value="tags"}
+	<section class="content books">
+		<div class="container">
+
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="normal-post-title">Books tagged with: {exp:tag:tag_name tag="{segment_3}" case="title"}</h1>
+					</div>
+					{exp:tag:entries
+						tag="{segment_3}"
+						tag_group_id="4"
+						inclusive="yes"
+						orderby="in_stock" sort="desc"
+						limit="20"
+						paginate="bottom"
+					}
+					<div class="col-md-6">
+						<div class="grid-box">
+							<div class="grid-post">
+								<div class="grid-post-header">
+									{if book_image}
+									<a href="{url_title_path='books'}"><img src="{book_image}" alt="{title}"></a>
+									{if:else}
+									<a href="{url_title_path='books'}"><img src="https://via.placeholder.com/330x304" alt="{title}"></a>
+									{/if}
+									{categories limit="1"}<a href="/books/category/{category_url_title}"><span class="category" {if books_category_color} style="background-color:#{books_category_color}"{/if}>{category_name}</span></a>{/categories}
+									{!-- {if in_stock}<span class="category in-stock">In Stock: {in_stock}</span>{/if} --}
+								</div>
+								<div class="grid-post-content">
+									<h2 class="grid-post-title"><a href="{url_title_path='books'}">{title}</a></h2>
+									{if book_blurb}{exp:snippet total="135" word="true" ellipsis="..."}{book_blurb}{/exp:snippet}{/if}
+								</div>
+								<div class="post-bottom clearfix">
+									{exp:simple_commerce:purchase entry_id="{entry_id}" currency="EUR" success="site/success" cancel="site/index"}
+									<span class="grid-read-more add-to-cart"><a href="{add_to_cart_url}" onclick="window.open(this.href);return false;">Add to Cart</a></span>
+									{/exp:simple_commerce:purchase}
+									<span class="grid-read-more"><a href="{url_title_path='books'}">Read More</a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					{if count%2 == 0}
+					<div class="clearfix"></div>
+					{/if}
+					{tag_paginate}
+					<div class="clearfix"></div>
+					<div class="page-numbers">
+						{tag_pagination_links}
+						<ul>
+							{previous_page}
+							<li class="previous-page"><a href="{pagination_url}"><i class="fa fa-angle-double-left"></i></a></li>
+							{/previous_page}
+
+							{page}
+							<li><a href="{pagination_url}" class="page-number {if current_page}active{/if}"><span>{pagination_page_number}</span></a></li>
+							{/page}
+
+							{next_page}
+							<li class="next-page"><a href="{pagination_url}"><i class="fa fa-angle-double-right"></i></a></li>
+							{/next_page}
+						</ul>
+						{/tag_pagination_links}
+					</div>
+					{/tag_paginate}
+					{/exp:tag:entries}
+				</div>
+			</div>
+			{embed="includes/_sidebar" section_var="{segment_1}"}
+		</div>
+	</section>
+	{/case}
+
+	{case value="#P([0-9]+)#"}
+	Content to show
+	{/case}
+
+	{case default="Yes"}
+	<section class="content single-post-content books">
+		<div class="container">
+			{exp:channel:entries channel="books" limit="1" require_entry="yes" disable="categories|member_data|pagination" cache="yes" refresh="576"}
+			{layout:set name='edit_entry_id' value='{entry_id}'}
+			{if no_results}{redirect="404"}{/if}
+			<div class="col-md-8 normal-box">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="normal-post-title">{title}</h1>
+					</div>
+					<div class="col-md-6">
+						<div class=" single-post-box">
+							<div class="normal-post">
+								{if book_image}
+								<div class="normal-post-header">
+									<img src="{book_image}" alt="{title}">
+								</div>
+								{/if}
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="single-post-box">
+							<div class="normal-post">
+								<div class="normal-post-content">
+									<div class="properties">
+										{if author_name}<div class="row"><div class="col-md-4 name"><h5>Author</h5></div><div class="col-md-8"><p>{author_name}</p></div></div>{/if}
+										{if pages}<div class="row mt10"><div class="col-md-4 name"><h5>Pages</h5></div><div class="col-md-8"><p>{pages}</p></div></div>{/if}
+										{if photographs_illustrations}<div class="row mt10"><div class="col-md-4 name"><h5>Photographs<br>Illustrations</h5></div><div class="col-md-8"><p>{photographs_illustrations}</p></div></div>{/if}
+										<div class="row mt10"><div class="col-md-4 name"><h5>Leather-bound edition</h5></div><div class="col-md-8"><p>{leather_available}{item}{/leather_available}</p></div></div>
+										{if binding_custom}
+										<div class="row mt10"><div class="col-md-4 name"><h5>Binding</h5></div><div class="col-md-8"><p>{binding_custom}</p></div></div>
+										{if:elseif binding}
+										<div class="row mt10"><div class="col-md-4 name"><h5>Binding</h5></div><div class="col-md-8"><p>{binding}</p></div></div>
+										{/if}
+										{if acessories}<div class="row mt10"><div class="col-md-4 name"><h5>Includes</h5></div><div class="col-md-8"><p>{acessories}</p></div></div>{/if}
+										<div class="row mt10"><div class="col-md-4 name"><h5>ISBN</h5></div><div class="col-md-8"><p>{if isbn && isbn_13}{isbn}, {isbn_13}{if:elseif isbn || isbn_13}{isbn}{isbn_13}{if:else}0-0000000-00-0{/if}</p></div></div>
+										{if width || height || weight}<div class="row mt10"><div class="col-md-4 name"><h5>Size/Weight</h5></div><div class="col-md-8"><p>{if width && height}{width} x {height} mm{/if}{if weight}, {weight} g{/if}</p></div></div>{/if}
+										{if other_languages != "None"}<div class="row mt10"><div class="col-md-4 name"><h5>Also available in</h5></div><div class="col-md-8"><p>{other_languages}</p></div></div>{/if}
+										{book_related_hotel}<div class="row mt10"><div class="col-md-4 name"><h5>Related Hotel</h5></div><div class="col-md-8"><p><a href="/hotels/{book_related_hotel:url_title}">{book_related_hotel:title}</a></p></div></div>{/book_related_hotel}
+									</div>
+									{exp:simple_commerce:purchase entry_id="{entry_id}" currency="EUR" success="site/success" cancel="site/index"}
+									<div class="add-to-cart">
+										<p class="price">Price: <span>€ {item_sale_price}</span></p>
+										<a class="cart-button" href="{add_to_cart_url}" onclick="window.open(this.href);return false;">Add to cart</a>
+									</div>
+									{/exp:simple_commerce:purchase}
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="single-post-box clearfix">
+							<div class="normal-post">
+								<div class="normal-post-content">
+
+									<ul class="nav nav-tabs" id="myTabs" role="tablist">
+										<li role="presentation" class="active"><a href="#blurb" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">About This Book</a></li>
+										{if travellers_notepad}
+										<li role="presentation"><a href="#travellers" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Traveller's Notepad</a></li>
+										{/if}
+										{if making_of}
+										<li role="presentation"><a href="#makingof" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Making Of</a></li>
+										{/if}
+										{if credits}
+										<li role="presentation"><a href="#credits" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Credits</a></li>
+										{/if}
+									</ul>
+									<div class="tab-content" id="myTabContent">
+										<div class="tab-pane fade in active" role="tabpanel" id="blurb" aria-labelledby="home-tab">
+											{book_blurb}
+										</div>
+										{if travellers_notepad}
+										<div class="tab-pane fade" role="tabpanel" id="travellers" aria-labelledby="profile-tab">
+											{travellers_notepad}
+										</div>
+										{/if}
+										{if making_of}
+										<div class="tab-pane fade" role="tabpanel" id="makingof" aria-labelledby="profile-tab">
+											{making_of}
+										</div>
+										{/if}
+										{if credits}
+										<div class="tab-pane fade" role="tabpanel" id="credits" aria-labelledby="profile-tab">
+											{credits}
+										</div>
+										{/if}
+									</div>
+								</div>
+							</div>
+						</div>
+						{addthis_inline}
+						<div class="post-footer clearfix">
+							<div class="post-tags">
+								<div class="post-tags-list">
+									<ul>
+										{exp:tag:tags
+											entry_id="{entry_id}"
+											orderby="tag_name" sort="asc"
+
+										}
+										<li><a href="{path='books/tags'}/{websafe_tag}"><span class="tag">{tag}</span></a></li>
+										{/exp:tag:tags}
+									</ul>
+								</div>
+							</div>
+							{/exp:channel:entries}
+
+
+							{exp:tag:related_entries
+								orderby="relevance" sort="desc"
+								tag_group_id="4"
+								limit="6"
+								paginate="bottom"
+							}
+							{if count == 1}
+							<div class="col-md-12">
+								<div class="widget-title">
+									<h3>You might also be interested in these related books</h3>
+								</div>
+							</div>
+							{/if}
+							<div class="col-md-4">
+								<div class="grid-box">
+									<div class="grid-post">
+										<div class="grid-post-header">
+											{if book_image}
+											<a href="{url_title_path='books'}"><img src="{book_image}" alt="{title}"></a>
+											{if:else}
+											<a href="{url_title_path='books'}"><img src="https://via.placeholder.com/350x220" alt="{title}"></a>
+											{/if}
+											{categories limit="1"}<a href="/books/category/{category_url_title}"><span class="category" {if books_category_color} style="background-color:#{books_category_color}"{/if}>{category_name}</span></a>{/categories}
+										</div>
+										<div class="grid-post-content">
+											<h2 class="grid-post-title"><a href="{url_title_path='books'}">{title}</a></h2>
+											<p>Relevance: {tag_relevance} matches ({tag_relevance_percent}%)</p>
+											{if book_blurb}<p>{exp:snippet total="135" word="true" ellipsis="..."}{book_blurb}{/exp:snippet}</p>{/if}
+										</div>
+										<div class="post-bottom clearfix">
+											<span class="grid-read-more"><a href="{url_title_path='books'}">Read More</a></span>
+										</div>
+									</div>
+								</div>
+							</div>
+							{if count%3 == 0}
+							<div class="clearfix"></div>
+							{/if}
+							{!--
+								{tag_paginate}
+								<ul class="pagination">
+									{tag_pagination_links}
+									{first_page}
+									<li><a href="{pagination_url}">First</a></li>
+									{/first_page}
+									{previous_page}
+									<li><a href="{pagination_url}">&laquo; Previous</a></li>
+									{/previous_page}
+									{page}
+									<li{if current_page} class="active"{/if}><a href="{pagination_url}">{pagination_page_number}</a></li>
+									{/page}
+									{next_page}
+									<li><a href="{pagination_url}">Next &raquo;</a></li>
+									{/next_page}
+									{last_page}
+									<li><a href="{pagination_url}">Last</a></li>
+									{/last_page}
+									{/tag_pagination_links}
+								</ul>
+								{/tag_paginate}
+								--}
+
+								{/exp:tag:related_entries}
+
+							</div>
+						</div>
+					</div>
+				</div>
+				{embed="includes/_sidebar" section_var="{segment_1}"}
+			</div>
+		</section>
+		{/case}
+
+		{/exp:switchee}

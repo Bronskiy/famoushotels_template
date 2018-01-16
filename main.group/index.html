@@ -1,19 +1,64 @@
 {layout="includes/_wrapper"}
-{embed="includes/_featured_posts"}
-
 <section class="content">
   <div class="container">
     <div class="col-md-8">
+      <div class="row mb30">
+        <div class="col-md-12">
+          <div class="home-page-slider swiper-container">
+            <div class="swiper-wrapper">
+              {exp:channel:entries channel="making_history" category="466" disable="member_data" limit="12" cache="yes" refresh="576" dynamic="no"}
+              <div class="swiper-slide" style="background-image:url({mh_picture})">
+                <div class="text">
+                  <div class="title">{title}</div>
+                  {if mh_text}
+                  <p>{mh_text}</p>
+                  {/if}
+                </div>
+              </div>
+              {/exp:channel:entries}
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination swiper-pagination-white"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-prev swiper-button-white"></div>
+            <div class="swiper-button-next swiper-button-white"></div>
+          </div>
+        </div>
+      </div>
+
+      {exp:channel:entries channel="pages" disable="member_data|categories|pagination" limit="1" cache="yes" refresh="576"}
       <div class="row">
-        {exp:channel:entries channel="news" disable="member_data" limit="12" cache="yes" refresh="576" paginate="bottom"}
+        <div class="col-md-12">
+          <div class="normal-box single-post-box">
+            <div class="normal-post">
+              {if page_image}
+              <div class="normal-post-header">
+                <img src="{page_image}" alt="{title}">
+              </div>
+              {/if}
+              <div class="normal-post-content">
+                <h1 class="normal-post-title">{title}</h1>
+                <p>{page_body}</p>
+              </div>
+              {addthis_inline}
+            </div>
+          </div>
+        </div>
+      </div>
+      {/exp:channel:entries}
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="normal-post-title">News</h2>
+        </div>
+        {exp:channel:entries channel="news" disable="member_data|pagination" limit="12" status="opener" cache="yes" refresh="576" dynamic="no"}
         <div class="col-md-6">
           <div class="grid-box">
-            <div class="grid-post">
+            <div class="grid-post reading-class" data-file="{url_title_path='news'}" data-target=".reading-class">
               <div class="grid-post-header">
                 {if article_photo}
-                <a href="{url_title_path='news'}"><img src="{article_photo}" alt="{title}"></a>
+                <a href="{url_title_path='news'}"><img src="{article_photo:thumb_news_small}" alt="{title}"></a>
                 {if:else}
-                <a href="{url_title_path='news'}"><img src="http://via.placeholder.com/330x220" alt="{title}"></a>
+                <a href="{url_title_path='news'}"><img src="https://via.placeholder.com/330x220" alt="{title}"></a>
                 {/if}
                 {categories limit="1"}<a href="/news/category/{category_url_title}"><span class="category">{category_name}</span></a>{/categories}
               </div>
@@ -32,15 +77,20 @@
         </div>
         {if count%2 == 0}
         <div class="clearfix"></div>
+        <div class="col-md-12">
+          {google_ads_wide_2}
+        </div>
         {/if}
         {/exp:channel:entries}
       </div>
+      {!--
       <div class="row">
         <div class="col-md-12">
           <h2 class="normal-post-title">New Books</h2>
           {new_books_iframe}
         </div>
       </div>
+      --}
     </div>
     {embed="includes/_sidebar"}
   </div>
