@@ -120,331 +120,334 @@
                         {/if}
 
                         {/exp:gwcode_categories}
-                      {!--
-                        {exp:channel:categories channel="books" category_group="4" style="linear"}
-                        <li><a href="{path='books'}">{category_name}</a></li>
-                        {/exp:channel:categories}
-                        --}
-                      </ul>
-                      {if:elseif entry_id == 1464}
-                      <ul>
-                        {exp:channel:categories channel="news" dynamic="off" style="linear"}
-                        <li><a href="{path='news'}">{category_name}</a></li>
-                        {/exp:channel:categories}
-                      </ul>
-                      {if:else}
-                      {menu_children}
-                      {if menu_children:count==1}<ul>{/if}
-                        {menu_children:parents field="menu_children"}
-                        <li><a href="{menu_children:menu_link}">{menu_children:title}</a></li>
-                        {/menu_children:parents}
-                        {if menu_children:count==menu_children:total_results}</ul>{/if}
-                        {/menu_children}
-                        {/if}
-                      </li>
-                      {/if}
-                      {if count == total_results}
-                      {exp:simple_commerce:purchase entry_id="547" success="success" cancel="site/index"}
-                      <li class="last-menu-item menu-cart"><a href="{view_cart_url}" onclick="window.open(this.href);return false;" title="View Cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-                      {/exp:simple_commerce:purchase}
-                      <li class="last-menu-item menu-search"><i class="fa fa-search" aria-hidden="true"></i></li>
-                      {/if}
-                      {/exp:channel:entries}
-                    </ul>
-                    <ul class="menu-button">
-                      <li><a href="#"><i class="fa fa-reorder"></i></a></li>
-                    </ul>
-                  </nav>
-                  <div class="search-overlay">
-                    <div class="search-overlay-inner">
-                      <span class="search-overlay-close-button">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                      </span>
-                      {exp:super_search:form
-                        form:id="filter"
-                        return="search/results"
-                        {if segment_2 == "saved"}
-                        search_id="{segment_3}"
-                        {/if}
-                      }
-                      <input class="search-box" name="keywords" id="keywords" autocomplete="off" maxlength="100" value="" placeholder="Search" type="text">
-                      <button class="header-search-submit" id="header-search" name="submit" value="Search" type="submit"><i class="fa fa-search"></i></button>
-                      <label class="search-label" for="search-input">Type keyword(s) to search</label>
-                      {/exp:super_search:form}
-
-
-                      <div class="header-search-results" id="header-results"></div>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </header>
-          <div class="responsive-menu">
-            <header>
-              <ul>
-                <li><a class="menu-button" href="#"><i class="fa fa-close"></i></a></li>
-                <li><a class="menu-button" href="#"><i class="fa fa-reorder"></i></a></li>
-              </ul>
-            </header>
-            <ul class="mobile-menu">
-              {exp:channel:entries channel="menu" disable="categories|member_data|pagination" dynamic="off" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
-              <li><a href="{menu_link}">{title}</a></li>
-              {/exp:channel:entries}
-            </ul>
-          </div>
-          {layout:contents}
-
-          <footer>
-            <div class="footer-content">
-              <div class="container">
-                <div class="col-md-3">
-                  <div class="categories">
-                    <ul>
-                      {exp:channel:entries channel="menu" category="465" disable="member_data|pagination" dynamic="off" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
-                      {if menu_order !=0 && menu_column == 1}
-                      <li><a href="{menu_link}">{title}</a></li>
-                      {/if}
-                      {/exp:channel:entries}
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <div class="categories">
-                    <ul>
-                      {exp:channel:entries channel="menu" category="465" disable="member_data|pagination" dynamic="off" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
-                      {if menu_order !=0 && menu_column == 2}
-                      <li><a href="{menu_link}">{title}</a></li>
-                      {/if}
-                      {/exp:channel:entries}
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="categories">
-                    <ul>
-                      {exp:channel:entries channel="menu" category="465" disable="member_data|pagination" dynamic="off" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
-                      {if menu_order !=0 && menu_column == 3}
-                      <li><a href="{menu_link}">{title}</a></li>
-                      {/if}
-                      {/exp:channel:entries}
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="categories">
-                    <ul>
-                      {exp:channel:entries channel="menu" category="465" disable="member_data|pagination" dynamic="off" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
-                      {if menu_order !=0 && menu_column == 4}
-                      <li><a href="{menu_link}">{title}</a></li>
-                      {/if}
-                      {/exp:channel:entries}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              {!--
-                <div class="container">
-                  <div class="col-md-3">
-                    <div class="footer-about-widget">
-                      <div class="widget-title">
-                        <h3>About The Houses</h3>
-                      </div>
-                      <div class="footer-logo">
-                        <img src="/assets/img/logo.png" alt="">
-                        <p>{about_footer}</p>
-                      </div>
-                    </div>
-                    <div class="widget-subscribe">
-                      <div class="widget-title">
-                        <h3>Subscribe NEWS</h3>
-                      </div>
-                      <input class="subscribe" placeholder="Enter Your E-Mail" type="text">
-                      <span><a href="#">subscribe now</a></span>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="widget-tags">
-                      <div class="widget-title">
-                        <h3>Popular Hotels <strong>Tags</strong></h3>
-                      </div>
-                      <div class="tags">
-                        <ul>
-                          {exp:tag:cloud
-                            channel="hotels"
-                            limit="25"
-                            orderby="total_entries"
-                            tag_group_id="2"
-                          }
-                          <li><a href="{path='hotels/tags'}/{websafe_tag}"><span class="tag">{tag} ({total_entries})</span></a></li>
-                          {/exp:tag:cloud}
+                        {!--
+                          {exp:channel:categories channel="books" category_group="4" style="linear"}
+                          <li><a href="{path='books'}">{category_name}</a></li>
+                          {/exp:channel:categories}
+                          --}
                         </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    {news-category-widget}
-                  </div>
-                  <div class="col-md-3">
-                    {books-category-widget}
-
-                  </div>
-                </div>
-
-                <div class="container">
-                  <div class="col-md-4">
-                    <div class="footer-about-widget">
-                      <div class="widget-title">
-                        <h3>About The Houses</h3>
-                      </div>
-                      <div class="footer-logo">
-                        <img src="/assets/img/logo.png" alt="">
-                        <p>{about_footer}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="widget-small-news">
-                      <div class="widget-title">
-                        <h3>Popular News</h3>
-                      </div>
-                      {exp:channel:entries channel="news" disable="member_data" limit="3" cache="yes" refresh="576" dynamic="no"}
-                      <div class="footer-small-news">
-                        {if article_photo}
-                        <img src="{article_photo}" alt="{title}">
+                        {if:elseif entry_id == 1464}
+                        <ul>
+                          {exp:channel:categories channel="news" dynamic="off" style="linear"}
+                          <li><a href="{path='news'}">{category_name}</a></li>
+                          {/exp:channel:categories}
+                        </ul>
                         {if:else}
-                        <img src="https://via.placeholder.com/68x68" alt="{title}">
+                        {menu_children}
+                        {if menu_children:count==1}<ul>{/if}
+                          {menu_children:parents field="menu_children"}
+                          <li><a href="{menu_children:menu_link}">{menu_children:title}</a></li>
+                          {/menu_children:parents}
+                          {if menu_children:count==menu_children:total_results}</ul>{/if}
+                          {/menu_children}
+                          {/if}
+                        </li>
                         {/if}
-                        {categories limit="1"}<span class="category">{category_name}</span>{/categories}
-                        <span class="small-date">{entry_date format='%d %F, %Y'}</span>
-                        <h4 class="small-news-title"><a href="{url_title_path='news'}">{title}</a></h4>
+                        {if count == total_results}
+                        {exp:simple_commerce:purchase entry_id="547" success="success" cancel="site/index"}
+                        <li class="last-menu-item menu-cart"><a href="{view_cart_url}" onclick="window.open(this.href);return false;" title="View Cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+                        {/exp:simple_commerce:purchase}
+                        <li class="last-menu-item menu-search"><i class="fa fa-search" aria-hidden="true"></i></li>
+                        {/if}
+                        {/exp:channel:entries}
+                      </ul>
+                      <ul class="menu-button">
+                        <li><a href="#"><i class="fa fa-reorder"></i></a></li>
+                      </ul>
+                    </nav>
+                    <div class="search-overlay">
+                      <div class="search-overlay-inner">
+                        <span class="search-overlay-close-button">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                        </span>
+                        {exp:super_search:form
+                          form:id="filter"
+                          return="search/results"
+                          {if segment_2 == "saved"}
+                          search_id="{segment_3}"
+                          {/if}
+                        }
+                        <input class="search-box" name="keywords" id="keywords" autocomplete="off" maxlength="100" value="" placeholder="Search" type="text">
+                        <button class="header-search-submit" id="header-search" name="submit" value="Search" type="submit"><i class="fa fa-search"></i></button>
+                        <label class="search-label" for="search-input">Type keyword(s) to search</label>
+                        {/exp:super_search:form}
+
+
+                        <div class="header-search-results" id="header-results"></div>
+
                       </div>
-                      {/exp:channel:entries}
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="widget-subscribe">
-                      <div class="widget-title">
-                        <h3>Subscribe NEWS</h3>
-                      </div>
-                      <input class="subscribe" placeholder="Enter Your E-Mail" type="text">
-                      <span><a href="#">subscribe now</a></span>
                     </div>
                   </div>
                 </div>
-                --}
               </div>
-              {if member_group == "1"}
-              <div class="dashboard-helper">
-                {if layout:edit_entry_id != ''}
-                <a href="/fh-db86/?/cp/publish/edit/entry/{layout:edit_entry_id}" target="_blank" ><img src="/assets/img/edit.png" title="Edit" alt="Edit"></a>
-                <a href="/fh-db86/" target="_blank" ><img src="/assets/img/dashboard.png" title="Dashboard" alt="Dashboard" ></a>
-                {if:else}
-                <a href="/fh-db86/" target="_blank" class="lonely-button" ><img src="/assets/img/dashboard.png" title="Dashboard" alt="Dashboard" ></a>
-                {/if}
-              </div>
-              {/if}
+            </header>
+            <div class="responsive-menu">
+              <header>
+                <ul>
+                  <li><a class="menu-button" href="#"><i class="fa fa-close"></i></a></li>
+                  <li><a class="menu-button" href="#"><i class="fa fa-reorder"></i></a></li>
+                </ul>
+              </header>
+              <ul class="mobile-menu">
+                {exp:channel:entries channel="menu" disable="categories|member_data|pagination" dynamic="off" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
+                <li><a href="{menu_link}">{title}</a></li>
+                {/exp:channel:entries}
+              </ul>
+            </div>
+            {layout:contents}
 
-              <div class="copyright">
-                <span>&copy; {current_time format="%Y"} The Most Famous Hotels in the World. All rights reserved</span>
-              </div>
-            </footer>
-          </div>
-          <script src="/assets/js/jquery-3.2.0.min.js"></script>
-          <script src="/assets/js/bootstrap.min.js"></script>
-          {if segment_1 == 'hotels' && segment_2 != ''}
-          <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDPdQspHkofxCXOhgh8Bo5mflQ8FIKA_yo"></script>
-          {/if}
-          <script src="/assets/js/jquery.form.min.js" type="text/javascript"></script>
-          <script src="/assets/js/jquery.cookieBar.min.js" type="text/javascript"></script>
-          <script src="/assets/swiper/js/swiper.min.js" type="text/javascript"></script>
-          {if segment_1 == "hotels"}
-          <script src="/assets/js/jquery.event.move.js" type="text/javascript"></script>
-          <script src="/assets/js/jquery.twentytwenty.js" type="text/javascript"></script>
-          <script>
-          $(function(){
-            $("#twentytwenty-container").twentytwenty({
-              before_label: 'History',
-              after_label: 'Present'
-            });
-          });
-          </script>
-          {/if}
-          {if segment_1 == "news" || segment_1 == ""}
-          <script src="/assets/js/readingTime.js" type="text/javascript"></script>
-          <script>
-          $(function() {
-            $('.reading-class').each(function() {
-              $(this).readingTime({
-                readingTimeTarget: $(this).find('.eta'),
-                wordCountTarget: $(this).find('.words'),
-                remotePath: $(this).attr('data-file'),
-                remoteTarget: $(this).attr('data-target')
+            <footer>
+              <div class="footer-content">
+                <div class="container">
+                  <div class="col-md-3">
+                    <div class="categories">
+                      <ul>
+                        {exp:channel:entries channel="menu" category="465" disable="member_data|pagination" dynamic="off" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
+                        {if menu_order !=0 && menu_column == 1}
+                        <li><a href="{menu_link}">{title}</a></li>
+                        {/if}
+                        {/exp:channel:entries}
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="categories">
+                      <ul>
+                        {exp:channel:entries channel="menu" category="465" disable="member_data|pagination" dynamic="off" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
+                        {if menu_order !=0 && menu_column == 2}
+                        <li><a href="{menu_link}">{title}</a></li>
+                        {/if}
+                        {/exp:channel:entries}
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="categories">
+                      <ul>
+                        {exp:channel:entries channel="menu" category="465" disable="member_data|pagination" dynamic="off" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
+                        {if menu_order !=0 && menu_column == 3}
+                        <li><a href="{menu_link}">{title}</a></li>
+                        {/if}
+                        {/exp:channel:entries}
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="categories">
+                      <ul>
+                        {exp:channel:entries channel="menu" category="465" disable="member_data|pagination" dynamic="off" order_by="menu_order" sort="asc" cache="yes" refresh="576"}
+                        {if menu_order !=0 && menu_column == 4}
+                        <li><a href="{menu_link}">{title}</a></li>
+                        {/if}
+                        {/exp:channel:entries}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                {!--
+                  <div class="container">
+                    <div class="col-md-3">
+                      <div class="footer-about-widget">
+                        <div class="widget-title">
+                          <h3>About The Houses</h3>
+                        </div>
+                        <div class="footer-logo">
+                          <img src="/assets/img/logo.png" alt="">
+                          <p>{about_footer}</p>
+                        </div>
+                      </div>
+                      <div class="widget-subscribe">
+                        <div class="widget-title">
+                          <h3>Subscribe NEWS</h3>
+                        </div>
+                        <input class="subscribe" placeholder="Enter Your E-Mail" type="text">
+                        <span><a href="#">subscribe now</a></span>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="widget-tags">
+                        <div class="widget-title">
+                          <h3>Popular Hotels <strong>Tags</strong></h3>
+                        </div>
+                        <div class="tags">
+                          <ul>
+                            {exp:tag:cloud
+                              channel="hotels"
+                              limit="25"
+                              orderby="total_entries"
+                              tag_group_id="2"
+                            }
+                            <li><a href="{path='hotels/tags'}/{websafe_tag}"><span class="tag">{tag} ({total_entries})</span></a></li>
+                            {/exp:tag:cloud}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      {news-category-widget}
+                    </div>
+                    <div class="col-md-3">
+                      {books-category-widget}
+
+                    </div>
+                  </div>
+
+                  <div class="container">
+                    <div class="col-md-4">
+                      <div class="footer-about-widget">
+                        <div class="widget-title">
+                          <h3>About The Houses</h3>
+                        </div>
+                        <div class="footer-logo">
+                          <img src="/assets/img/logo.png" alt="">
+                          <p>{about_footer}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="widget-small-news">
+                        <div class="widget-title">
+                          <h3>Popular News</h3>
+                        </div>
+                        {exp:channel:entries channel="news" disable="member_data" limit="3" cache="yes" refresh="576" dynamic="no"}
+                        <div class="footer-small-news">
+                          {if article_photo}
+                          <img src="{article_photo}" alt="{title}">
+                          {if:else}
+                          <img src="https://via.placeholder.com/68x68" alt="{title}">
+                          {/if}
+                          {categories limit="1"}<span class="category">{category_name}</span>{/categories}
+                          <span class="small-date">{entry_date format='%d %F, %Y'}</span>
+                          <h4 class="small-news-title"><a href="{url_title_path='news'}">{title}</a></h4>
+                        </div>
+                        {/exp:channel:entries}
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="widget-subscribe">
+                        <div class="widget-title">
+                          <h3>Subscribe NEWS</h3>
+                        </div>
+                        <input class="subscribe" placeholder="Enter Your E-Mail" type="text">
+                        <span><a href="#">subscribe now</a></span>
+                      </div>
+                    </div>
+                  </div>
+                  --}
+                </div>
+                {if member_group == "1"}
+                <div class="dashboard-helper">
+                  {if layout:edit_entry_id != ''}
+                  <a href="/fh-db86/?/cp/publish/edit/entry/{layout:edit_entry_id}" target="_blank" ><img src="/assets/img/edit.png" title="Edit" alt="Edit"></a>
+                  <a href="/fh-db86/" target="_blank" ><img src="/assets/img/dashboard.png" title="Dashboard" alt="Dashboard" ></a>
+                  {if:else}
+                  <a href="/fh-db86/" target="_blank" class="lonely-button" ><img src="/assets/img/dashboard.png" title="Dashboard" alt="Dashboard" ></a>
+                  {/if}
+                </div>
+                {/if}
+                <div class="copyright">
+                  <span>&copy; {current_time format="%Y"} The Most Famous Hotels in the World. All rights reserved</span>
+                </div>
+              </footer>
+            </div>
+
+            {embed="includes/_modal-form"}
+
+            <script src="/assets/js/jquery-3.2.0.min.js"></script>
+            <script src="/assets/js/bootstrap.min.js"></script>
+            {if segment_1 == 'hotels' && segment_2 != ''}
+            <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDPdQspHkofxCXOhgh8Bo5mflQ8FIKA_yo"></script>
+            {/if}
+            <script src="/assets/js/jquery.form.min.js" type="text/javascript"></script>
+            <script src="/assets/js/jquery.cookieBar.min.js" type="text/javascript"></script>
+            <script src="/assets/js/jquery.cookie.min.js" type="text/javascript"></script>
+            <script src="/assets/swiper/js/swiper.min.js" type="text/javascript"></script>
+            {if segment_1 == "hotels"}
+            <script src="/assets/js/jquery.event.move.js" type="text/javascript"></script>
+            <script src="/assets/js/jquery.twentytwenty.js" type="text/javascript"></script>
+            <script>
+            $(function(){
+              $("#twentytwenty-container").twentytwenty({
+                before_label: 'History',
+                after_label: 'Present'
               });
             });
-          });
-          </script>
-          {/if}
-          <script src="/assets/js/script.js" type="text/javascript"></script>
-          <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59f93b7af0fa2505"></script>
-          {if segment_1 == 'hotels' && segment_2 != ''}
-          <script>
-          var geocoder;
-          var map;
-          function initialize() {
-            geocoder = new google.maps.Geocoder();
-            var latlng = new google.maps.LatLng(-34.397, 150.644);
-            var mapOptions = {
-              zoom: 18,
-              center: latlng
-            }
-            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-          }
-          function codeAddress() {
-            var address = document.getElementById('address').value;
-            geocoder.geocode( { 'address': address}, function(results, status) {
-              if (status == google.maps.GeocoderStatus.OK) {
-                map.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                  map: map,
-                  position: results[0].geometry.location
+            </script>
+            {/if}
+            {if segment_1 == "news" || segment_1 == ""}
+            <script src="/assets/js/readingTime.js" type="text/javascript"></script>
+            <script>
+            $(function() {
+              $('.reading-class').each(function() {
+                $(this).readingTime({
+                  readingTimeTarget: $(this).find('.eta'),
+                  wordCountTarget: $(this).find('.words'),
+                  remotePath: $(this).attr('data-file'),
+                  remoteTarget: $(this).attr('data-target')
                 });
-              } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-              }
+              });
             });
-          }
-          window.onload = function() {
-            initialize();
-            codeAddress();
-          }
-          </script>
-          {/if}
-          {if segment_1 == 'hotels' && segment_2 == ''}
-          <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDPdQspHkofxCXOhgh8Bo5mflQ8FIKA_yo"></script>
-          <script src="{path="includes/locations"}" type="text/javascript"></script>
-          {/if}
-          {if segment_1 == 'hotels' && segment_2 == 'suggest'}
-          <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-          <script src="{path="includes/availableHotels"}" type="text/javascript"></script>
-          <script src="/assets/js/countrySelect.min.js"></script>
-          <script>
-      			$("#country_selector").countrySelect({
+            </script>
+            {/if}
+            <script src="/assets/js/script.js" type="text/javascript"></script>
+            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59f93b7af0fa2505"></script>
+            {if segment_1 == 'hotels' && segment_2 != ''}
+            <script>
+            var geocoder;
+            var map;
+            function initialize() {
+              geocoder = new google.maps.Geocoder();
+              var latlng = new google.maps.LatLng(-34.397, 150.644);
+              var mapOptions = {
+                zoom: 18,
+                center: latlng
+              }
+              map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            }
+            function codeAddress() {
+              var address = document.getElementById('address').value;
+              geocoder.geocode( { 'address': address}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                  map.setCenter(results[0].geometry.location);
+                  var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                  });
+                } else {
+                  alert('Geocode was not successful for the following reason: ' + status);
+                }
+              });
+            }
+            window.onload = function() {
+              initialize();
+              codeAddress();
+            }
+            </script>
+            {/if}
+            {if segment_1 == 'hotels' && segment_2 == ''}
+            <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDPdQspHkofxCXOhgh8Bo5mflQ8FIKA_yo"></script>
+            <script src="{path="includes/locations"}" type="text/javascript"></script>
+            {/if}
+            {if segment_1 == 'hotels' && segment_2 == 'suggest'}
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <script src="{path="includes/availableHotels"}" type="text/javascript"></script>
+            <script src="/assets/js/countrySelect.min.js"></script>
+            <script>
+            $("#country_selector").countrySelect({
               defaultCountry: "",
               preferredCountries: ['at']
             });
-      		</script>
-          {/if}
-          <!-- Global site tag (gtag.js) - Google Analytics -->
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109349734-1"></script>
-          <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+            </script>
+            {/if}
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109349734-1"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-          gtag('config', 'UA-109349734-1');
-          </script>
+            gtag('config', 'UA-109349734-1');
+            </script>
 
-        </body>
-        </html>
+          </body>
+          </html>

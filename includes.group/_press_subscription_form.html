@@ -1,0 +1,17 @@
+<form method=post name="subscribeform" class="subscribeform contact-form" action="https://famoushotels.org/lists/?p=subscribe&id=2">
+  <input type="hidden" name="formtoken" value="{csrf_token}" />
+
+  <div class="form-group">
+    <textarea name="attribute8" class="form-control" cols="30" rows="3" id="" placeholder="Publication(s)" required></textarea>
+    <input type="text" name="attribute1" class="form-control" id="" placeholder="First Name" required>
+    <input type="text" name="attribute2" class="form-control" id="" placeholder="Family Name" required>
+    <input type="text" name="attribute3" class="form-control" id="" placeholder="Country of Residence" required>
+    <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+    <input type="email" name="emailconfirm" class="form-control" placeholder="Confirm Email" required>
+  </div>
+
+  <input type="hidden" name="list[12]" value="signup"><input type="hidden" name="listname[12]" value="Mailing List 3"/>
+  <div style="display:none"><input type="text" name="VerificationCodeX" value="" size="20"></div>
+  <div class="clearfix"></div>
+  <input type=submit name="subscribe" onClick="return checkform();" value="Subscribe">
+</form>

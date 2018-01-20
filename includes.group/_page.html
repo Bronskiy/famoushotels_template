@@ -2,6 +2,7 @@
 <section class="content single-post-content">
   <div class="container">
     {exp:channel:entries channel="pages" disable="categories|member_data|pagination" cache="yes" refresh="576"}
+    {if no_results}{redirect="404"}{/if}
     <div class="col-md-8">
       <div class="row">
         <div class="col-md-12">
@@ -21,9 +22,14 @@
                 {embed="includes/_quiz_form"}
                 {if:elseif segment_1 == 'hotels' && segment_2 == 'suggest'}
                 {embed="includes/_suggest_hotel"}
+                {!--
                 {if:elseif segment_1 == 'subscription' && segment_2 == ''}
-                {embed="includes/_subscription_form"}
+                {embed="includes/_register_form"}
+                --}
+                {if:elseif segment_1 == 'about' && segment_2 == 'research-archives'}
+                {embed="includes/_press_subscription_form"}
                 {/if}
+
               </div>
             </div>
           </div>

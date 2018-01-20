@@ -1,0 +1,39 @@
+<div class='modal fade' id='myModal'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class='modal-title'>Subscribe to Feuilleton, the famoushotels  newsletter</h4>
+        <h5 class='modal-title'>All Famous Hotels — Fascinating Research — Wonderful Books</h5>
+      </div>
+      <div class='modal-body'>
+        <form method=post name="subscribeform" class="subscribeform" action="https://famoushotels.org/lists/?p=subscribe&id=1">
+          <input type="hidden" name="formtoken" value="{csrf_token}" />
+
+          <div class="form-group">
+            <input type="text" name="attribute1" class="form-control" id="" placeholder="First Name" required>
+            <input type="text" name="attribute2" class="form-control" id="" placeholder="Family Name" required>
+            <input type="text" name="attribute3" class="form-control" id="" placeholder="Country of Residence" required>
+            <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+            <input type="email" name="emailconfirm" class="form-control" placeholder="Confirm Email" required>
+          </div>
+          <div class="form-group">
+            <label for="attribute4">My Favourite Famous Hotels</label>
+            <input type="text" name="attribute4" class="form-control" placeholder="Hotel's Name" id="attribute4">
+            <input type="text" name="attribute5" class="form-control" placeholder="Hotel's Name" id="attribute5">
+            <input type="text" name="attribute6" class="form-control" placeholder="Hotel's Name" id="attribute6">
+            <input type="text" name="attribute7" class="form-control" placeholder="Hotel's Name" id="attribute7">
+            <input type="text" name="attribute8" class="form-control" placeholder="Hotel's Name" id="attribute8">
+          </div>
+
+          <input type="hidden" name="list[6]" value="signup"><input type="hidden" name="listname[6]" value="Mailing List 3"/>
+          <div style="display:none"><input type="text" name="VerificationCodeX" value="" size="20"></div>
+          <input type=submit name="subscribe" onClick="return checkform();" value="Subscribe">
+        </form>
+        <div class="checkbox pull-right">
+          <label><input class='modal-check' name='modal-check' type="checkbox"> Don't Show</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
